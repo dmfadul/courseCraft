@@ -1,0 +1,1 @@
+user_1 = {"name": "admin", "password": "admin"}
