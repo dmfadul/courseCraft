@@ -1,0 +1,15 @@
+.venv/
+instance/
+__pycache__/
+alembic/__pycache__/
+alembic/versions/__pycache__/
+db_info/__pycache__/
+app/__pycache__/
+app/models/__pycache__/
+app/routes/__pycache__/
+app/routes/dashboard/__pycache__/
+app/routes/grid/__pycache__/
+app/routes/crud/__pycache__/
+app/routes/login/__pycache__/
+app/routes/reports/__pycache__/
+app/routes/crud/teachers/__pycache__/
