@@ -60,12 +60,12 @@ class Modulus(db.Model):
             return -1
         return self.lectures[-1].date
     
-    # @property
-    # def current_workload(self):
-    #     from app.global_vars import ENDING_DATE
-    #     if not self.lectures:
-    #         return 0
-    #     return Lecture.count(self.id, ENDING_DATE, 12)
+    @property
+    def current_workload(self):
+        from app.global_vars import ENDING_DATE
+        if not self.lectures:
+            return 0
+        return Lecture.count(self.id, ENDING_DATE, 12)
 
     @property
     def remaining_workload(self):
@@ -84,19 +84,19 @@ class Modulus(db.Model):
 
         return Lecture.count(self.id, last_lecture.date, last_lecture.grid_position) >= self.discipline.workload
     
-    # @property
-    # def prerequisite_lastdate(self):
-    #     from app.global_vars import STARTING_DATE
-    #     prerequisites = self.discipline.prerequisites
-    #     if not prerequisites:
-    #         return STARTING_DATE
+    @property
+    def prerequisite_lastdate(self):
+        from app.global_vars import STARTING_DATE
+        prerequisites = self.discipline.prerequisites
+        if not prerequisites:
+            return STARTING_DATE
         
-    #     end_dates = []
-    #     for prerequisite in prerequisites:
-    #         modulus = Modulus.query.filter_by(discipline_id=prerequisite.id, cohort_id=self.cohort_id).first()
-    #         end_dates.append(modulus.end_date)
+        end_dates = []
+        for prerequisite in prerequisites:
+            modulus = Modulus.query.filter_by(discipline_id=prerequisite.id, cohort_id=self.cohort_id).first()
+            end_dates.append(modulus.end_date)
 
-    #     return max(end_dates)
+        return max(end_dates)
              
 
     @classmethod
