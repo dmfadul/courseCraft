@@ -1,0 +1,42 @@
+@page {
+    size: A4 portrait;  /* 'portrait' is the default, can be omitted */
+    margin: 0mm;
+}
+
+td {
+    font-size: 9px;
+}
+
+/* override-styles.css */
+td:first-child {
+    width: 30px; /* Smaller width for the first cell */
+    font-size: 8px; /* Smaller font size */
+}
+
+.table .cell- {
+    width: 108px; /* Smaller width for other cells */
+    height: 50px; /* Smaller height for other cells */
+}
+
+.table .cell-header, .table .cell-subHeader {
+    width: 100px; /* Smaller width for header cells */
+    height: 15px; /* Smaller height for header cells */
+}
+
+.table .cell-corner {
+    width: 5px; /* Smaller width for corner cells */
+    max-width: 65px;
+    height: 15px; /* Smaller height for corner cells */
+}
+
+.table .cell-firstColumn {
+    width: 5px; /* Smaller width for first column cells */
+    max-width: 65px;
+    padding-top: 20px;
+}
+
+.table .cell-interval {
+    width: 5px; /* Smaller width for interval cells */
+    max-width: 65px;
+    max-height: 5px;
+}

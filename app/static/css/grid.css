@@ -1,0 +1,133 @@
+/* Table Styles */
+.table-container {
+    display: flex;
+    justify-content: center; /* Centers the table horizontally */
+    align-items: center; /* Centers the table vertically if the viewport height allows */
+    min-height: 100vh; /* Optional: takes at least the full height of the viewport */
+    padding: 20px; /* Optional: adds some space around the table */
+    padding-bottom: 50px;
+}
+
+table {
+    margin: auto;
+    width: 80%;
+    max-width: 1300px;
+    border-collapse: collapse;
+    padding-bottom: 30px;
+    table-layout: initial; /* Ensures uniform column width */
+    user-select: none; /* Prevents text from being selected/highlighted */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds shadow around the table */
+    margin-bottom: 50px;
+}
+
+.table-header {
+    position: sticky;
+    top: 100px;
+    z-index: 2;
+}
+
+.table-header th {
+    text-align: center;
+    color: white;
+    background-color: #007bff; /* Consistent with button color */
+    border: 1px solid black;
+    box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.2); /* Inner shadow for depth */
+
+}
+
+td {
+    border: 1px solid #ddd; /* Lighter border for a softer look */
+    text-align: center;
+    padding: 5px;
+    background-color: #ffffff; /* White background for better readability */
+    font-size: 12px;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06); /* Subtle inner shadow */
+    transition: box-shadow 0.2s; /* Smooth transitions for 3D effect */
+}
+
+td:first-child {
+    width: 100px; /* Narrower width for the first cell */
+    font-size: 10px;
+}
+
+td:hover {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.15); /* Elevated shadow on hover */
+}
+
+.table .cell- {
+    background-color: white;
+    width: 200px; /* Wider width for other cells */
+    height: 100px;  /* Vertical size */
+} /* Default for empty cells */
+
+.table .cell-header, .table .cell-subHeader {
+    position: sticky;
+    background-color: #dcdcdc; /* Light gray background */
+    border: 2px solid black; /* Slightly thicker borders */
+    pointer-events: none; /* Prevents the cell from being clickable */
+    width: 200px; /* Wider width for other cells */
+    box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.2); /* Inner shadow for depth */
+    height: 35px;  /* Vertical size */
+    top: 142px;
+    z-index: 3;
+}
+
+.table .cell-subHeader {
+    top: 177px;
+    z-index: 4;
+}
+
+.table .cell-corner {
+    background-color: #dcdcdc;
+    width: 10px; /* Wider width for other cells */
+    max-width: 130px;
+    pointer-events: none; /* Prevents the cell from being clickable */
+}
+
+.table .cell-firstColumn {
+    background-color: #dcdcdc;
+    border: 2px solid white; /* Slightly thicker borders */
+    pointer-events: none; /* Prevents the cell from being clickable */
+    width: 10px; /* Wider width for other cells */
+    max-width: 130px;
+    padding-top: 50px;
+}
+
+.table .cell-interval {
+    pointer-events: none; /* Prevents the cell from being clickable */   
+    width: 10px; /* Wider width for other cells */
+    max-width: 130px;
+}
+
+.table .cell-intervalFirstCol {
+    pointer-events: none; /* Prevents the cell from being clickable */   
+}
+
+.table .cell-holiday {
+    background-color:  #3F51B5;
+    color: #FFFFFF; /* Sets the font color to white */
+    pointer-events: none; /* Prevents the cell from being clickable */
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.2); /* Light inner shadow for contrast */   
+}
+
+.form-check-group {
+    display: flex;
+    gap: 1rem; /* Add space between the checkboxes if needed */
+}
+
+.form-check {
+    margin-bottom: 0; /* Remove bottom margin to avoid extra space */
+}
+
+.table .cell-joined { 
+    border: 2px solid #dad8d8;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 1.4); 
+    font-weight: bold;  
+}
+
+.flash-messages {
+    position: relative;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}

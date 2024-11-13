@@ -1,0 +1,49 @@
+/* Navigation Styles */
+.navigation {
+    position: sticky;
+    text-align: center;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f8f8f8; /* Light grey background */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    top: 0px;
+    z-index: 1;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #007bff; /* Bootstrap primary blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px; /* Space between buttons and dropdown */
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+select {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ddd; /* Light grey border */
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    outline: none; /* Removes the default focus outline */
+    transition: border-color 0.3s ease;
+}
+
+select:hover,
+select:focus {
+    border-color: #007bff; /* Blue border on hover/focus */
+}
+
+option {
+    padding: 5px;
+    background-color: white; /* Ensures options are also styled */
+}
