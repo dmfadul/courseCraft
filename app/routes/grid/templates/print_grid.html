@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block head_links %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/grid.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/print_grid.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/colors.css') }}">
+{% endblock %}
+
+{% block mainContent %}
+    <div class="table-container">
+        <table class="table" id="data-table">
+            <tr class="table-header">
+                <th colspan="7"> {{ classCode }} - AULAS {{ classType }} NA {{ classLocation }} - {{ weekNumber }}ª SEMANA </th>
+            </tr>
+            {% for row in grid %}
+                    {% for cell in row %}
+                    <td class="{% if cell[1] is string %}{{ 'cell-' + cell[1] }}{% else %}{% for class in cell[1] %}{{ 'cell-' + class }} {% endfor %}{% endif %}">
+                        {% set lines = cell[0].split('\n') %}
+                        {% for line in lines %}
+                            {% if loop.last %}
+                                {{ line | safe }}
+                            {% else %}
+                                {{ line | safe }}<br>
+                            {% endif %}
+                        {% endfor %}
+                    </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

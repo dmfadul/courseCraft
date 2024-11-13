@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block head_links %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block mainContent %}
+    <a href="/grid/" target="_blank"><button>Grade</button></a>
+    <a href="/crud/add-teacher" target="_blank"><button>Adicionar Professor</button></a>
+    <a href="/crud/add-teacher-discipline" target="_blank"><button>Adicionar Professor à Disciplina</button></a> 
+    <a href="/crud/rm-teacher-discipline" target="_blank"><button>Remover Professor da Disciplina</button></a>
+    <a href="/crud/add-teacher-moduli" target="_blank"><button>Adicionar Professor ao Módulo</button></a>
+    <a href="/crud/rm-teacher-moduli" target="_blank"><button>Remover Professor do Módulo</button></a>
+    <a href="/crud/classroom" target="_blank"><button>Adicionar Sala ao Módulo</button></a>
+    <a href="/teachergrid" target="_blank"><button>Horário do Professor</button></a>
+    <a href="/classroomgrid" target="_blank"><button>Horário da Sala</button></a>
+    <a href="/reports/" target="_blank"><button>Relatórios</button></a>
+    <a href="/logout"><button>Logout</button></a>
+</body>
+{% endblock %}

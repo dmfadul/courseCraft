@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block mainContent %}
+<div class="container mt-5">
+    <h2>Add New Teacher</h2>
+    <form action="/crud/add-teacher" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nome do Professor</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+            <label for="abbr" class="form-label">Abreviação do Nome</label>
+            <input type="text" class="form-control" id="abbr" name="abbr" required>
+            <label for="rg" class="form-label">RG do Professor</label>
+            <input type="text" class="form-control" id="rg" name="rg" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Teacher</button>
+    </form>
+</div>
+{% endblock %}

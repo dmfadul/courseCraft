@@ -14,6 +14,17 @@ def create_app(config_filename=None):
 
     db.init_app(app)
 
+    from app.routes.dashboard.dashboard import dashboard_bp
+    from app.routes.grid.grid import grid_bp
+    from app.routes.reports.reports import reports_bp
+    from app.routes.crud.crud import crud_bp
+    from app.routes.login.login import login_bp
+    app.register_blueprint(dashboard_bp)
+    app.register_blueprint(grid_bp)
+    app.register_blueprint(reports_bp)
+    app.register_blueprint(crud_bp)
+    app.register_blueprint(login_bp)
+
     return app
 
 

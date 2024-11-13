@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block head_links %}
+    <title>Classrooms</title>
+    <style>
+        .form-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .form-row label {
+            width: 800px; /* Adjust as needed for proper alignment */
+            margin-right: 10px;
+        }
+        .form-row select {
+            flex: 1;
+            margin-right: 50px;
+        }
+    </style>
+{% endblock %}
+
+{% block mainContent %}
+    <h1>{{ pageName }}</h1>
+
+    {% for modulus in moduli %}
+        <form method="POST" action="/crud/update">
+            <div class="form-row">
+                <label>{{ modulus[0] }}</label>
+                <input type="hidden" name="discipline" value="{{ modulus[0] }}">
+                <input type="hidden" name="request_path" value="{{ request_path }}">
+                <select name="{{ select_name }}">
+                    {% for option in options %}
+                        <option value="{{ option }}" {% if option == modulus[1] %}selected{% endif %}>{{ option }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Confirm</button>
+            </div>
+        </form>
+    {% endfor %}
+{% endblock %}

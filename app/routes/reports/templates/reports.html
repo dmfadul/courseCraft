@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reports.css') }}">
+    <title>Report Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+    $('#reportSelector').change(function() {
+        var selectedReport = $(this).val();
+        if (selectedReport) {
+            $.ajax({
+                url: '/fetch_report/' + selectedReport,
+                type: 'GET',
+                success: function(response) {
+                    $('#reportContainer').html(response);
+                },
+                error: function(error) {
+                    console.log('Error:', error);
+                    $('#reportContainer').html('<p>An error occurred while fetching the report</p>');
+                }
+                    });
+                } else {
+                    $('#reportContainer').html('');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <select class="form-select" id="reportSelector">
+        {% for option in reportsList %}
+            <option value="{{ option }}">{{ option }}</option>
+        {% endfor %}
+    </select>
+
+    <div id="reportContainer">
+        <!-- The report content will be loaded here dynamically -->
+    </div>
+</body>
+</html>

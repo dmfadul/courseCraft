@@ -1,0 +1,13 @@
+<table class="table" id="data-table">
+    <tr class="table-header">
+        <th colspan="7"> {{ report_name }} </th>
+    </tr>
+    {% for row in grid %}
+            {% for cell in row %}
+            <td class="{% if cell[1] is string %}{{ 'cell-' + cell[1] }}{% else %}{% for class in cell[1] %}{{ 'cell-' + class }} {% endfor %}{% endif %}">
+                {{ cell[0] }}
+            </td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>

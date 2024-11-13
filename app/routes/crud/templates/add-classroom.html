@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block mainContent %}
+<div class="container mt-5">
+    <h2>Add New Classroom</h2>
+    <form action="/crud/add-classroom" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">Nome da Sala</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+            <label for="code" class="form-label">Código da Sala</label>
+            <input type="text" class="form-control" id="code" name="code" required>
+            <label for="capacity" class="form-label">Capacidade</label>
+            <input type="number" class="form-control" id="capacity" name="capacity" required>
+            <label for="fungible" class="form-label">Fungível</label>
+            <input type="number" class="form-control" id="fungible" name="fungible">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Teacher</button>
+    </form>
+</div>
+{% endblock %}
