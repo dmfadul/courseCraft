@@ -9,7 +9,7 @@ class Discipline(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    name_abbr = db.Column(db.String(20), nullable=False)
+    name_abbr = db.Column(db.String(50), nullable=False)
     code = db.Column(db.String(20), nullable=False, unique=True)
     workload = db.Column(db.Integer, nullable=False)
     is_theoretical = db.Column(db.Boolean, nullable=False)
