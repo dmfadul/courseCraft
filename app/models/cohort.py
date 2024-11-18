@@ -6,6 +6,7 @@ class Cohort(db.Model):
     __tablename__ = 'cohorts'
     id = db.Column(db.Integer, primary_key=True)
     code = db.Column(db.String(20), nullable=False, unique=True)
+    area = db.Column(db.String(20), nullable=False)
     number_of_students = db.Column(db.Integer, nullable=False)
     lunch_position = db.Column(db.Integer, nullable=False)
     theoretical_week_parity = db.Column(db.Integer, nullable=False)
@@ -19,8 +20,9 @@ class Cohort(db.Model):
     )
     
     @classmethod
-    def add_cohort(cls, cohort_code, number_of_students, lunch_position, theoretical_week_parity):
+    def add_cohort(cls, cohort_code, area, number_of_students, lunch_position, theoretical_week_parity):
         new_cohort = cls(code=cohort_code,
+                         area=area,
                          number_of_students=number_of_students,
                          lunch_position=lunch_position,
                          theoretical_week_parity=theoretical_week_parity)

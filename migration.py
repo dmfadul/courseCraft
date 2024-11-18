@@ -54,6 +54,8 @@ def add_teachers():
     teachers = [teacher.strip() for teacher in teachers]
 
     for teacher_name_abbr_rg in teachers:
+        if teacher_name_abbr_rg == "":
+            continue
         name, abbr, rg = teacher_name_abbr_rg.split(", ")
         if rg == "0":
             continue

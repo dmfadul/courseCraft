@@ -9,7 +9,7 @@ class Teacher(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False, unique=True)
-    abbr_name = db.Column(db.String(20), nullable=False)
+    abbr_name = db.Column(db.String(40), nullable=False)
     rg = db.Column(db.String(20), nullable=False, unique=True)
 
     disciplines = relationship(
