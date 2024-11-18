@@ -149,6 +149,11 @@ class Modulus(db.Model):
             return f"{teacher.name} removed from {self.code}."
         else:
             return f"{teacher.name} is not a part of {self.code}."
+        
+    def clear_teachers(self):
+        self.teachers = []
+        db.session.commit()
+        return f"Teachers removed from {self.code}."
     
     def set_main_classroom(self, classroom_name=None):
         import random

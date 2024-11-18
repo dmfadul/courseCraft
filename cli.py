@@ -3,6 +3,15 @@ from app.models import Teacher, Modulus, Discipline, Cohort
 import migration
 
 
+# app = create_app()
+# with app.app_context():
+#     disciplines = Discipline.query.all()
+#     for discipline in disciplines:
+#         for modulus in discipline.moduli:
+#             modulus.clear_teachers()
+#             print(modulus.code, modulus.teachers_names)
+
+
 # migration.add_users()
 # migration.add_teachers()
 # migration.add_cohorts()

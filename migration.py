@@ -137,7 +137,7 @@ def add_disciplines():
         else:
             discipline["joined_cohorts"] = bool(discipline["joined_cohorts"])
 
-        # print(discipline)
+        print(discipline)
         app = create_app()
         with app.app_context():
             Discipline.add_discipline(**discipline)        
@@ -153,14 +153,15 @@ def add_prerequisites():
             continue
 
         prerequisites = [p.strip() for p in prerequisites.split(",")]
-        discipline = Discipline.query.filter_by(code=code).first()
-        if not discipline:
-            print(f"Discipline {code} not found.")
-            continue
-        
-        print(code, prerequisites)
         app = create_app()
         with app.app_context():
+            discipline = Discipline.query.filter_by(code=code).first()
+            if not discipline:
+                print(f"Discipline {code} not found.")
+                continue
+            
+            print(code, prerequisites)
+    
             for prerequisite in prerequisites:
                 discipline.add_prerequisite(prerequisite)
 
