@@ -1,11 +1,11 @@
 from app import create_app
-from app.models import Teacher, Modulus, Discipline
+from app.models import Teacher, Modulus, Discipline, Cohort
 import migration
-  
+
 
 # migration.add_users()
 # migration.add_teachers()
-migration.add_cohorts()
+# migration.add_cohorts()
 # migration.add_classrooms()
 # migration.add_disciplines()
 # migration.add_prerequisites()

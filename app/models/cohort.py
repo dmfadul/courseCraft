@@ -10,6 +10,7 @@ class Cohort(db.Model):
     number_of_students = db.Column(db.Integer, nullable=False)
     lunch_position = db.Column(db.Integer, nullable=False)
     theoretical_week_parity = db.Column(db.Integer, nullable=False)
+    is_active = db.Column(db.Boolean, nullable=False, default=True)
 
     moduli = relationship('Modulus', backref='cohort', lazy=True)
 
@@ -32,5 +33,9 @@ class Cohort(db.Model):
 
     def delete_cohort(self):
         db.session.delete(self)
+        db.session.commit()
+
+    def activate(self):
+        self.is_active = True
         db.session.commit()
         
