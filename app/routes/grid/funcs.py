@@ -297,11 +297,22 @@ def gen_classroom_schedule(classroom_name, week_number):
 
 def populate_discipline_list(class_code, parity, get_all=False):
     cohort = Cohort.query.filter_by(code=class_code).first()
+
     moduli = cohort.moduli
     if not get_all:
         moduli = [modulus for modulus in moduli if not modulus.discipline.is_theoretical == parity]   
     moduli = [modulus for modulus in moduli if not modulus.is_complete]
+    
+    moduli = sorted(
+        moduli,
+        key=lambda x: (
+            float('.'.join(part.zfill(2) for part in x.discipline.code.replace('P', '').split('.'))),  # Pad fractions
+            'P' in x.discipline.code  # Place 'P' codes after non-'P' codes
+        )
+    )
+
     discipline_list = ["0 - APAGAR"] + [f"{modulus.discipline.code} - {modulus.discipline.name} ({modulus.remaining_workload}/{modulus.discipline.workload})" for modulus in moduli]
+    
 
     return discipline_list
 

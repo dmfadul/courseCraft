@@ -1,142 +1,62 @@
 {
-    "1.1-DEL44": [
-        "Anna Karyne Turbay Palodetto",
-        "Silas Roque Dos Santos"
-    ],
-    "1.1-APJ04": [
-        "Anna Karyne Turbay Palodetto",
-        "Silas Roque Dos Santos"
-    ],
-    "1.1-APJ05": [
-        "Anna Karyne Turbay Palodetto",
-        "Silas Roque Dos Santos"
-    ],
-    "1.1-APJ06": [
-        "Anna Karyne Turbay Palodetto",
-        "Silas Roque Dos Santos"
-    ],
+    "1.1-DEL44": [],
+    "1.1-APJ04": [],
+    "1.1-APJ05": [],
+    "1.1-APJ06": [],
     "1.1P-PAP21": [
         "Vinicius Augustus De Carvalho"
     ],
-    "1.2-DEL44": [
-        "Jo\u015be Barreto De Macedo Junior"
-    ],
-    "1.2-APJ04": [
-        "Jo\u015be Barreto De Macedo Junior"
-    ],
-    "1.2-APJ05": [
-        "Jo\u015be Barreto De Macedo Junior"
-    ],
-    "1.2-APJ06": [
-        "Jo\u015be Barreto De Macedo Junior"
-    ],
+    "1.2-DEL44": [],
+    "1.2-APJ04": [],
+    "1.2-APJ05": [],
+    "1.2-APJ06": [],
     "1.2P-PAP21": [
         "Jo\u015be Barreto De Macedo Junior"
     ],
-    "1.3-DEL44": [
-        "Andre Gustavo Feltes"
-    ],
-    "1.3-APJ04": [
-        "Andre Gustavo Feltes"
-    ],
-    "1.3-APJ05": [
-        "Andre Gustavo Feltes"
-    ],
-    "1.3-APJ06": [
-        "Andre Gustavo Feltes"
-    ],
+    "1.3-DEL44": [],
+    "1.3-APJ04": [],
+    "1.3-APJ05": [],
+    "1.3-APJ06": [],
     "1.3P-PAP21": [
         "Valderes Luiz Scalco"
     ],
-    "1.4-DEL44": [
-        "Paula Brisola"
-    ],
-    "1.4-APJ04": [
-        "Paula Brisola"
-    ],
-    "1.4-APJ05": [
-        "Paula Brisola"
-    ],
-    "1.4-APJ06": [
-        "Paula Brisola"
-    ],
+    "1.4-DEL44": [],
+    "1.4-APJ04": [],
+    "1.4-APJ05": [],
+    "1.4-APJ06": [],
     "1.4P-PAP21": [
         "Paula Brisola"
     ],
-    "1.5-DEL44": [
-        "Adriano Pereira Adura"
-    ],
-    "1.5-APJ04": [
-        "Adriano Pereira Adura"
-    ],
-    "1.5-APJ05": [
-        "Adriano Pereira Adura"
-    ],
-    "1.5-APJ06": [
-        "Adriano Pereira Adura"
-    ],
+    "1.5-DEL44": [],
+    "1.5-APJ04": [],
+    "1.5-APJ05": [],
+    "1.5-APJ06": [],
     "1.5P-PAP21": [
         "Adriano Pereira Adura"
     ],
-    "1.6-DEL44": [
-        "Leandro Farnese Teixeira",
-        "Rafael Bacelar De Souza"
-    ],
-    "1.6-APJ04": [
-        "Leandro Farnese Teixeira",
-        "Rafael Bacelar De Souza"
-    ],
-    "1.6-APJ05": [
-        "Leandro Farnese Teixeira",
-        "Rafael Bacelar De Souza"
-    ],
-    "1.6-APJ06": [
-        "Leandro Farnese Teixeira",
-        "Rafael Bacelar De Souza"
-    ],
-    "1.7-DEL44": [
-        "Alessandro Roberto Luz"
-    ],
-    "1.7-APJ04": [
-        "Alessandro Roberto Luz"
-    ],
-    "1.7-APJ05": [
-        "Alessandro Roberto Luz"
-    ],
-    "1.7-APJ06": [
-        "Alessandro Roberto Luz"
-    ],
+    "1.6-DEL44": [],
+    "1.6-APJ04": [],
+    "1.6-APJ05": [],
+    "1.6-APJ06": [],
+    "1.7-DEL44": [],
+    "1.7-APJ04": [],
+    "1.7-APJ05": [],
+    "1.7-APJ06": [],
     "1.8-DEL44": [],
     "1.8-APJ04": [],
     "1.8-APJ05": [],
     "1.8-APJ06": [],
-    "1.9-DEL44": [
-        "Anna Karyne Turbay Palodetto"
-    ],
-    "1.9-APJ04": [
-        "Anna Karyne Turbay Palodetto"
-    ],
-    "1.9-APJ05": [
-        "Anna Karyne Turbay Palodetto"
-    ],
-    "1.9-APJ06": [
-        "Anna Karyne Turbay Palodetto"
-    ],
+    "1.9-DEL44": [],
+    "1.9-APJ04": [],
+    "1.9-APJ05": [],
+    "1.9-APJ06": [],
     "1.9P-PAP21": [
         "Anna Karyne Turbay Palodetto"
     ],
-    "1.12-DEL44": [
-        "Thayse Campos Mileski"
-    ],
-    "1.12-APJ04": [
-        "Thayse Campos Mileski"
-    ],
-    "1.12-APJ05": [
-        "Thayse Campos Mileski"
-    ],
-    "1.12-APJ06": [
-        "Thayse Campos Mileski"
-    ],
+    "1.12-DEL44": [],
+    "1.12-APJ04": [],
+    "1.12-APJ05": [],
+    "1.12-APJ06": [],
     "1.12-PAP21": [
         "Thayse Campos Mileski"
     ],
@@ -144,64 +64,28 @@
     "1.13-APJ04": [],
     "1.13-APJ05": [],
     "1.13-APJ06": [],
-    "1.14-DEL44": [
-        "Luiz Rafael Junta Ferro"
-    ],
-    "1.14-APJ04": [
-        "Luiz Rafael Junta Ferro"
-    ],
-    "1.14-APJ05": [
-        "Luiz Rafael Junta Ferro"
-    ],
-    "1.14-APJ06": [
-        "Luiz Rafael Junta Ferro"
-    ],
+    "1.14-DEL44": [],
+    "1.14-APJ04": [],
+    "1.14-APJ05": [],
+    "1.14-APJ06": [],
     "1.14-PAP21": [
         "Luiz Rafael Junta Ferro"
     ],
-    "1.15-DEL44": [
-        "Carlos Eduardo De Arruda Silveira"
-    ],
-    "1.15-APJ04": [
-        "Carlos Eduardo De Arruda Silveira"
-    ],
-    "1.15-APJ05": [
-        "Carlos Eduardo De Arruda Silveira"
-    ],
-    "1.15-APJ06": [
-        "Carlos Eduardo De Arruda Silveira"
-    ],
-    "1.16-DEL44": [
-        "Luiz Rodrigo Grochocki"
-    ],
-    "1.16-APJ04": [
-        "Luiz Rodrigo Grochocki"
-    ],
-    "1.16-APJ05": [
-        "Luiz Rodrigo Grochocki"
-    ],
-    "1.16-APJ06": [
-        "Luiz Rodrigo Grochocki"
-    ],
+    "1.15-DEL44": [],
+    "1.15-APJ04": [],
+    "1.15-APJ05": [],
+    "1.15-APJ06": [],
+    "1.16-DEL44": [],
+    "1.16-APJ04": [],
+    "1.16-APJ05": [],
+    "1.16-APJ06": [],
     "1.16-PAP21": [
         "Luiz Rodrigo Grochocki"
     ],
-    "1.18-DEL44": [
-        "Adriano Pereira Adura",
-        "Paulo Murilo Diaz Borges"
-    ],
-    "1.18-APJ04": [
-        "Adriano Pereira Adura",
-        "Paulo Murilo Diaz Borges"
-    ],
-    "1.18-APJ05": [
-        "Adriano Pereira Adura",
-        "Paulo Murilo Diaz Borges"
-    ],
-    "1.18-APJ06": [
-        "Adriano Pereira Adura",
-        "Paulo Murilo Diaz Borges"
-    ],
+    "1.18-DEL44": [],
+    "1.18-APJ04": [],
+    "1.18-APJ05": [],
+    "1.18-APJ06": [],
     "1.19-DEL44": [],
     "1.19-APJ04": [],
     "1.19-APJ05": [],
@@ -229,7 +113,9 @@
     "1.18P-PAP21": [
         "Juliana Vilela De Barros"
     ],
-    "1.19P-PAP21": [],
+    "1.19P-PAP21": [ 
+    	"Aline Graziele Frizzo"
+    ],
     "1.20P-PAP21": [
         "Karol Kasuko Arake Fragoso Pires"
     ],
@@ -246,144 +132,64 @@
     "1.25P-PAP21": [
         "Amanda Rodrigues De Mello"
     ],
-    "2.1-DEL44": [
-        "Sandra Mara Nepomuceno"
-    ],
-    "2.1-APJ04": [
-        "Sandra Mara Nepomuceno"
-    ],
-    "2.1-APJ05": [
-        "Sandra Mara Nepomuceno"
-    ],
-    "2.1-APJ06": [
-        "Sandra Mara Nepomuceno"
-    ],
-    "2.2-DEL44": [
-        "Anna Karyne Turbay Palodetto"
-    ],
-    "2.2-APJ04": [
-        "Anna Karyne Turbay Palodetto"
-    ],
-    "2.2-APJ05": [
-        "Anna Karyne Turbay Palodetto"
-    ],
-    "2.2-APJ06": [
-        "Anna Karyne Turbay Palodetto"
-    ],
-    "2.3-DEL44": [
-        "Silas Roque Dos Santos"
-    ],
-    "2.3-APJ04": [
-        "Silas Roque Dos Santos"
-    ],
-    "2.3-APJ05": [
-        "Silas Roque Dos Santos"
-    ],
-    "2.3-APJ06": [
-        "Silas Roque Dos Santos"
-    ],
-    "2.4-DEL44": [
-        "Paula Brisola"
-    ],
-    "2.4-APJ04": [
-        "Paula Brisola"
-    ],
-    "2.4-APJ05": [
-        "Paula Brisola"
-    ],
-    "2.4-APJ06": [
-        "Paula Brisola"
-    ],
+    "2.1-DEL44": [],
+    "2.1-APJ04": [],
+    "2.1-APJ05": [],
+    "2.1-APJ06": [],
+    "2.2-DEL44": [],
+    "2.2-APJ04": [],
+    "2.2-APJ05": [],
+    "2.2-APJ06": [],
+    "2.3-DEL44": [],
+    "2.3-APJ04": [],
+    "2.3-APJ05": [],
+    "2.3-APJ06": [],
+    "2.4-DEL44": [],
+    "2.4-APJ04": [],
+    "2.4-APJ05": [],
+    "2.4-APJ06": [],
     "2.4-PAP21": [
         "Paula Brisola"
     ],
-    "2.5-DEL44": [
-        "Guilherme Luiz Dias"
-    ],
-    "2.5-APJ04": [
-        "Guilherme Luiz Dias"
-    ],
-    "2.5-APJ05": [
-        "Guilherme Luiz Dias"
-    ],
-    "2.5-APJ06": [
-        "Guilherme Luiz Dias"
-    ],
+    "2.5-DEL44": [],
+    "2.5-APJ04": [],
+    "2.5-APJ05": [],
+    "2.5-APJ06": [],
     "2.5-PAP21": [
         "Guilherme Luiz Dias"
     ],
-    "2.6-DEL44": [
-        "Andre Gustavo Feltes"
-    ],
-    "2.6-APJ04": [
-        "Andre Gustavo Feltes"
-    ],
-    "2.6-APJ05": [
-        "Andre Gustavo Feltes"
-    ],
-    "2.6-APJ06": [
-        "Andre Gustavo Feltes"
-    ],
+    "2.6-DEL44": [],
+    "2.6-APJ04": [],
+    "2.6-APJ05": [],
+    "2.6-APJ06": [],
     "2.6-PAP21": [
         "Andre Gustavo Feltes"
     ],
-    "2.7-DEL44": [
-        "Edgar Dias Santana"
-    ],
-    "2.7-APJ04": [
-        "Edgar Dias Santana"
-    ],
-    "2.7-APJ05": [
-        "Edgar Dias Santana"
-    ],
-    "2.7-APJ06": [
-        "Edgar Dias Santana"
-    ],
+    "2.7-DEL44": [],
+    "2.7-APJ04": [],
+    "2.7-APJ05": [],
+    "2.7-APJ06": [],
     "2.7-PAP21": [
         "Edgar Dias Santana"
     ],
-    "2.8-DEL44": [
-        "Eliete Aparecida Kovalhuk"
-    ],
-    "2.8-APJ04": [
-        "Eliete Aparecida Kovalhuk"
-    ],
-    "2.8-APJ05": [
-        "Eliete Aparecida Kovalhuk"
-    ],
-    "2.8-APJ06": [
-        "Eliete Aparecida Kovalhuk"
-    ],
+    "2.8-DEL44": [],
+    "2.8-APJ04": [],
+    "2.8-APJ05": [],
+    "2.8-APJ06": [],
     "2.8-PAP21": [
         "Eliete Aparecida Kovalhuk"
     ],
-    "2.9-DEL44": [
-        "Emanuele Maria De Oliveira Siqueira"
-    ],
-    "2.9-APJ04": [
-        "Emanuele Maria De Oliveira Siqueira"
-    ],
-    "2.9-APJ05": [
-        "Emanuele Maria De Oliveira Siqueira"
-    ],
-    "2.9-APJ06": [
-        "Emanuele Maria De Oliveira Siqueira"
-    ],
+    "2.9-DEL44": [],
+    "2.9-APJ04": [],
+    "2.9-APJ05": [],
+    "2.9-APJ06": [],
     "2.9-PAP21": [
         "Emanuele Maria De Oliveira Siqueira"
     ],
-    "2.10-DEL44": [
-        "Rodrigo Rederde"
-    ],
-    "2.10-APJ04": [
-        "Rodrigo Rederde"
-    ],
-    "2.10-APJ05": [
-        "Rodrigo Rederde"
-    ],
-    "2.10-APJ06": [
-        "Rodrigo Rederde"
-    ],
+    "2.10-DEL44": [],
+    "2.10-APJ04": [],
+    "2.10-APJ05": [],
+    "2.10-APJ06": [],
     "2.10-PAP21": [
         "Rodrigo Rederde"
     ],
@@ -392,82 +198,38 @@
     "2.11-APJ05": [],
     "2.11-APJ06": [],
     "2.11-PAP21": [],
-    "3.1-DEL44": [
-        "Fernando Zamoner"
-    ],
-    "3.1-APJ04": [
-        "Fernando Zamoner"
-    ],
-    "3.1-APJ05": [
-        "Fernando Zamoner"
-    ],
-    "3.1-APJ06": [
-        "Fernando Zamoner"
-    ],
+    "3.1-DEL44": [],
+    "3.1-APJ04": [],
+    "3.1-APJ05": [],
+    "3.1-APJ06": [],
     "3.1-PAP21": [
         "Fernando Zamoner"
     ],
-    "3.2-DEL44": [
-        "Aleciane Roberta De Oliveira E Silva"
-    ],
-    "3.2-APJ04": [
-        "Aleciane Roberta De Oliveira E Silva"
-    ],
-    "3.2-APJ05": [
-        "Aleciane Roberta De Oliveira E Silva"
-    ],
-    "3.2-APJ06": [
-        "Aleciane Roberta De Oliveira E Silva"
-    ],
+    "3.2-DEL44": [],
+    "3.2-APJ04": [],
+    "3.2-APJ05": [],
+    "3.2-APJ06": [],
     "3.2-PAP21": [
         "Aleciane Roberta De Oliveira E Silva"
     ],
-    "3.3-DEL44": [
-        "Aleciane Roberta De Oliveira E Silva"
-    ],
-    "3.3-APJ04": [
-        "Aleciane Roberta De Oliveira E Silva"
-    ],
-    "3.3-APJ05": [
-        "Aleciane Roberta De Oliveira E Silva"
-    ],
-    "3.3-APJ06": [
-        "Aleciane Roberta De Oliveira E Silva"
-    ],
+    "3.3-DEL44": [],
+    "3.3-APJ04": [],
+    "3.3-APJ05": [],
+    "3.3-APJ06": [],
     "3.3-PAP21": [
         "Aleciane Roberta De Oliveira E Silva"
     ],
-    "3.4-DEL44": [
-        "Melina Scheneider Bastos",
-        "Marco Aurelio Moura De Rezende"
-    ],
-    "3.4-APJ04": [
-        "Melina Scheneider Bastos",
-        "Marco Aurelio Moura De Rezende"
-    ],
-    "3.4-APJ05": [
-        "Melina Scheneider Bastos",
-        "Marco Aurelio Moura De Rezende"
-    ],
-    "3.4-APJ06": [
-        "Melina Scheneider Bastos",
-        "Marco Aurelio Moura De Rezende"
-    ],
+    "3.4-DEL44": [],
+    "3.4-APJ04": [],
+    "3.4-APJ05": [],
+    "3.4-APJ06": [],
     "3.4P-PAP21": [
         "Julio Cesar Nogueira"
     ],
-    "3.5-DEL44": [
-        "Jonatha Arus Cunha"
-    ],
-    "3.5-APJ04": [
-        "Jonatha Arus Cunha"
-    ],
-    "3.5-APJ05": [
-        "Jonatha Arus Cunha"
-    ],
-    "3.5-APJ06": [
-        "Jonatha Arus Cunha"
-    ],
+    "3.5-DEL44": [],
+    "3.5-APJ04": [],
+    "3.5-APJ05": [],
+    "3.5-APJ06": [],
     "3.5-PAP21": [
         "Jonatha Arus Cunha"
     ],
@@ -479,164 +241,72 @@
     "3.7-APJ04": [],
     "3.7-APJ05": [],
     "3.7-APJ06": [],
-    "3.8-DEL44": [
-        "Raphael De Assump\u00e7\u00e3o Jamielniak"
-    ],
-    "3.8-APJ04": [
-        "Raphael De Assump\u00e7\u00e3o Jamielniak"
-    ],
-    "3.8-APJ05": [
-        "Raphael De Assump\u00e7\u00e3o Jamielniak"
-    ],
-    "3.8-APJ06": [
-        "Raphael De Assump\u00e7\u00e3o Jamielniak"
-    ],
-    "3.9-DEL44": [
-        "Adriano Pereira Adura"
-    ],
-    "3.9-APJ04": [
-        "Adriano Pereira Adura"
-    ],
-    "3.9-APJ05": [
-        "Adriano Pereira Adura"
-    ],
-    "3.9-APJ06": [
-        "Adriano Pereira Adura"
-    ],
-    "3.10-DEL44": [
-        "Paulo Murilo Diaz Borges"
-    ],
-    "3.10-APJ04": [
-        "Paulo Murilo Diaz Borges"
-    ],
-    "3.10-APJ05": [
-        "Paulo Murilo Diaz Borges"
-    ],
-    "3.10-APJ06": [
-        "Paulo Murilo Diaz Borges"
-    ],
-    "4.3-DEL44": [
-        "Valderes Luiz Scalco"
-    ],
-    "4.3-APJ04": [
-        "Valderes Luiz Scalco"
-    ],
-    "4.3-APJ05": [
-        "Valderes Luiz Scalco"
-    ],
-    "4.3-APJ06": [
-        "Valderes Luiz Scalco"
-    ],
+    "3.8-DEL44": [],
+    "3.8-APJ04": [],
+    "3.8-APJ05": [],
+    "3.8-APJ06": [],
+    "3.9-DEL44": [],
+    "3.9-APJ04": [],
+    "3.9-APJ05": [],
+    "3.9-APJ06": [],
+    "3.10-DEL44": [],
+    "3.10-APJ04": [],
+    "3.10-APJ05": [],
+    "3.10-APJ06": [],
+    "4.3-DEL44": [],
+    "4.3-APJ04": [],
+    "4.3-APJ05": [],
+    "4.3-APJ06": [],
     "4.3-PAP21": [
         "Valderes Luiz Scalco"
     ],
-    "4.4-DEL44": [
-        "Daniela Correa Antunes Andrade"
-    ],
-    "4.4-APJ04": [
-        "Daniela Correa Antunes Andrade"
-    ],
-    "4.4-APJ05": [
-        "Daniela Correa Antunes Andrade"
-    ],
-    "4.4-APJ06": [
-        "Daniela Correa Antunes Andrade"
-    ],
+    "4.4-DEL44": [],
+    "4.4-APJ04": [],
+    "4.4-APJ05": [],
+    "4.4-APJ06": [],
     "4.4-PAP21": [
         "Daniela Correa Antunes Andrade"
     ],
-    "4.6-DEL44": [
-        "Jo\u00e3o M\u00e1rio De Goes",
-        "Renata Magalh\u00e3es Bohrer"
-    ],
-    "4.6-APJ04": [
-        "Jo\u00e3o M\u00e1rio De Goes",
-        "Renata Magalh\u00e3es Bohrer"
-    ],
-    "4.6-APJ05": [
-        "Jo\u00e3o M\u00e1rio De Goes",
-        "Renata Magalh\u00e3es Bohrer"
-    ],
-    "4.6-APJ06": [
-        "Jo\u00e3o M\u00e1rio De Goes",
-        "Renata Magalh\u00e3es Bohrer"
-    ],
+    "4.6-DEL44": [],
+    "4.6-APJ04": [],
+    "4.6-APJ05": [],
+    "4.6-APJ06": [],
     "4.6-PAP21": [
         "Jo\u00e3o M\u00e1rio De Goes",
         "Renata Magalh\u00e3es Bohrer"
     ],
-    "4.7-DEL44": [
-        "Renan Barbosa Lopes Ferreira"
-    ],
-    "4.7-APJ04": [
-        "Renan Barbosa Lopes Ferreira"
-    ],
-    "4.7-APJ05": [
-        "Renan Barbosa Lopes Ferreira"
-    ],
-    "4.7-APJ06": [
-        "Renan Barbosa Lopes Ferreira"
-    ],
+    "4.7-DEL44": [],
+    "4.7-APJ04": [],
+    "4.7-APJ05": [],
+    "4.7-APJ06": [],
     "4.7-PAP21": [
         "Renan Barbosa Lopes Ferreira"
     ],
-    "4.8-DEL44": [
-        "Jo\u00e3o Paulo Correa Pinheiro"
-    ],
-    "4.8-APJ04": [
-        "Jo\u00e3o Paulo Correa Pinheiro"
-    ],
-    "4.8-APJ05": [
-        "Jo\u00e3o Paulo Correa Pinheiro"
-    ],
-    "4.8-APJ06": [
-        "Jo\u00e3o Paulo Correa Pinheiro"
-    ],
+    "4.8-DEL44": [],
+    "4.8-APJ04": [],
+    "4.8-APJ05": [],
+    "4.8-APJ06": [],
     "4.8-PAP21": [
         "Jo\u00e3o Paulo Correa Pinheiro"
     ],
-    "4.9-DEL44": [
-        "Vyctor Hugo Guaita Grotti"
-    ],
-    "4.9-APJ04": [
-        "Vyctor Hugo Guaita Grotti"
-    ],
-    "4.9-APJ05": [
-        "Vyctor Hugo Guaita Grotti"
-    ],
-    "4.9-APJ06": [
-        "Vyctor Hugo Guaita Grotti"
-    ],
+    "4.9-DEL44": [],
+    "4.9-APJ04": [],
+    "4.9-APJ05": [],
+    "4.9-APJ06": [],
     "4.9-PAP21": [
         "Vyctor Hugo Guaita Grotti"
     ],
-    "4.10-DEL44": [
-        "Galmirete Egidio Da Silva Topan"
-    ],
-    "4.10-APJ04": [
-        "Galmirete Egidio Da Silva Topan"
-    ],
-    "4.10-APJ05": [
-        "Galmirete Egidio Da Silva Topan"
-    ],
-    "4.10-APJ06": [
-        "Galmirete Egidio Da Silva Topan"
-    ],
+    "4.10-DEL44": [],
+    "4.10-APJ04": [],
+    "4.10-APJ05": [],
+    "4.10-APJ06": [],
     "4.10-PAP21": [
         "Galmirete Egidio Da Silva Topan"
     ],
-    "4.13-DEL44": [
-        "Rafael Bacelar De Souza"
-    ],
-    "4.13-APJ04": [
-        "Rafael Bacelar De Souza"
-    ],
-    "4.13-APJ05": [
-        "Rafael Bacelar De Souza"
-    ],
-    "4.13-APJ06": [
-        "Rafael Bacelar De Souza"
-    ],
+    "4.13-DEL44": [],
+    "4.13-APJ04": [],
+    "4.13-APJ05": [],
+    "4.13-APJ06": [],
     "4.13-PAP21": [
         "Rafael Bacelar De Souza"
     ],
@@ -645,62 +315,26 @@
     "5.1-APJ05": [],
     "5.1-APJ06": [],
     "5.1-PAP21": [],
-    "5.2-DEL44": [
-        "Rodrigo J. Dos Santos",
-        "Gabriel Miqueletto"
-    ],
-    "5.2-APJ04": [
-        "Rodrigo J. Dos Santos",
-        "Gabriel Miqueletto"
-    ],
-    "5.2-APJ05": [
-        "Rodrigo J. Dos Santos",
-        "Gabriel Miqueletto"
-    ],
-    "5.2-APJ06": [
-        "Rodrigo J. Dos Santos",
-        "Gabriel Miqueletto"
-    ],
+    "5.2-DEL44": [],
+    "5.2-APJ04": [],
+    "5.2-APJ05": [],
+    "5.2-APJ06": [],
     "5.2-PAP21": [
         "Rodrigo J. Dos Santos",
         "Gabriel Miqueletto"
     ],
-    "5.3-DEL44": [
-        "Rodrigo J. Dos Santos",
-        "Gabriel Miqueletto"
-    ],
-    "5.3-APJ04": [
-        "Rodrigo J. Dos Santos",
-        "Gabriel Miqueletto"
-    ],
-    "5.3-APJ05": [
-        "Rodrigo J. Dos Santos",
-        "Gabriel Miqueletto"
-    ],
-    "5.3-APJ06": [
-        "Rodrigo J. Dos Santos",
-        "Gabriel Miqueletto"
-    ],
+    "5.3-DEL44": [],
+    "5.3-APJ04": [],
+    "5.3-APJ05": [],
+    "5.3-APJ06": [],
     "5.3-PAP21": [
         "Rodrigo J. Dos Santos",
         "Gabriel Miqueletto"
     ],
-    "5.4-DEL44": [
-        "Rodrigo J. Dos Santos",
-        "Gabriel Miqueletto"
-    ],
-    "5.4-APJ04": [
-        "Rodrigo J. Dos Santos",
-        "Gabriel Miqueletto"
-    ],
-    "5.4-APJ05": [
-        "Rodrigo J. Dos Santos",
-        "Gabriel Miqueletto"
-    ],
-    "5.4-APJ06": [
-        "Rodrigo J. Dos Santos",
-        "Gabriel Miqueletto"
-    ],
+    "5.4-DEL44": [],
+    "5.4-APJ04": [],
+    "5.4-APJ05": [],
+    "5.4-APJ06": [],
     "5.4-PAP21": [
         "Rodrigo J. Dos Santos",
         "Gabriel Miqueletto"
@@ -715,37 +349,17 @@
     "5.6-APJ05": [],
     "5.6-APJ06": [],
     "5.6-PAP21": [],
-    "5.7-DEL44": [
-        "Cristiano Augusto Quintas Dos Santos"
-    ],
-    "5.7-APJ04": [
-        "Cristiano Augusto Quintas Dos Santos"
-    ],
-    "5.7-APJ05": [
-        "Cristiano Augusto Quintas Dos Santos"
-    ],
-    "5.7-APJ06": [
-        "Cristiano Augusto Quintas Dos Santos"
-    ],
+    "5.7-DEL44": [],
+    "5.7-APJ04": [],
+    "5.7-APJ05": [],
+    "5.7-APJ06": [],
     "5.7-PAP21": [
         "Cristiano Augusto Quintas Dos Santos"
     ],
-    "5.8-DEL44": [
-        "Gilson Andre Acosta De Jesus",
-        "Nikolas Cabral Dos Santos"
-    ],
-    "5.8-APJ04": [
-        "Gilson Andre Acosta De Jesus",
-        "Nikolas Cabral Dos Santos"
-    ],
-    "5.8-APJ05": [
-        "Gilson Andre Acosta De Jesus",
-        "Nikolas Cabral Dos Santos"
-    ],
-    "5.8-APJ06": [
-        "Gilson Andre Acosta De Jesus",
-        "Nikolas Cabral Dos Santos"
-    ],
+    "5.8-DEL44": [],
+    "5.8-APJ04": [],
+    "5.8-APJ05": [],
+    "5.8-APJ06": [],
     "5.8-PAP21": [
         "Gilson Andre Acosta De Jesus",
         "Nikolas Cabral Dos Santos"
@@ -765,113 +379,53 @@
     "5.11-APJ05": [],
     "5.11-APJ06": [],
     "5.11-PAP21": [],
-    "5.12-DEL44": [
-        "Jo\u00e3o Carlos Jakubiu"
-    ],
-    "5.12-APJ04": [
-        "Jo\u00e3o Carlos Jakubiu"
-    ],
-    "5.12-APJ05": [
-        "Jo\u00e3o Carlos Jakubiu"
-    ],
-    "5.12-APJ06": [
-        "Jo\u00e3o Carlos Jakubiu"
-    ],
+    "5.12-DEL44": [],
+    "5.12-APJ04": [],
+    "5.12-APJ05": [],
+    "5.12-APJ06": [],
     "5.12-PAP21": [
         "Jo\u00e3o Carlos Jakubiu"
     ],
-    "5.13-DEL44": [
-        "Daniela Correa Antunes Andrade"
-    ],
-    "5.13-APJ04": [
-        "Daniela Correa Antunes Andrade"
-    ],
-    "5.13-APJ05": [
-        "Daniela Correa Antunes Andrade"
-    ],
-    "5.13-APJ06": [
-        "Daniela Correa Antunes Andrade"
-    ],
+    "5.13-DEL44": [],
+    "5.13-APJ04": [],
+    "5.13-APJ05": [],
+    "5.13-APJ06": [],
     "5.13-PAP21": [
         "Daniela Correa Antunes Andrade"
     ],
-    "5.14-DEL44": [
-        "Cristiano Augusto Quintas Dos Santos"
-    ],
-    "5.14-APJ04": [
-        "Cristiano Augusto Quintas Dos Santos"
-    ],
-    "5.14-APJ05": [
-        "Cristiano Augusto Quintas Dos Santos"
-    ],
-    "5.14-APJ06": [
-        "Cristiano Augusto Quintas Dos Santos"
-    ],
+    "5.14-DEL44": [],
+    "5.14-APJ04": [],
+    "5.14-APJ05": [],
+    "5.14-APJ06": [],
     "5.14-PAP21": [
         "Cristiano Augusto Quintas Dos Santos"
     ],
-    "5.16-DEL44": [
-        "Duccio Alfredo Matuella"
-    ],
-    "5.16-APJ04": [
-        "Duccio Alfredo Matuella"
-    ],
-    "5.16-APJ05": [
-        "Duccio Alfredo Matuella"
-    ],
-    "5.16-APJ06": [
-        "Duccio Alfredo Matuella"
-    ],
+    "5.16-DEL44": [],
+    "5.16-APJ04": [],
+    "5.16-APJ05": [],
+    "5.16-APJ06": [],
     "5.16-PAP21": [
         "Duccio Alfredo Matuella"
     ],
-    "5.17-DEL44": [
-        "Sebasti\u00e3o De Paula Pinto J\u00fanior",
-        "Oscar Michelc"
-    ],
-    "5.17-APJ04": [
-        "Sebasti\u00e3o De Paula Pinto J\u00fanior",
-        "Oscar Michelc"
-    ],
-    "5.17-APJ05": [
-        "Sebasti\u00e3o De Paula Pinto J\u00fanior",
-        "Oscar Michelc"
-    ],
-    "5.17-APJ06": [
-        "Sebasti\u00e3o De Paula Pinto J\u00fanior",
-        "Oscar Michelc"
-    ],
+    "5.17-DEL44": [],
+    "5.17-APJ04": [],
+    "5.17-APJ05": [],
+    "5.17-APJ06": [],
     "5.17-PAP21": [
         "Sebasti\u00e3o De Paula Pinto J\u00fanior",
         "Oscar Michelc"
     ],
-    "6.1-DEL44": [
-        "Rafael Ferreira Vianna"
-    ],
-    "6.1-APJ04": [
-        "Rafael Ferreira Vianna"
-    ],
-    "6.1-APJ05": [
-        "Rafael Ferreira Vianna"
-    ],
-    "6.1-APJ06": [
-        "Rafael Ferreira Vianna"
-    ],
+    "6.1-DEL44": [],
+    "6.1-APJ04": [],
+    "6.1-APJ05": [],
+    "6.1-APJ06": [],
     "6.1-PAP21": [
         "Rafael Ferreira Vianna"
     ],
-    "6.2-DEL44": [
-        "Vyctor Hugo Guaita Grotti"
-    ],
-    "6.2-APJ04": [
-        "Vyctor Hugo Guaita Grotti"
-    ],
-    "6.2-APJ05": [
-        "Vyctor Hugo Guaita Grotti"
-    ],
-    "6.2-APJ06": [
-        "Vyctor Hugo Guaita Grotti"
-    ],
+    "6.2-DEL44": [],
+    "6.2-APJ04": [],
+    "6.2-APJ05": [],
+    "6.2-APJ06": [],
     "6.2-PAP21": [
         "Vyctor Hugo Guaita Grotti"
     ],
@@ -880,33 +434,17 @@
     "6.3-APJ05": [],
     "6.3-APJ06": [],
     "6.3-PAP21": [],
-    "6.4-DEL44": [
-        "Elter Taets Garcia"
-    ],
-    "6.4-APJ04": [
-        "Elter Taets Garcia"
-    ],
-    "6.4-APJ05": [
-        "Elter Taets Garcia"
-    ],
-    "6.4-APJ06": [
-        "Elter Taets Garcia"
-    ],
+    "6.4-DEL44": [],
+    "6.4-APJ04": [],
+    "6.4-APJ05": [],
+    "6.4-APJ06": [],
     "6.4-PAP21": [
         "Elter Taets Garcia"
     ],
-    "6.5-DEL44": [
-        "Elter Taets Garcia"
-    ],
-    "6.5-APJ04": [
-        "Elter Taets Garcia"
-    ],
-    "6.5-APJ05": [
-        "Elter Taets Garcia"
-    ],
-    "6.5-APJ06": [
-        "Elter Taets Garcia"
-    ],
+    "6.5-DEL44": [],
+    "6.5-APJ04": [],
+    "6.5-APJ05": [],
+    "6.5-APJ06": [],
     "6.5-PAP21": [
         "Elter Taets Garcia"
     ],
@@ -915,65 +453,17 @@
     "6.6-APJ05": [],
     "6.6-APJ06": [],
     "6.6-PAP21": [],
-    "6.7-DEL44": [
-        "Vinicius Augustus De Carvalho"
-    ],
-    "6.7-APJ04": [
-        "Vinicius Augustus De Carvalho"
-    ],
-    "6.7-APJ05": [
-        "Vinicius Augustus De Carvalho"
-    ],
-    "6.7-APJ06": [
-        "Vinicius Augustus De Carvalho"
-    ],
+    "6.7-DEL44": [],
+    "6.7-APJ04": [],
+    "6.7-APJ05": [],
+    "6.7-APJ06": [],
     "6.7-PAP21": [
         "Vinicius Augustus De Carvalho"
     ],
-    "6.15-DEL44": [
-        "Rafael Ferreira Vianna",
-        "Ana Claudia Machado",
-        "Claudia Martins",
-        "Carlos Fernando De Lima",
-        "Patricia Villa Costa Vaz",
-        "Allen Paiva Fermon",
-        "Sheila M. Schneider",
-        "David Fadul",
-        "Eduardo Cezar Santos"
-    ],
-    "6.15-APJ04": [
-        "Rafael Ferreira Vianna",
-        "Ana Claudia Machado",
-        "Claudia Martins",
-        "Carlos Fernando De Lima",
-        "Patricia Villa Costa Vaz",
-        "Allen Paiva Fermon",
-        "Sheila M. Schneider",
-        "David Fadul",
-        "Eduardo Cezar Santos"
-    ],
-    "6.15-APJ05": [
-        "Rafael Ferreira Vianna",
-        "Ana Claudia Machado",
-        "Claudia Martins",
-        "Carlos Fernando De Lima",
-        "Patricia Villa Costa Vaz",
-        "Allen Paiva Fermon",
-        "Sheila M. Schneider",
-        "David Fadul",
-        "Eduardo Cezar Santos"
-    ],
-    "6.15-APJ06": [
-        "Rafael Ferreira Vianna",
-        "Ana Claudia Machado",
-        "Claudia Martins",
-        "Carlos Fernando De Lima",
-        "Patricia Villa Costa Vaz",
-        "Allen Paiva Fermon",
-        "Sheila M. Schneider",
-        "David Fadul",
-        "Eduardo Cezar Santos"
-    ],
+    "6.15-DEL44": [],
+    "6.15-APJ04": [],
+    "6.15-APJ05": [],
+    "6.15-APJ06": [],
     "6.15-PAP21": [
         "Rafael Ferreira Vianna",
         "Ana Claudia Machado",
@@ -985,132 +475,60 @@
         "David Fadul",
         "Eduardo Cezar Santos"
     ],
-    "1.10-DEL44": [
-        "Eduardo Bergmann Moura"
-    ],
-    "1.10-APJ04": [
-        "Eduardo Bergmann Moura"
-    ],
-    "1.10-APJ05": [
-        "Eduardo Bergmann Moura"
-    ],
-    "1.10-APJ06": [
-        "Eduardo Bergmann Moura"
-    ],
-    "1.11-DEL44": [
-        "Adriano Chohfi"
-    ],
-    "1.11-APJ04": [
-        "Adriano Chohfi"
-    ],
-    "1.11-APJ05": [
-        "Adriano Chohfi"
-    ],
-    "1.11-APJ06": [
-        "Adriano Chohfi"
-    ],
+    "1.10-DEL44": [],
+    "1.10-APJ04": [],
+    "1.10-APJ05": [],
+    "1.10-APJ06": [],
+    "1.11-DEL44": [],
+    "1.11-APJ04": [],
+    "1.11-APJ05": [],
+    "1.11-APJ06": [],
     "1.11-PAP21": [
         "Adriano Chohfi"
     ],
-    "1.17-DEL44": [
-        "Flavio Adriano Balan"
-    ],
-    "1.17-APJ04": [
-        "Flavio Adriano Balan"
-    ],
-    "1.17-APJ05": [
-        "Flavio Adriano Balan"
-    ],
-    "1.17-APJ06": [
-        "Flavio Adriano Balan"
-    ],
-    "4.1-DEL44": [
-        "Silvio Jacob Rockembach"
-    ],
-    "4.1-APJ04": [
-        "Silvio Jacob Rockembach"
-    ],
-    "4.1-APJ05": [
-        "Silvio Jacob Rockembach"
-    ],
-    "4.1-APJ06": [
-        "Silvio Jacob Rockembach"
-    ],
+    "1.17-DEL44": [],
+    "1.17-APJ04": [],
+    "1.17-APJ05": [],
+    "1.17-APJ06": [],
+    "4.1-DEL44": [],
+    "4.1-APJ04": [],
+    "4.1-APJ05": [],
+    "4.1-APJ06": [],
     "4.1-PAP21": [
         "Silvio Jacob Rockembach"
     ],
-    "4.2-DEL44": [
-        "Renan Barbosa Lopes Ferreira"
-    ],
-    "4.2-APJ04": [
-        "Renan Barbosa Lopes Ferreira"
-    ],
-    "4.2-APJ05": [
-        "Renan Barbosa Lopes Ferreira"
-    ],
-    "4.2-APJ06": [
-        "Renan Barbosa Lopes Ferreira"
-    ],
+    "4.2-DEL44": [],
+    "4.2-APJ04": [],
+    "4.2-APJ05": [],
+    "4.2-APJ06": [],
     "4.2-PAP21": [
         "Renan Barbosa Lopes Ferreira"
     ],
-    "4.5-DEL44": [
-        "Rafael Ferreira Vianna"
-    ],
-    "4.5-APJ04": [
-        "Rafael Ferreira Vianna"
-    ],
-    "4.5-APJ05": [
-        "Rafael Ferreira Vianna"
-    ],
-    "4.5-APJ06": [
-        "Rafael Ferreira Vianna"
-    ],
+    "4.5-DEL44": [],
+    "4.5-APJ04": [],
+    "4.5-APJ05": [],
+    "4.5-APJ06": [],
     "4.5-PAP21": [
         "Rafael Ferreira Vianna"
     ],
-    "4.11-DEL44": [
-        "Marcus Vinicius Da Costa Michelotto"
-    ],
-    "4.11-APJ04": [
-        "Marcus Vinicius Da Costa Michelotto"
-    ],
-    "4.11-APJ05": [
-        "Marcus Vinicius Da Costa Michelotto"
-    ],
-    "4.11-APJ06": [
-        "Marcus Vinicius Da Costa Michelotto"
-    ],
+    "4.11-DEL44": [],
+    "4.11-APJ04": [],
+    "4.11-APJ05": [],
+    "4.11-APJ06": [],
     "4.11-PAP21": [
         "Marcus Vinicius Da Costa Michelotto"
     ],
-    "4.12-DEL44": [
-        "Marcelo Lemos De Oliveira"
-    ],
-    "4.12-APJ04": [
-        "Marcelo Lemos De Oliveira"
-    ],
-    "4.12-APJ05": [
-        "Marcelo Lemos De Oliveira"
-    ],
-    "4.12-APJ06": [
-        "Marcelo Lemos De Oliveira"
-    ],
+    "4.12-DEL44": [],
+    "4.12-APJ04": [],
+    "4.12-APJ05": [],
+    "4.12-APJ06": [],
     "4.12-PAP21": [
         "Marcelo Lemos De Oliveira"
     ],
-    "6.8-DEL44": [
-        "Renan Barbosa Lopes Ferreira"
-    ],
-    "6.8-APJ04": [
-        "Renan Barbosa Lopes Ferreira"
-    ],
-    "6.8-APJ05": [
-        "Renan Barbosa Lopes Ferreira"
-    ],
-    "6.8-APJ06": [
-        "Renan Barbosa Lopes Ferreira"
-    ],
+    "6.8-DEL44": [],
+    "6.8-APJ04": [],
+    "6.8-APJ05": [],
+    "6.8-APJ06": [],
     "6.8-PAP21": [
         "Renan Barbosa Lopes Ferreira"
     ],
@@ -1119,119 +537,39 @@
     "6.9-APJ05": [],
     "6.9-APJ06": [],
     "6.9-PAP21": [],
-    "6.10-DEL44": [
-        "Diogo Correa De Oliveira Reis"
-    ],
-    "6.10-APJ04": [
-        "Diogo Correa De Oliveira Reis"
-    ],
-    "6.10-APJ05": [
-        "Diogo Correa De Oliveira Reis"
-    ],
-    "6.10-APJ06": [
-        "Diogo Correa De Oliveira Reis"
-    ],
+    "6.10-DEL44": [],
+    "6.10-APJ04": [],
+    "6.10-APJ05": [],
+    "6.10-APJ06": [],
     "6.10-PAP21": [
         "Diogo Correa De Oliveira Reis"
     ],
-    "6.11-DEL44": [
-        "Ana Claudia Machado"
-    ],
-    "6.11-APJ04": [
-        "Ana Claudia Machado"
-    ],
-    "6.11-APJ05": [
-        "Ana Claudia Machado"
-    ],
-    "6.11-APJ06": [
-        "Ana Claudia Machado"
-    ],
+    "6.11-DEL44": [],
+    "6.11-APJ04": [],
+    "6.11-APJ05": [],
+    "6.11-APJ06": [],
     "6.11-PAP21": [
         "Ana Claudia Machado"
     ],
-    "6.12-DEL44": [
-        "Rafael Ferreira Vianna",
-        "Ana Claudia Machado"
-    ],
-    "6.12-APJ04": [
-        "Rafael Ferreira Vianna",
-        "Ana Claudia Machado"
-    ],
-    "6.12-APJ05": [
-        "Rafael Ferreira Vianna",
-        "Ana Claudia Machado"
-    ],
-    "6.12-APJ06": [
-        "Rafael Ferreira Vianna",
-        "Ana Claudia Machado"
-    ],
+    "6.12-DEL44": [],
+    "6.12-APJ04": [],
+    "6.12-APJ05": [],
+    "6.12-APJ06": [],
     "6.12-PAP21": [
         "Rafael Ferreira Vianna",
         "Ana Claudia Machado"
     ],
-    "6.13-DEL44": [
-        "Sheila M. Schneider"
-    ],
-    "6.13-APJ04": [
-        "Sheila M. Schneider"
-    ],
-    "6.13-APJ05": [
-        "Sheila M. Schneider"
-    ],
-    "6.13-APJ06": [
-        "Sheila M. Schneider"
-    ],
+    "6.13-DEL44": [],
+    "6.13-APJ04": [],
+    "6.13-APJ05": [],
+    "6.13-APJ06": [],
     "6.13-PAP21": [
         "Sheila M. Schneider"
     ],
-    "6.14-DEL44": [
-        "Rafael Ferreira Vianna",
-        "Ana Claudia Machado",
-        "Claudia Martins",
-        "Carlos Fernando De Lima",
-        "Patricia Villa Costa Vaz",
-        "Luciane Grochocki",
-        "Patricia Coccia",
-        "Andre Duarte",
-        "Sheila M. Schneider",
-        "David Fadul"
-    ],
-    "6.14-APJ04": [
-        "Rafael Ferreira Vianna",
-        "Ana Claudia Machado",
-        "Claudia Martins",
-        "Carlos Fernando De Lima",
-        "Patricia Villa Costa Vaz",
-        "Luciane Grochocki",
-        "Patricia Coccia",
-        "Andre Duarte",
-        "Sheila M. Schneider",
-        "David Fadul"
-    ],
-    "6.14-APJ05": [
-        "Rafael Ferreira Vianna",
-        "Ana Claudia Machado",
-        "Claudia Martins",
-        "Carlos Fernando De Lima",
-        "Patricia Villa Costa Vaz",
-        "Luciane Grochocki",
-        "Patricia Coccia",
-        "Andre Duarte",
-        "Sheila M. Schneider",
-        "David Fadul"
-    ],
-    "6.14-APJ06": [
-        "Rafael Ferreira Vianna",
-        "Ana Claudia Machado",
-        "Claudia Martins",
-        "Carlos Fernando De Lima",
-        "Patricia Villa Costa Vaz",
-        "Luciane Grochocki",
-        "Patricia Coccia",
-        "Andre Duarte",
-        "Sheila M. Schneider",
-        "David Fadul"
-    ],
+    "6.14-DEL44": [],
+    "6.14-APJ04": [],
+    "6.14-APJ05": [],
+    "6.14-APJ06": [],
     "6.14-PAP21": [
         "Rafael Ferreira Vianna",
         "Ana Claudia Machado",

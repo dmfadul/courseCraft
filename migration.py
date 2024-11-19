@@ -161,7 +161,7 @@ def add_prerequisites():
                 continue
             
             print(code, prerequisites)
-    
+
             for prerequisite in prerequisites:
                 discipline.add_prerequisite(prerequisite)
 
@@ -250,7 +250,6 @@ def add_teacher_to_modulus():
                     continue
                 
                 modulus.add_teacher(teacher_name)
-                print("")
 
 
 def add_users():
