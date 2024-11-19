@@ -249,7 +249,8 @@ def add_teacher_to_modulus():
                     print(f"Teacher {teacher_name} not found.")
                     continue
                 
-                modulus.add_teacher(teacher_name)
+                flag = modulus.add_teacher(teacher_name)
+                print(flag)
 
 
 def add_users():

@@ -3,13 +3,15 @@ from app.models import Teacher, Modulus, Discipline, Cohort
 import migration
 
 
-# app = create_app()
-# with app.app_context():
-#     disciplines = Discipline.query.all()
-#     for discipline in disciplines:
-#         for modulus in discipline.moduli:
-#             modulus.clear_teachers()
-#             print(modulus.code, modulus.teachers_names)
+app = create_app()
+with app.app_context():
+    teacher = Teacher.query.filter_by(name="Amanda Rodrigues De Mello").first()
+    print(teacher.name)
+    # disciplines = Discipline.query.all()
+    # for discipline in disciplines:
+    #     for modulus in discipline.moduli:
+    #         modulus.clear_teachers()
+    #         print(modulus.code, modulus.teachers)
 
 
 # migration.add_users()
@@ -19,8 +21,11 @@ import migration
 # migration.add_disciplines()
 # migration.add_prerequisites()
 # migration.add_moduli()
-# migration.add_teacher_to_modulus()
+
 # migration.gen_teacher_moduli_dict()
+
+# migration.add_teacher_to_modulus()
+
 
     
 # moduli = Modulus.query.all()
