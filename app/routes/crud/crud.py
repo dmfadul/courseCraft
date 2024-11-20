@@ -55,7 +55,7 @@ def add_teacher_to_discipline():
                             request_path='add-teacher-discipline')
 
 
-@crud_bp.route('/crud/add-discipline', methods=['GET', 'POST'])
+@crud_bp.route('/crud/add-discipline/', methods=['GET', 'POST'])
 @login_required
 def add_discipline(): 
     if request.method == 'POST':

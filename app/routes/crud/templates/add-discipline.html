@@ -1,25 +1,101 @@
 {% extends "base.html" %}
+
+{% block head_links %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/discipline.css') }}">
+{% endblock %}
+
 {% block mainContent %}
-<div class="container mt-5">
-    <h2>Add New Classroom</h2>
-    <form action="/crud/add-discipline" method="post">
-        <div class="mb-3">
-            <label for="name" class="form-label">Nome da Disciplina</label>
-            <input type="text" class="form-control" id="name" name="name" required>
-            <label for="name_abbr" class="form-label">Nome Abreviado</label>
-            <input type="text" class="form-control" id="name_abbr" name="name_abbr" required>
-            <label for="code" class="form-label">Código da Disciplina</label>
-            <input type="text" class="form-control" id="code" name="code" required>
-            <label for="workload" class="form-label">Carga Horária</label>
-            <input type="number" class="form-control" id="workload" name="workload" required>
-            <label for="is_theoretical" class="form-label">Teórica</label>
-            <input type="number" class="form-control" id="is_theoretical" name="is_theoretical">
-            <label for="is_intensive" class="form-label">Intensiva</label>
-            <input type="number" class="form-control" id="is_intensive" name="is_intensive">
-            <label for="classroom" class="form-label">Sala de aula</label>
-            <input type="number" class="form-control" id="classroom" name="classroom">
+<div class="container">
+    <h1>Discipline Management</h1>
+
+    <!-- Add New Discipline -->
+    <form id="add-discipline-form">
+        <h2>Add New Discipline</h2>
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
         </div>
-        <button type="submit" class="btn btn-primary">Add Discipline</button>
+
+        <div class="form-group">
+            <label for="name_abbr">Abbreviation</label>
+            <input type="text" id="name_abbr" name="name_abbr" required>
+        </div>
+
+        <div class="form-group">
+            <label for="code">Code</label>
+            <input type="text" id="code" name="code" required>
+        </div>
+
+        <div class="form-group">
+            <label for="workload">Workload</label>
+            <input type="number" id="workload" name="workload" required>
+        </div>
+
+        <div class="form-group">
+            <label for="is_theoretical">Theoretical?</label>
+            <select id="is_theoretical" name="is_theoretical">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="is_intensive">Intensive?</label>
+            <select id="is_intensive" name="is_intensive">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+        </div>
+
+        <button type="submit">Add Discipline</button>
     </form>
+
+    <!-- List of Disciplines -->
+    <div class="discipline-list">
+        <h2>Existing Disciplines</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Abbreviation</th>
+                    <th>Code</th>
+                    <th>Workload</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="discipline-table">
+                <!-- Dynamic content will be loaded here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Edit Discipline Form -->
+    <div id="edit-discipline-form" class="edit-form">
+        <h2>Edit Discipline</h2>
+        <form>
+            <div class="form-group">
+                <label for="edit-name">Name</label>
+                <input type="text" id="edit-name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="edit-name_abbr">Abbreviation</label>
+                <input type="text" id="edit-name_abbr" name="name_abbr" required>
+            </div>
+
+            <div class="form-group">
+                <label for="edit-code">Code</label>
+                <input type="text" id="edit-code" name="code" required readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="edit-workload">Workload</label>
+                <input type="number" id="edit-workload" name="workload" required>
+            </div>
+
+            <button type="submit">Update Discipline</button>
+        </form>
+    </div>
 </div>
 {% endblock %}
