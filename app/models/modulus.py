@@ -97,7 +97,17 @@ class Modulus(db.Model):
             end_dates.append(modulus.end_date)
 
         return max(end_dates)
-             
+    
+    @classmethod
+    def get_by_code(cls, code):
+        from .discipline import Discipline
+        from .cohort import Cohort
+
+        discipline_code, class_code = code.split('-')
+        discipline = Discipline.query.filter_by(code=discipline_code.strip()).first()
+        cohort = Cohort.query.filter_by(code=class_code.strip()).first()
+
+        return cls.query.filter_by(discipline_id=discipline.id, cohort_id=cohort.id).first()
 
     @classmethod
     def add_modulus(cls, class_code, discipline_code):
