@@ -34,19 +34,19 @@
 
         <div class="form-group">
             <label for="is_theoretical">Theoretical?</label>
-            <select id="is_theoretical" name="is_theoretical">
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-            </select>
+            <label class="switch">
+                <input type="checkbox" id="is_theoretical" name="is_theoretical">
+                <span class="slider"></span>
+            </label>
         </div>
-
+        
         <div class="form-group">
             <label for="is_intensive">Intensive?</label>
-            <select id="is_intensive" name="is_intensive">
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-            </select>
-        </div>
+            <label class="switch">
+                <input type="checkbox" id="is_intensive" name="is_intensive">
+                <span class="slider"></span>
+            </label>
+        </div>     
 
         <button type="submit">Add Discipline</button>
     </form>
