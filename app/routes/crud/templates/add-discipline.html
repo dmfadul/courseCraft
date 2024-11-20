@@ -2,6 +2,7 @@
 
 {% block head_links %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/discipline.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/crud.js') }}"></script>
 {% endblock %}
 
 {% block mainContent %}
@@ -46,7 +47,34 @@
                 <input type="checkbox" id="is_intensive" name="is_intensive">
                 <span class="slider"></span>
             </label>
-        </div>     
+        </div>
+        
+        <div class="form-group">
+            <label for="assigned-teachers">Assigned Teachers</label>
+            <div id="assigned-teachers" class="teacher-list">
+                <!-- Dynamically populated list of current teachers -->
+                {% for teacher in current_teachers %}
+                <div class="teacher-item" data-teacher-id="{{ teacher.id }}">
+                    <span>{{ teacher.name }}</span>
+                    <button type="button" class="remove-teacher-btn" data-teacher-id="{{ teacher.id }}">Remove</button>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="new-teacher">Add New Teacher</label>
+            <div class="add-teacher-form">
+                <select id="new-teacher" name="new_teacher" required>
+                    <option value="" disabled selected>Select a teacher</option>
+                    {% for teacher in available_teachers %}
+                    <option value="{{ teacher.id }}">{{ teacher.name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="button" id="add-teacher-btn">Add Teacher</button>
+            </div>
+        </div>
+        
 
         <button type="submit">Add Discipline</button>
     </form>

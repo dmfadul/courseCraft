@@ -80,8 +80,11 @@ def add_discipline():
 
         flash(f'Classroom {flag.name} added successfully.', 'success')
         return redirect(url_for('dashboard.dashboard'))
-
-    return render_template('add-discipline.html')
+    else:
+        available_teachers = sorted(Teacher.query.all(), key=lambda x: x.name)
+        
+        return render_template('add-discipline.html',
+                                available_teachers=available_teachers)
 
 
 

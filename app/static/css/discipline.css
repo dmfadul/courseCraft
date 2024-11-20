@@ -136,3 +136,50 @@ table th {
 .switch input:checked + .slider:before {
     transform: translateX(26px);
 }
+
+.teacher-list {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+.teacher-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.teacher-item:last-child {
+    border-bottom: none;
+}
+
+.remove-teacher-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.remove-teacher-btn:hover {
+    background-color: #cc0000;
+}
+
+.add-teacher-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.add-teacher-form select {
+    flex: 1;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
