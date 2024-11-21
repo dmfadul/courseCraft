@@ -16,8 +16,7 @@ import migration
 #             print(modulus.code, modulus.teachers_names)
 
 
-# migration.clear_all_tables()
-migration.add_users()
+# migration.add_users()
 # migration.add_teachers()
 # migration.add_cohorts()
 # migration.add_classrooms()
