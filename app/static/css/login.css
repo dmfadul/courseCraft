@@ -1,41 +1,87 @@
-#login {
-    border: 2px solid #ccc;
-    padding: 20px;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2), -3px -3px 10px rgba(255, 255, 255, 0.7);
-  }
-  
-  .login-register form {
-    margin-bottom: 20px;
-  }
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #222;
+  color: #fff;
+}
 
-  main {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* 100% of the viewport height */
-  }
+/* Login Container */
+.login-container {
+  width: 100%;
+  max-width: 400px;
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
 
-  a {
-    color: black;
-    text-decoration: none;
-  }
-  
-  input[type=text],
-  input[type=email],
-  input[type=password] {
-    width: 90%;
-    padding: 12px;
-    margin: 8px 0;
-  }
+.login-container h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #007BFF;
+  text-transform: uppercase;
+  border-bottom: 2px solid #007BFF;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/* Input Fields */
+.form-input {
+  width: 90%;
+  padding: 12px;
+  margin: 10px 0;
+  font-size: 16px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background: #333;
+  color: #fff;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
+}
+
+.form-input:focus {
+  border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.8);
+  outline: none;
+}
+
+/* Submit Button */
+.button {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007BFF;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Register Link */
+.register-link {
+  margin-top: 15px;
+}
+
+.register-link a {
+  color: #007BFF;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.register-link a:hover {
+  color: #0056b3;
+}
