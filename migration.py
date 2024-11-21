@@ -8,9 +8,9 @@ def clear_all_tables():
     app = create_app()
     with app.app_context():
         db.session.query(Modulus).delete()
+        db.session.query(Discipline).delete()
         db.session.query(Cohort).delete()
         db.session.query(Teacher).delete()
-        db.session.query(Discipline).delete()
         db.session.commit()
 
 
