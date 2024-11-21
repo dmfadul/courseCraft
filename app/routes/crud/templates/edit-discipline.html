@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block head_links %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/discipline.css') }}">
+{% endblock %}
+
+{% block mainContent %}
+<div class="dashboard">
+    <div class="section">
+        <h2>Search and Edit Discipline</h2>
+
+        <!-- Search Form -->
+        <form id="search-discipline-form" action="javascript:void(0);">
+            <div class="form-group">
+                <label for="search-code">Discipline Code:</label>
+                <input type="text" id="search-code" name="search_code" placeholder="Enter discipline code" required>
+            </div>
+            <button type="submit">Search</button>
+        </form>
+
+        <!-- Edit Form (Initially Hidden) -->
+        <div id="discipline-details" style="display: none;">
+            <h3>Edit Discipline</h3>
+            <form id="edit-discipline-details-form" action="javascript:void(0);">
+                <div class="form-group">
+                    <label for="edit-name">Name</label>
+                    <input type="text" id="edit-name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-name-abbr">Abbreviation</label>
+                    <input type="text" id="edit-name-abbr" name="name_abbr" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-code">Code</label>
+                    <input type="text" id="edit-code" name="code" readonly required>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-workload">Workload</label>
+                    <input type="number" id="edit-workload" name="workload" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-is-theoretical">Theoretical?</label>
+                    <select id="edit-is-theoretical" name="is_theoretical">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-is-intensive">Intensive?</label>
+                    <select id="edit-is-intensive" name="is_intensive">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Handle search form submission
+    document.getElementById('search-discipline-form').addEventListener('submit', async function(event) {
+        const code = document.getElementById('search-code').value;
+
+        // Fetch discipline details
+        const response = await fetch(`/get_discipline?code=${code}`);
+        if (response.ok) {
+            const data = await response.json();
+            document.getElementById('edit-name').value = data.name;
+            document.getElementById('edit-name-abbr').value = data.name_abbr;
+            document.getElementById('edit-code').value = data.code;
+            document.getElementById('edit-workload').value = data.workload;
+            document.getElementById('edit-is-theoretical').value = data.is_theoretical ? 'true' : 'false';
+            document.getElementById('edit-is-intensive').value = data.is_intensive ? 'true' : 'false';
+            document.getElementById('discipline-details').style.display = 'block';
+        } else {
+            alert('Discipline not found');
+            document.getElementById('discipline-details').style.display = 'none';
+        }
+    });
+
+    // Handle update form submission
+    document.getElementById('edit-discipline-details-form').addEventListener('submit', async function(event) {
+        const data = {
+            name: document.getElementById('edit-name').value,
+            name_abbr: document.getElementById('edit-name-abbr').value,
+            code: document.getElementById('edit-code').value,
+            workload: document.getElementById('edit-workload').value,
+            is_theoretical: document.getElementById('edit-is-theoretical').value,
+            is_intensive: document.getElementById('edit-is-intensive').value,
+        };
+
+        const response = await fetch('/update_discipline', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            alert('Discipline updated successfully');
+        } else {
+            alert('Error updating discipline');
+        }
+    });
+</script>
+{% endblock %}

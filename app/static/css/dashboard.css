@@ -61,6 +61,11 @@ button:hover {
     transform: scale(1.05);
 }
 
+#search-discipline-section {
+    margin-top: 40px;
+}
+
+
 @media (max-width: 768px) {
     .dashboard {
         grid-template-columns: 1fr;
