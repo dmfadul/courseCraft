@@ -3,21 +3,21 @@ from app.models import Teacher, Modulus, Discipline, Cohort
 import migration
 
 
-app = create_app()
-with app.app_context():
-    teacher = Teacher.query.filter_by(name="Amanda Rodrigues De Mello").first()
-    modulus = Modulus.get_by_code(code="6.14-PAP21")
+# app = create_app()
+# with app.app_context():
+#     teacher = Teacher.query.filter_by(name="Amanda Rodrigues De Mello").first()
+#     modulus = Modulus.get_by_code(code="6.14-PAP21")
 
-    # print(modulus.teachers_names)
+#     # print(modulus.teachers_names)
 
-    disciplines = Discipline.query.all()
-    for discipline in disciplines:
-        for modulus in discipline.moduli:
-            print(modulus.code, modulus.teachers_names)
+#     disciplines = Discipline.query.all()
+#     for discipline in disciplines:
+#         for modulus in discipline.moduli:
+#             print(modulus.code, modulus.teachers_names)
 
 
 # migration.clear_all_tables()
-# migration.add_users()
+migration.add_users()
 # migration.add_teachers()
 # migration.add_cohorts()
 # migration.add_classrooms()
