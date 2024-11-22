@@ -87,9 +87,17 @@ def edit_discipline():
 @login_required
 def get_discipline(discipline_code):
     discipline = Discipline.query.filter_by(code=discipline_code).first()
-    if discipline:
-        return jsonify(discipline.to_dict())
-    return jsonify({'error': 'Discipline not found'}), 404
+    # if discipline:
+        # return jsonify(discipline.to_dict())
+    test_dict = {
+        'name': "nome",
+        'code': "code",
+        'workload': 10,
+        'is_theoretical': True,
+        'is_intensive': False
+    }
+    # return jsonify({'error': 'Discipline not found'}), 404
+    return jsonify(test_dict)
 
 
 @crud_bp.route('/crud/delete-discipline/<discipline_code>', methods=['POST'])

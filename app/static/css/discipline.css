@@ -54,6 +54,23 @@ label {
     border-radius: 4px;
 }
 
+.delete-button-red {
+    display: inline-block;
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete-button-red:hover {
+    background-color: #cc0000;
+}
+
+
+
 button {
     display: inline-block;
     padding: 10px 15px;
