@@ -1,10 +1,14 @@
 from app import create_app
-from app.models import Teacher, Modulus, Discipline, Cohort
+from app.models import Teacher, Modulus, Discipline, Cohort, associations
 import migration
 
 
 # app = create_app()
 # with app.app_context():
+#     discipline = Discipline.query.filter_by(code='1.11P').first()
+#     print(discipline.name)
+
+    # discipline.delete_discipline()
 #     teacher = Teacher.query.filter_by(name="Amanda Rodrigues De Mello").first()
 #     modulus = Modulus.get_by_code(code="6.14-PAP21")
 
