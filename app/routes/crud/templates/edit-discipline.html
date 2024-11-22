@@ -59,20 +59,21 @@
                 </div>
 
                 <button type="submit">Save Changes</button>
+                <button type="button" id="delete-discipline-btn">Delete</button>
+
             </form>
         </div>
     </div>
 </div>
-{% endblock %}
 
-{% block scripts %}
 <script>
-    // Handle search form submission
-    document.getElementById('search-discipline-form').addEventListener('submit', async function(event) {
-        const code = document.getElementById('search-code').value;
+document.getElementById('search-discipline-form').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Prevent form submission
 
-        // Fetch discipline details
-        const response = await fetch(`/get_discipline?code=${code}`);
+    const code = document.getElementById('search-code').value;
+
+    try {
+        const response = await fetch(`/crud/get-discipline/${code}`);
         if (response.ok) {
             const data = await response.json();
             document.getElementById('edit-name').value = data.name;
@@ -86,7 +87,11 @@
             alert('Discipline not found');
             document.getElementById('discipline-details').style.display = 'none';
         }
-    });
+    } catch (error) {
+        console.error('Error fetching discipline:', error);
+        alert('An error occurred while fetching the discipline.');
+    }
+});
 
     // Handle update form submission
     document.getElementById('edit-discipline-details-form').addEventListener('submit', async function(event) {
@@ -111,5 +116,31 @@
             alert('Error updating discipline');
         }
     });
+
+    // Handle delete button click
+    document.getElementById('delete-discipline-btn').addEventListener('click', async function(event) {
+        const code = document.getElementById('edit-code').value;
+
+        if (confirm('Are you sure you want to delete this discipline?')) {
+            try {
+                const response = await fetch(`/crud/delete-discipline/${code}`, {
+                    method: 'POST',
+                });
+
+                if (response.ok) {
+                    alert('Discipline deleted successfully');
+                    // Clear form and hide details
+                    document.getElementById('discipline-details').style.display = 'none';
+                    document.getElementById('search-code').value = '';
+                } else {
+                    alert('Error deleting discipline');
+                }
+            } catch (error) {
+                console.error('Error deleting discipline:', error);
+                alert('An error occurred while deleting the discipline.');
+            }
+        }
+    });
+
 </script>
 {% endblock %}

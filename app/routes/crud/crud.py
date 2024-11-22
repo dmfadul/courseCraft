@@ -20,41 +20,6 @@ def crud():
     return redirect(url_for('crud.add_teacher_to_modulus'))
 
 
-@crud_bp.route('/crud/add-teacher', methods=['GET', 'POST'])
-@login_required
-def add_teacher():
-    if request.method == 'POST':
-        name = request.form['name']
-        abbr = request.form['abbr']
-        rg = request.form['rg']
-        flag = Teacher.add_teacher(name=name, abbr_name=abbr, rg=rg)
-        if flag == 1:
-            flash(f"The name {name} already part of the shabang", 'danger')
-        elif flag == 2:
-            flash(f"RG {rg} already part of the shabang", 'danger')
-        else:
-            flash(f'Teacher {name} added successfully.', 'success')
-
-        return render_template('add-teacher.html')
-
-    return render_template('add-teacher.html')
-
-
-@crud_bp.route('/crud/add-teacher-discipline', methods=['GET', 'POST'])
-@login_required
-def add_teacher_to_discipline():
-    discipline_teacher = [
-        [f"{d.code}-{d.name} -- {d.teachers_names}: ", ""] for d in Discipline.query.all()]
-    teachers = sorted([t.name for t in Teacher.query.all()])
-
-    return render_template('crud-moduli.html',
-                            pageName='Add Teacher to Discipline',
-                            moduli=discipline_teacher,
-                            options=teachers,
-                            select_name='teacher',
-                            request_path='add-teacher-discipline')
-
-
 @crud_bp.route('/crud/add-discipline/', methods=['GET', 'POST'])
 @login_required
 def add_discipline(): 
@@ -116,6 +81,63 @@ def edit_discipline():
         available_teachers = sorted(Teacher.query.all(), key=lambda x: x.name)
         
         return render_template('edit-discipline.html')
+
+
+@crud_bp.route('/crud/get-discipline/<discipline_code>')
+@login_required
+def get_discipline(discipline_code):
+    discipline = Discipline.query.filter_by(code=discipline_code).first()
+    if discipline:
+        return jsonify(discipline.to_dict())
+    return jsonify({'error': 'Discipline not found'}), 404
+
+
+@crud_bp.route('/crud/delete-discipline/<discipline_code>', methods=['POST'])
+@login_required
+def delete_discipline(discipline_code):
+    print(discipline_code)
+
+    return jsonify({})
+
+
+
+
+
+
+
+@crud_bp.route('/crud/add-teacher', methods=['GET', 'POST'])
+@login_required
+def add_teacher():
+    if request.method == 'POST':
+        name = request.form['name']
+        abbr = request.form['abbr']
+        rg = request.form['rg']
+        flag = Teacher.add_teacher(name=name, abbr_name=abbr, rg=rg)
+        if flag == 1:
+            flash(f"The name {name} already part of the shabang", 'danger')
+        elif flag == 2:
+            flash(f"RG {rg} already part of the shabang", 'danger')
+        else:
+            flash(f'Teacher {name} added successfully.', 'success')
+
+        return render_template('add-teacher.html')
+
+    return render_template('add-teacher.html')
+
+
+@crud_bp.route('/crud/add-teacher-discipline', methods=['GET', 'POST'])
+@login_required
+def add_teacher_to_discipline():
+    discipline_teacher = [
+        [f"{d.code}-{d.name} -- {d.teachers_names}: ", ""] for d in Discipline.query.all()]
+    teachers = sorted([t.name for t in Teacher.query.all()])
+
+    return render_template('crud-moduli.html',
+                            pageName='Add Teacher to Discipline',
+                            moduli=discipline_teacher,
+                            options=teachers,
+                            select_name='teacher',
+                            request_path='add-teacher-discipline')
 
 
 @crud_bp.route('/crud/rm-teacher-discipline', methods=['GET', 'POST'])

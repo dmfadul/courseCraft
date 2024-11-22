@@ -195,3 +195,17 @@ class Discipline(db.Model):
         self.name_abbr = new_abbr
         db.session.commit()
         return f"Changed name of {self.code} to {self.name}."
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'name_abbr': self.name_abbr,
+            'code': self.code,
+            'workload': self.workload,
+            'is_theoretical': self.is_theoretical,
+            'is_intensive': self.is_intensive,
+            'mandatory_room': self.mandatory_room.name if self.mandatory_room else '0',
+            'teachers': [teacher.name for teacher in self.teachers],
+            'prerequisites': [prerequisite.code for prerequisite in self.prerequisites],
+        }
