@@ -2,6 +2,7 @@ from app import db
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 from .associations import teacher_discipline_association, discipline_prerequisite_association
+from app.global_config import ALTERNATING_WEEKS
 
 
 class Discipline(db.Model):
@@ -78,6 +79,9 @@ class Discipline(db.Model):
 
         db.session.commit()
 
+        if not ALTERNATING_WEEKS and new_discipline.mandatory_room_id == -1:
+            new_discipline.add_mandatory_room(0)
+
         return new_discipline
 
     def delete_discipline(self):
@@ -99,7 +103,7 @@ class Discipline(db.Model):
     
     def change_theoretical(self):        
         self.is_theoretical = not self.is_theoretical
-        if self.is_theoretical:
+        if self.is_theoretical and ALTERNATING_WEEKS:
             self.add_mandatory_room(-1)
         else:
             self.add_mandatory_room(0)
