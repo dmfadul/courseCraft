@@ -7,7 +7,7 @@ END_DATE_STRING = "12/07/2025"
 START_TIME = 800
 END_TIME = 2120
 
-holidays_dates = []
+holidays_dates = ["03/03", "04/03", "05/03", "18/04", "21/04", "01/05", "19/06"]
 
 CLASSES_PER_DAY = 12
 INTERVALS_SLOTS = [2, 5, 8, 11, 14]
