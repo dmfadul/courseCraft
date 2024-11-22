@@ -184,7 +184,11 @@ class Discipline(db.Model):
     def add_mandatory_room(self, room_code):
         """Add a mandatory room to the discipline."""
         from .classroom import Classroom
+
         # Find the room by name
+        if room_code == -1 and not ALTERNATING_WEEKS:
+            room_code = 0
+            
         room = db.session.query(Classroom).filter_by(code=room_code).first()
 
         if room is None:
