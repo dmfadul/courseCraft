@@ -5,17 +5,19 @@
 {% endblock %}
 
 {% block mainContent %}
-<div class="dashboard">
+<div class="container">
     <div class="section">
-        <h2>Search and Edit Discipline</h2>
+        <h2 >Search and Edit Discipline</h2>
 
         <!-- Search Form -->
         <form id="search-discipline-form" action="javascript:void(0);">
             <div class="form-group">
                 <label for="search-code">Discipline Code:</label>
-                <input type="text" id="search-code" name="search_code" placeholder="Enter discipline code" required>
+                <input style="width: 8rem;" type="text" id="search-code" name="search_code" placeholder="Discipline code" required>
             </div>
+            <div style="margin: 1rem 0 3rem 0;">
             <button type="submit">Search</button>
+            </div>
         </form>
 
         <!-- Edit Form (Initially Hidden) -->
@@ -24,43 +26,44 @@
             <form id="edit-discipline-details-form" action="javascript:void(0);">
                 <div class="form-group">
                     <label for="edit-name">Name</label>
-                    <input type="text" id="edit-name" name="name" required>
+                    <input style="width: 60rem;" type="text" id="edit-name" name="name" required>
                 </div>
 
                 <div class="form-group">
                     <label for="edit-name-abbr">Abbreviation</label>
-                    <input type="text" id="edit-name-abbr" name="name_abbr" required>
+                    <input style="width: 60rem;" type="text" id="edit-name-abbr" name="name_abbr" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="edit-code">Code</label>
-                    <input type="text" id="edit-code" name="code" readonly required>
+                <div class="form-group1">
+                    <label style="padding: 0 1rem 0 0;" for="edit-code">Code</label>
+                    <input style="width: 8rem;" type="text" id="edit-code" name="code" readonly required>
                 </div>
 
-                <div class="form-group">
-                    <label for="edit-workload">Workload</label>
-                    <input type="number" id="edit-workload" name="workload" required>
+                <div class="form-group1">
+                    <label style="padding: 0 1rem 0 0;" for="edit-workload">Workload</label>
+                    <input style="width: 8rem;" type="number" id="edit-workload" name="workload" required>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group1">
                     <label for="edit-is-theoretical">Theoretical?</label>
-                    <select id="edit-is-theoretical" name="is_theoretical">
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                    </select>
+                    <label class="switch">
+                        <input type="checkbox" id="edit-is-theoretical" name="edit-is-theoretical">
+                        <span class="slider"></span>
+                    </label>
                 </div>
-
-                <div class="form-group">
+                
+                <div class="form-group1">
                     <label for="edit-is-intensive">Intensive?</label>
-                    <select id="edit-is-intensive" name="is_intensive">
-                        <option value="true">Yes</option>
-                        <option value="false">No</option>
-                    </select>
+                    <label class="switch">
+                        <input type="checkbox" id="edit-is-intensive" name="edit-is-intensive">
+                        <span class="slider"></span>
+                    </label>
                 </div>
 
-                <button type="submit">Save Changes</button>
-                <button type="button" id="delete-discipline-btn">Delete</button>
-
+                <div style="padding: 0 1rem 0 0;">
+                <button style="margin: 0 1rem 0 0;" type="submit">Save Changes</button>
+                <button class="delete-button-red" type="button" id="delete-discipline-btn">Delete</button>
+                </div>    
             </form>
         </div>
     </div>
