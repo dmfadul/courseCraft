@@ -238,8 +238,10 @@ def crud_update():
         flag = funcs.resolve_teacher_to_discipline(data)
     elif request_path in ['add-teacher-moduli', 'rm-teacher-moduli']:
         flag = funcs.resolve_teacher_to_modulus(data)
+        print(flag)
     elif request_path == 'classroom':
         flag = funcs.resolve_classroom_to_modulus(data)
+        print(flag)
     else:
         return 'Invalid request path.'
     
