@@ -165,6 +165,11 @@ class Discipline(db.Model):
         else:
             return f"{teacher.name} is not a part of {self.code}."  
     
+    def remove_all_teachers(self):
+        self.teachers = []
+        db.session.commit()
+        return f"Teachers removed from {self.code}."
+    
     def add_prerequisite(self, prerequisite_code):
         """Add a prerequisite discipline by its code."""
         # Find the discipline by code

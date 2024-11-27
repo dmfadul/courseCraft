@@ -3,8 +3,31 @@ from app.models import Teacher, Modulus, Discipline, Cohort, associations
 import migration
 
 
-# app = create_app()
-# with app.app_context():
+app = create_app()
+with app.app_context():
+    disc_code = "6.7"
+    cohort_code = "APJ04"
+    teacher_name = "David Fadul"
+
+    disc = Discipline.query.filter_by(code=disc_code).first()
+    cohort = Cohort.query.filter_by(code=cohort_code).first()
+    teacher = Teacher.query.filter_by(name=teacher_name).first()
+
+    mod = Modulus.query.filter_by(discipline_id=disc.id, cohort_id=cohort.id).first()
+    mod.add_teacher(teacher.name)
+
+    # print(teacher.name)
+    print(disc.name)
+    # print(mod.code)
+
+    # disc.add_teacher(teacher.name)
+
+    for t in disc.teachers:
+        print(t.name)
+
+    # print(disc.name)
+    # for teacher in disc.teachers:
+        # print(teacher.name)
 
 # migration.add_users()
 # migration.add_teachers()
