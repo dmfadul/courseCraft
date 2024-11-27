@@ -143,12 +143,14 @@ class Modulus(db.Model):
         if teacher not in self.discipline.teachers:
             return f"{teacher.name} is not allowed to teach {self.discipline.name}."
         
-        if teacher not in self.teachers:
-            self.teachers.append(teacher)
-            db.session.commit()
-            return f"{teacher.name} added to {self.code}."
-        else:
+        if teacher in self.teachers:
             return f"{teacher.name} is already a part of {self.code}."
+        
+        self.teachers.append(teacher)
+        db.session.commit()
+        return f"{teacher.name} added to {self.code}."
+
+            
         
     def remove_teacher(self, teacher_name):
         from .teacher import Teacher
