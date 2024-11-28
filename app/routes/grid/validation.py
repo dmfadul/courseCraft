@@ -71,10 +71,14 @@ def check_conflicting_classrooms(lecture):
 
 
 def check_teacher_conflicts(teacher, modulus):
+    message = ""
     common_lectures = []
     for t_lecture in teacher.lectures:
         for m_lecture in modulus.lectures:
-            if t_lecture.date == m_lecture.date and t_lecture.grid_position == m_lecture.grid_position:
+            same_date = t_lecture.date == m_lecture.date
+            same_position = t_lecture.grid_position == m_lecture.grid_position 
+            same_room = t_lecture.classroom_id == m_lecture.classroom_id
+            if same_date and same_position and not same_room:
                 common_lectures.append(t_lecture)
 
     if not common_lectures:
@@ -83,7 +87,6 @@ def check_teacher_conflicts(teacher, modulus):
     
     message = f"O professor(a) {teacher.name} está ocupado(a) nas seguintes aulas: <br>"
     for lecture in common_lectures:
-        cohort_code = lecture.modulus.cohort.code
         message += f"""{lecture.date}, {lecture.grid_position} na turma {lecture.modulus.cohort.code}."""
         message += "<br>"
 

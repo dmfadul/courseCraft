@@ -20,6 +20,18 @@
 {% endblock %}
 
 {% block mainContent %}
+    <!-- Display Flash Messages -->
+    <div id="flash-messages" class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message | safe}}
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
     <h1>{{ pageName }}</h1>
 
     {% for modulus in moduli %}

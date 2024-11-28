@@ -27,7 +27,6 @@ def resolve_teacher_to_modulus(data):
     if not teacher:
         return 'Teacher not found.'
     
-    print(request_path)
     if request_path == 'add-teacher-moduli':
         if teacher in modulus.teachers:
             return f"{teacher_name} is already a part of {modulus.code}-{modulus.discipline.name}."
