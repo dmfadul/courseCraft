@@ -78,7 +78,10 @@ def check_teacher_conflicts(teacher, modulus):
             same_date = t_lecture.date == m_lecture.date
             same_position = t_lecture.grid_position == m_lecture.grid_position 
             same_room = t_lecture.classroom_id == m_lecture.classroom_id
-            if same_date and same_position and not same_room:
+            if same_date and same_position:
+                if same_room and t_lecture.joined_cohorts and m_lecture.joined_cohorts:
+                    continue
+                
                 common_lectures.append(t_lecture)
 
     if not common_lectures:
