@@ -216,8 +216,10 @@ def gen_teacher_schedule(teacher_name, month):
     if not lectures:
         return [[["Sem aulas neste mês", ""]]]
 
-    lec_dates = sorted(list(set([lecture.date.strftime("%d/%m") for lecture in lectures])))
-    lec_weekdays = sorted(list(set([lecture.date.weekday() for lecture in lectures])))
+    unique_dates = sorted(list(set([lecture.date for lecture in lectures])))
+
+    lec_dates = [d.strftime("%d/%m") for d in unique_dates]
+    lec_weekdays = [d.weekday() for d in unique_dates]
     
     dates = [["", "corner"]] + [list((date, "header")) for date in lec_dates]
     week_days = [["", "corner"]] + [list((global_vars.DIAS_DA_SEMANA[weekday], "subHeader")) for weekday in lec_weekdays]
