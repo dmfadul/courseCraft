@@ -50,7 +50,7 @@
     <div class="table-container">
         <table class="table" id="data-table">
             <tr class="table-header">
-                <th colspan="7"> {{ headerMessage }} </th>
+                <th colspan="{{ grid[0] | length}}"> {{ headerMessage }} </th>
             </tr>
             {% for row in grid %}
                     {% for cell in row %}
