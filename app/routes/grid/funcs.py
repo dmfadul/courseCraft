@@ -229,8 +229,14 @@ def gen_teacher_schedule(teacher_name, month):
     grid.append(week_days)
 
     lectures = sorted(lectures, key=lambda x: (x.grid_position, x.date))
+    str_hours = []
     for lecture in lectures:
-        row = [[inverted_hours_dict.get(lecture.grid_position), ""]] + [["", ""]] * len(lec_dates)
+        str_hour = inverted_hours_dict.get(lecture.grid_position)
+        if str_hour in str_hours:
+            continue
+        
+        str_hours.append(str_hour)
+        row = [[str_hour, ""]] + [["", ""]] * len(lec_dates)
         grid.append(row)
 
     for i in range(len(grid)):
@@ -261,6 +267,7 @@ def gen_teacher_schedule(teacher_name, month):
                 grid[i][j] = [cell_text, disc_code.replace(".", "-")]
 
     return grid
+
 
 def gen_classroom_schedule(classroom_name, week_number):
     grid = gen_empty_grid(week_number)
