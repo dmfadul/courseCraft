@@ -24,23 +24,22 @@ def crud():
 @login_required
 def add_discipline(): 
     if request.method == 'POST':
+        print("TEST")
         name = request.form['name']
         name_abbr = request.form['name_abbr']
         code = request.form['code']
         workload = request.form['workload']
-        is_theoretical = bool(request.form['is_theoretical'])
-        is_intensive = bool(request.form['is_intensive'])
-        classroom = None if request.form['classroom'] == '0' else request.form['classroom']
-
-
+        # is_theoretical = request.form['is_theoretical'] == 'on'
+        # is_intensive = request.form['is_intensive'] == 'on'
+        # classroom = None if request.form['classroom'] == '0' else request.form['classroom']
 
         flag = Discipline.add_discipline(name,
                                          name_abbr,
                                          code,
                                          workload,
-                                         is_theoretical,
-                                         is_intensive,
-                                         mandatory_room=classroom,
+                                         True,
+                                         False,
+                                         mandatory_room=3,
                                         )
 
         flash(f'Classroom {flag.name} added successfully.', 'success')
