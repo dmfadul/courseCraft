@@ -38,3 +38,19 @@ function setPrintButtonUrl() {
 
 // Set the print button URL when the page loads
 window.onload = setPrintButtonUrl;
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "ArrowLeft") {
+        // Simulate click on the left-arrow-button
+        const leftArrowButton = document.getElementById("left-arrow-button");
+        if (leftArrowButton) {
+            leftArrowButton.click();
+        }
+    } else if (event.key === "ArrowRight") {
+        // Simulate click on the right-arrow-button
+        const rightArrowButton = document.getElementById("right-arrow-button");
+        if (rightArrowButton) {
+            rightArrowButton.click();
+        }
+    }
+});

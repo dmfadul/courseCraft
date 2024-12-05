@@ -9,7 +9,7 @@
 
 {% block mainContent %}
     <div class="navigation">
-        <button onclick="changeWeek(-1)">&#8592;</button>
+        <button id="left-arrow-button" onclick="changeWeek(-1)">&#8592;</button>
         
         <!-- Dropdown for cohorts -->
         <select id="cohortSelect" onchange="changeCohort(this.value)">
@@ -29,7 +29,7 @@
             {% endfor %}
         </select>
         
-        <button onclick="changeWeek(1)">&#8594;</button>
+        <button id="right-arrow-button" onclick="changeWeek(1)">&#8594;</button>
 
         <!-- Print button -->
         <button id="printButton">Print</button>
