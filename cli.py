@@ -1,29 +1,52 @@
+from t_list import teacher_list
 from app import create_app
 from app.models import Teacher, Modulus, Discipline, Cohort, associations
 import migration
+import json
 
 
 app = create_app()
-with app.app_context():
-    disc_code = "6.7"
-    cohort_code = "APJ04"
-    teacher_name = "David Fadul"
+for entry in teacher_list:
+    code = entry.get("code")
 
-    disc = Discipline.query.filter_by(code=disc_code).first()
-    cohort = Cohort.query.filter_by(code=cohort_code).first()
-    teacher = Teacher.query.filter_by(name=teacher_name).first()
+    with app.app_context():
+        disc = Discipline.query.filter_by(code=code).first()
+        if disc is None:
+            print(code)
 
-    mod = Modulus.query.filter_by(discipline_id=disc.id, cohort_id=cohort.id).first()
-    mod.add_teacher(teacher.name)
+
+# app = create_app()
+# with app.app_context():
+    # new_disc = Discipline.add_discipline(
+    #                                     name="AVALIAÇÕES DAS DISCIPLINAS E DA CPA",
+    #                                     name_abbr="AVAL. DISC. E CPA",
+    #                                     code="6.13",
+    #                                     workload=4,
+    #                                     is_theoretical=True,
+    #                                     is_intensive=False,
+    #                                     mandatory_room=None,
+    #                                     teachers=None,
+    #                                     joined_cohorts=False)
+
+    # disc_code = "6.7"
+    # cohort_code = "APJ04"
+    # teacher_name = "David Fadul"
+
+    # disc = Discipline.query.filter_by(code=disc_code).first()
+    # cohort = Cohort.query.filter_by(code=cohort_code).first()
+    # teacher = Teacher.query.filter_by(name=teacher_name).first()
+
+    # mod = Modulus.query.filter_by(discipline_id=disc.id, cohort_id=cohort.id).first()
+    # mod.add_teacher(teacher.name)
 
     # print(teacher.name)
-    print(disc.name)
+    # print(disc.name)
     # print(mod.code)
 
     # disc.add_teacher(teacher.name)
 
-    for t in disc.teachers:
-        print(t.name)
+    # for t in disc.teachers:
+    #     print(t.name)
 
     # print(disc.name)
     # for teacher in disc.teachers:
