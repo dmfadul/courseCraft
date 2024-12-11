@@ -5,12 +5,12 @@ import migration
 import json
 
 
-app = create_app()
-with app.app_context():
-    moduli = Modulus.query.all()
+# app = create_app()
+# with app.app_context():
+#     moduli = Modulus.query.all()
 
-    for modulus in moduli:
-        modulus.clear_teachers()
+#     for modulus in moduli:
+#         modulus.clear_teachers()
 
 
 
