@@ -1,6 +1,7 @@
 from t_list import teacher_list
 from app import create_app
 from app.models import Teacher, Modulus, Discipline, Cohort, associations
+import unicodedata
 import migration
 import json
 
@@ -14,27 +15,28 @@ import json
 
 
 
-# app = create_app()
-# wrong_names = []
-# for entry in teacher_list:
-#     code = entry.get("code")
-#     t_names = entry.get("teachers")
+app = create_app()
+wrong_names = []
+for entry in teacher_list:
+    code = entry.get("code")
+    t_names = entry.get("teachers")
 
-#     with app.app_context():
-#         for name in t_names:
-#             if name == "":
-#                 continue
-
-#             clean_name = ' '.join([name.capitalize().strip() for name in name.split(' ')])
-#             teacher = Teacher.query.filter_by(name=clean_name).first()
-#             if teacher is None:
-#                 if clean_name not in wrong_names:
-#                     wrong_names.append(clean_name)
+    with app.app_context():
+        for name in t_names:
+            if name == "":
+                continue
+            
+            clean_name = ' '.join([name.capitalize().strip() for name in name.split(' ')])
+            clean_name = unicodedata.normalize('NFKD', clean_name).encode('ASCII', 'ignore').decode('utf-8')
+            teacher = Teacher.query.filter_by(name=clean_name).first()
+            if teacher is None:
+                if clean_name not in wrong_names:
+                    wrong_names.append(clean_name)
                 
-# if wrong_names:
-#     wrong_names = sorted(list(set(wrong_names)))
-#     for i, name in enumerate(wrong_names):
-#         print(i+1, name)
+if wrong_names:
+    wrong_names = sorted(list(set(wrong_names)))
+    for i, name in enumerate(wrong_names):
+        print(i+1, name)
 
 
 
