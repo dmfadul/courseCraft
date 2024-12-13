@@ -52,13 +52,13 @@ for entry in teacher_list:
                     print(f"Teacher {clean_name} not found.")
                     continue
 
-            #     if teacher not in discipline.teachers:
-            #         print(f"Teacher {teacher.name} not allowed to teach {discipline.name}.")
-            #         continue
+                if teacher not in discipline.teachers:
+                    print(f"Teacher {teacher.name} not allowed to teach {discipline.name}.")
+                    continue
 
-                # if teacher not in modulus.teachers:
-                #     flag = modulus.add_teacher(teacher.name)
-                #     print(flag)
+                if teacher not in modulus.teachers:
+                    flag = modulus.add_teacher(teacher.name)
+                    print(flag)
                     
 
 
