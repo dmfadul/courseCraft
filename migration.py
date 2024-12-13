@@ -1,5 +1,6 @@
 from app import create_app, db
 from app.models import Discipline, Teacher, Modulus, Cohort, Lecture, Classroom
+import unicodedata
 import openpyxl
 import json
 
@@ -264,3 +265,38 @@ def add_users():
 
         for user in users:
             User.add_entry(**user)
+
+
+def clear_teachers():
+    app = create_app()
+    with app.app_context():
+        moduli = Modulus.query.all()
+        for modulus in moduli:
+            modulus.clear_teachers()
+
+
+def check_teachers_on_db():
+    from t_list import teacher_list
+
+    app = create_app()
+    wrong_names = []
+    for entry in teacher_list:
+        code = entry.get("code")
+        t_names = entry.get("teachers")
+
+        with app.app_context():
+            for name in t_names:
+                if name == "":
+                    continue
+            
+                clean_name = ' '.join([name.capitalize().strip() for name in name.split(' ')])
+                clean_name = unicodedata.normalize('NFKD', clean_name).encode('ASCII', 'ignore').decode('utf-8')
+                teacher = Teacher.query.filter_by(name=clean_name).first()
+                if teacher is None:
+                    if clean_name not in wrong_names:
+                        wrong_names.append(clean_name)
+                
+    if wrong_names:
+        wrong_names = sorted(list(set(wrong_names)))
+        for i, name in enumerate(wrong_names):
+            print(i+1, name)
