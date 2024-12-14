@@ -96,19 +96,27 @@ class Teacher(db.Model):
                 target_l = self.all_lectures[j]
 
                 if test_l.date == target_l.date and test_l.grid_position == target_l.grid_position:
-                    if test_l.joined_cohorts and target_l.joined_cohorts:
+                    if test_l.joined_cohorts and target_l.joined_cohorts and (test_l.classroom_id == target_l.classroom_id):
                         continue
                     if test_l == target_l:
                         continue
-                    conflicting_lectures.append(test_l)
-                    conflicting_lectures.append(target_l)
+                    conflicting_lectures.append((test_l, target_l))
 
-        first_conflict = conflicting_lectures[0] if conflicting_lectures else None
-        if first_conflict:
-            return f"Teacher {self.name} has a conflict on {first_conflict.date} at position {first_conflict.grid_position}."
-        
-        return 0
+        if not conflicting_lectures:
+            return 0
 
+        output, done = [], []
+        for test_l, target_l in conflicting_lectures:
+            if test_l in done:
+                continue
+
+            output.append(f"""{test_l.modulus.discipline.name} - {test_l.date}, {test_l.grid_position} - 
+            entre as turmas {test_l.modulus.cohort.code} e {target_l.modulus.cohort.code}.""")
+            
+            done.append(test_l)
+
+        return output
+      
     def check_for_conflict(self, date, grid_position, joined=False):
         for lecture in self.all_lectures:
             if lecture.date == date and lecture.grid_position == grid_position:

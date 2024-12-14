@@ -164,7 +164,10 @@ def check_teachers_conflicts():
         if flag == 0:
             continue
         
-        grid.append([[f"{teacher.name} -- {flag}", "name"]])
+        grid.append([[f"{teacher.name}:", "name"]])
+
+        for line in flag:
+            grid.append([[f"{line}", "name"]])
 
     if not grid:
         return [[["No conflicts found", "name"]]]
