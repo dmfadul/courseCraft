@@ -153,3 +153,21 @@ def check_lectures_in_odd_classrooms():
             grid.append([[message, "name"]])
 
     return grid
+
+
+def check_teachers_conflicts():
+    teachers = Teacher.query.all()
+
+    grid = []    
+    for teacher in teachers:
+        flag = teacher.check_for_conflicts()
+        if flag == 0:
+            continue
+        
+        grid.append([[f"{teacher.name} -- {flag}", "name"]])
+
+    if not grid:
+        return [[["No conflicts found", "name"]]]
+
+    return grid
+    
