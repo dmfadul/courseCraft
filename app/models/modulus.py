@@ -225,3 +225,10 @@ class Modulus(db.Model):
                 return flag
         
         return 0
+
+    def check_for_modulus_conflict(self, discipline_id, cohort_id):
+        modulus = Modulus.filter_by(discipline_id=discipline_id, cohort_id=cohort_id).first()
+        if not modulus:
+            return f"Modulus {discipline_id}-{cohort_id} not found."
+
+        print(modulus)

@@ -6,15 +6,6 @@ import migration
 import json
 
 
-app = create_app()
-with app.app_context():
-    teachers = Teacher.query.all()
-    for teacher in teachers:
-        flag = teacher.check_for_conflicts()
-        if flag == 0:
-            continue
-        print(teacher.name, flag)
-
 # app = create_app()
 # wrong_names = []
 # for entry in teacher_list:
