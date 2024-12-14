@@ -6,6 +6,12 @@ import migration
 import json
 
 
+app = create_app()
+with app.app_context():
+    discipline = Discipline.query.filter_by(code='5.17').first()
+    print(discipline.name)
+    discipline.remove_all_teachers()
+
 # app = create_app()
 # wrong_names = []
 # for entry in teacher_list:
