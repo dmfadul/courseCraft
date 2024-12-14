@@ -213,3 +213,15 @@ class Modulus(db.Model):
         db.session.commit()
         return f"{self.code} now has joined cohorts."
     
+    def check_for_teacher_conflict(self, teacher_name):
+        from .teacher import Teacher
+        teacher = Teacher.query.filter_by(name=teacher_name).first()
+        if not teacher:
+            return f"Teacher {teacher_name} not found."
+        
+        for lecture in self.lectures:
+            flag = teacher.check_for_conflict(lecture.date, lecture.grid_position, lecture.joined_cohorts)
+            if flag:
+                return flag
+        
+        return 0
