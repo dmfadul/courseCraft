@@ -85,7 +85,7 @@ def check_teacher_conflicts(teacher, modulus):
                 common_lectures.append(t_lecture)
 
     if not common_lectures:
-        print("No conflicts found.")
+        # print("No conflicts found.")
         return 0
     
     message = f"O professor(a) {teacher.name} está ocupado(a) nas seguintes aulas: <br>"
