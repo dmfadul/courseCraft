@@ -161,8 +161,14 @@ class Discipline(db.Model):
         if teacher in self.teachers:
             self.teachers.remove(teacher)
             db.session.commit()
+            for modulus in self.moduli:
+                modulus.teachers.remove(teacher)
+                db.session.commit()
             return f"{teacher.name} removed from {self.code}."
         else:
+            for modulus in self.moduli:
+                modulus.teachers.remove(teacher)
+                db.session.commit()
             return f"{teacher.name} is not a part of {self.code}."  
     
     def remove_all_teachers(self):
