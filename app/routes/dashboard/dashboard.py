@@ -127,3 +127,29 @@ def find_modulus(discipline_code, cohort_code):
     
     dates = list(set([l.date for l in modulus.lectures]))
     return dates
+
+
+@dashboard_bp.route('/rm-teacher-mod/<discipline_code>/<cohort_code>/<teacher_name>')
+@login_required
+def remove_teacher_modulus(discipline_code, cohort_code, teacher_name):
+    from app.models import Discipline, Cohort, Modulus, Teacher
+    
+    discipline = Discipline.query.filter_by(code=discipline_code).first()
+    if not discipline:
+        return f"Discipline {discipline_code} not found."
+    
+    cohort = Cohort.query.filter_by(code=cohort_code).first()
+    if not cohort:
+        return f"Cohort {cohort_code} not found."
+    
+    teacher = Teacher.query.filter_by(name=teacher_name).first()
+    if not teacher:
+        return f"Teacher {teacher_name} not found."
+    
+    modulus = Modulus.query.filter_by(discipline_id=discipline.id, cohort_id=cohort.id).first()
+    if not modulus:
+        return f"Modulus {discipline_code} from {cohort_code} not found."
+    
+    flag = modulus.remove_teacher(teacher.name)
+
+    return f"{flag}"
