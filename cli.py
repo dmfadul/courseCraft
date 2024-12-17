@@ -6,130 +6,169 @@ import migration
 import json
 
 
-app = create_app()
-wrong_names = []
-for entry in teacher_list:
-    code = entry.get("code")
-    t_names = entry.get("teachers")
-    cohorts_str = entry.get("cohorts")
-    cohorts_lst = cohorts_str.split("+")
-    cohorts_lst = [c.strip() for c in cohorts_lst]
+def add_teachers_from_dict():
+    from app.routes.grid.validation import check_teacher_conflicts
+    app = create_app()
+    wrong_names = []
+    for entry in teacher_list:
+        code = entry.get("code")
+        t_names = entry.get("teachers")
+        cohorts_str = entry.get("cohorts")
+        cohorts_lst = cohorts_str.split("+")
+        cohorts_lst = [c.strip() for c in cohorts_lst]
+    
+        cohorts_lst = ['PAP21' if c == 'PAP' else c for c in cohorts_lst]
+        cohorts_lst = ['DEL44' if c == 'DEL' else c for c in cohorts_lst]
+    
+        cohorts_lst = [
+            sub_item
+            for item in cohorts_lst
+            for sub_item in (["APJ04", "APJ05", "APJ06"] if item == "APJ" else [item])
+        ]
+    
+        with app.app_context():   
+            discipline = Discipline.query.filter_by(code=code).first()
+            if discipline is None:
+                print(f"Discipline {code} not found.")
+                continue
+            
+            for c in cohorts_lst:
+                cohort = Cohort.query.filter_by(code=c).first()
+                if cohort is None:
+                    print(f"Cohort {c} not found.")
+                    continue
+                
+                modulus = Modulus.query.filter_by(discipline_id=discipline.id, cohort_id=cohort.id).first()
+                if modulus is None:
+                    print(f"Modulus {code}-{c} not found.")
+                    continue
+    
+                for name in t_names:
+                    if name == "":
+                        continue
+            
+                    clean_name = ' '.join([name.capitalize().strip() for name in name.split(' ')])
+                    clean_name = unicodedata.normalize('NFKD', clean_name).encode('ASCII', 'ignore').decode('utf-8')
+                    teacher = Teacher.query.filter_by(name=clean_name).first()
+                    if teacher is None:
+                        print(f"Teacher {clean_name} not found.")
+                        continue
+    
+                    if teacher not in discipline.teachers:
+                        print(f"Teacher {teacher.name} not allowed to teach {discipline.name}.")
+                        continue
+    
+                    if teacher not in modulus.teachers:
+                        flag1 = check_teacher_conflicts(teacher, modulus)
+                        if not flag1 == 0:
+                            print(flag1)
+                            continue
+                        flag2 = modulus.add_teacher(teacher.name)
+                        print(flag2)
+                        
 
-    cohorts_lst = ['PAP21' if c == 'PAP' else c for c in cohorts_lst]
-    cohorts_lst = ['DEL44' if c == 'DEL' else c for c in cohorts_lst]
+def check_modulus(disc, coh):
+    app = create_app()
+    wrong_names = []
+    for entry in teacher_list:
+        code = entry.get("code")
+        t_names = entry.get("teachers")
+        cohorts_str = entry.get("cohorts")
+        cohorts_lst = cohorts_str.split("+")
+        cohorts_lst = [c.strip() for c in cohorts_lst]
 
-    cohorts_lst = [
+        cohorts_lst = ['PAP21' if c == 'PAP' else c for c in cohorts_lst]
+        cohorts_lst = ['DEL44' if c == 'DEL' else c for c in cohorts_lst]
+
+        cohorts_lst = [
+            sub_item
+            for item in cohorts_lst
+            for sub_item in (["APJ04", "APJ05", "APJ06"] if item == "APJ" else [item])
+        ]
+
+        with app.app_context():
+            discipline_test = Discipline.query.filter_by(code=disc).first()
+            cohort_test = Cohort.query.filter_by(code=coh).first()
+            modulus_test = Modulus.query.filter_by(discipline_id=discipline_test.id, cohort_id=cohort_test.id).first()
+
+            discipline = Discipline.query.filter_by(code=code).first()
+            if discipline is None:
+                print(f"Discipline {code} not found.")
+                continue
+
+            for c in cohorts_lst:
+                cohort = Cohort.query.filter_by(code=c).first()
+                if cohort is None:
+                    print(f"Cohort {c} not found.")
+                    continue
+
+                modulus = Modulus.query.filter_by(discipline_id=discipline.id, cohort_id=cohort.id).first()
+                if modulus is None:
+                    print(f"Modulus {code}-{c} not found.")
+                    continue
+                
+                flag = modulus_test.check_for_modulus_conflict(modulus.discipline.id, modulus.cohort.id)
+
+                if len(flag) == 0:
+                    continue
+                
+                if isinstance(flag, str):
+                    print(flag)
+                    continue
+
+                for lec1, lec2 in flag:
+                    part1 = f"{lec1.date} - {lec1.grid_position}."
+                    part2 = f"{lec1.modulus.discipline.code} - {lec1.modulus.discipline.name_abbr}/{lec1.modulus.cohort.code}"
+                    part3 = f"{lec2.modulus.discipline.code} - {lec2.modulus.discipline.name_abbr}/{lec2.modulus.cohort.code}"
+                    print(f"{part1} {part2} // {part3}")
+
+def check_all():
+    for entry in teacher_list:
+        code = entry.get("code")
+        cohorts_str = entry.get("cohorts")
+        cohorts_lst = cohorts_str.split("+")
+        cohorts_lst = [c.strip() for c in cohorts_lst]
+
+        cohorts_lst = ['PAP21' if c == 'PAP' else c for c in cohorts_lst]
+        cohorts_lst = ['DEL44' if c == 'DEL' else c for c in cohorts_lst]
+
+        cohorts_lst = [
         sub_item
         for item in cohorts_lst
         for sub_item in (["APJ04", "APJ05", "APJ06"] if item == "APJ" else [item])
-    ]
+        ]
 
-    with app.app_context():
-        discipline = Discipline.query.filter_by(code=code).first()
-        if discipline is None:
-            print(f"Discipline {code} not found.")
-            continue
-
-        for c in cohorts_lst:
-            cohort = Cohort.query.filter_by(code=c).first()
-            if cohort is None:
-                print(f"Cohort {c} not found.")
+        app = create_app()
+        with app.app_context():
+            discipline = Discipline.query.filter_by(code=code).first()
+            if discipline is None:
+                print(f"Discipline {code} not found.")
                 continue
 
-            modulus = Modulus.query.filter_by(discipline_id=discipline.id, cohort_id=cohort.id).first()
-            if modulus is None:
-                print(f"Modulus {code}-{c} not found.")
-                continue
-
-            for name in t_names:
-                if name == "":
-                    continue
-        
-                clean_name = ' '.join([name.capitalize().strip() for name in name.split(' ')])
-                clean_name = unicodedata.normalize('NFKD', clean_name).encode('ASCII', 'ignore').decode('utf-8')
-                teacher = Teacher.query.filter_by(name=clean_name).first()
-                if teacher is None:
-                    print(f"Teacher {clean_name} not found.")
+            for c in cohorts_lst:
+                cohort = Cohort.query.filter_by(code=c).first()
+                if cohort is None:
+                    print(f"Cohort {c} not found.")
                     continue
 
-                if teacher not in discipline.teachers:
-                    print(f"Teacher {teacher.name} not allowed to teach {discipline.name}.")
+                modulus = Modulus.query.filter_by(discipline_id=discipline.id, cohort_id=cohort.id).first()
+                if modulus is None:
+                    print(f"Modulus {code}-{c} not found.")
                     continue
+                
+                print(f"Checking {modulus.discipline.code} - {modulus.discipline.name_abbr}...")
+                check_modulus(discipline.code, cohort.code)
+                print("\n\n")
 
-                if teacher not in modulus.teachers:
-                    flag = modulus.add_teacher(teacher.name)
-                    print(flag)
-                    
-
-
-
-
-        # disc = Discipline.query.filter_by(code=code).first()
-        # if disc is None:
-        #     print(code)
-
+add_teachers_from_dict()
+# check_all()
 
 # app = create_app()
 # with app.app_context():
-    # new_disc = Discipline.add_discipline(
-    #                                     name="AVALIAÇÕES DAS DISCIPLINAS E DA CPA",
-    #                                     name_abbr="AVAL. DISC. E CPA",
-    #                                     code="6.13",
-    #                                     workload=4,
-    #                                     is_theoretical=True,
-    #                                     is_intensive=False,
-    #                                     mandatory_room=None,
-    #                                     teachers=None,
-    #                                     joined_cohorts=False)
-
-    # disc_code = "6.7"
-    # cohort_code = "APJ04"
-    # teacher_name = "David Fadul"
-
-    # disc = Discipline.query.filter_by(code=disc_code).first()
-    # cohort = Cohort.query.filter_by(code=cohort_code).first()
-    # teacher = Teacher.query.filter_by(name=teacher_name).first()
-
-    # mod = Modulus.query.filter_by(discipline_id=disc.id, cohort_id=cohort.id).first()
-    # mod.add_teacher(teacher.name)
-
-    # print(teacher.name)
-    # print(disc.name)
-    # print(mod.code)
-
-    # disc.add_teacher(teacher.name)
-
-    # for t in disc.teachers:
-    #     print(t.name)
-
-    # print(disc.name)
-    # for teacher in disc.teachers:
-        # print(teacher.name)
-
-# migration.add_users()
-# migration.add_teachers()
-# migration.add_cohorts()
-# migration.add_classrooms()
-# migration.add_disciplines()
-# migration.add_prerequisites()
-# migration.add_moduli()
-
-# migration.gen_teacher_moduli_dict()
-
-# migration.add_teacher_to_modulus()
-
-
-    
-# moduli = Modulus.query.all()
-# for modulus in moduli:
-#     print(modulus.code, modulus.teachers_names)
-
-# disciplines = Discipline.query.all()
-# for discipline in disciplines:
-#     print(discipline.name, discipline.mandatory_room)
-#     for modulus in discipline.moduli:
-#         print(modulus.code, modulus.classroom)
-
-# teachers = Teacher.query.all()
-# print(teachers[0].name, teachers[0].lectures)
-# print(teachers[1].name, teachers[1].lectures)
+#     discipline = Discipline.query.filter_by(code="5.3").first()
+#     # cohort = Cohort.query.filter_by(code="APJ05").first()
+#     print(discipline.name)
+#     discipline.remove_all_teachers()
+#     # modulus = Modulus.query.filter_by(discipline_id=discipline.id, cohort_id=cohort.id).first()
+#     # print(modulus.code)
+#     # modulus.clear_teachers()

@@ -17,7 +17,8 @@ REPORTS_DICT = {
     'Checar Disciplinas Físicas': funcs.check_proximity_of_intensive_moduli,
     'Checar Prerequisitos': funcs.check_prerequisites,
     'Checar Aulas Fora de Salas Obrigatórias': funcs.check_lectures_in_odd_classrooms,
-    'Checar Aulas na Semana Errada': funcs.check_lectures_in_wrong_week
+    'Checar Aulas na Semana Errada': funcs.check_lectures_in_wrong_week,
+    'Checar Conflitos de Professores': funcs.check_teachers_conflicts,
     }
 
 

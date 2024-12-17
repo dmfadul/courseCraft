@@ -168,6 +168,9 @@ class Discipline(db.Model):
     def remove_all_teachers(self):
         self.teachers = []
         db.session.commit()
+        for modulus in self.moduli:
+            modulus.teachers = []
+            db.session.commit()
         return f"Teachers removed from {self.code}."
     
     def add_prerequisite(self, prerequisite_code):

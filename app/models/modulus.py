@@ -213,3 +213,36 @@ class Modulus(db.Model):
         db.session.commit()
         return f"{self.code} now has joined cohorts."
     
+    def check_for_teacher_conflict(self, teacher_name):
+        from .teacher import Teacher
+        teacher = Teacher.query.filter_by(name=teacher_name).first()
+        if not teacher:
+            return f"Teacher {teacher_name} not found."
+        
+        for lecture in self.lectures:
+            flag = teacher.check_for_conflict(lecture.date, lecture.grid_position, lecture.joined_cohorts)
+            if flag:
+                return flag
+        
+        return 0
+
+    def check_for_modulus_conflict(self, discipline_id, cohort_id):
+        modulus = Modulus.query.filter_by(discipline_id=discipline_id, cohort_id=cohort_id).first()
+        if not modulus:
+            return f"Modulus {discipline_id}-{cohort_id} not found."
+
+        if modulus == self:
+            return f"Modulus {self.code} is the same as {modulus.code}."
+
+        conflicts = []
+        for lecture in self.lectures:
+            for other_lecture in modulus.lectures:
+                same_date = lecture.date == other_lecture.date
+                same_position = lecture.grid_position == other_lecture.grid_position
+                if same_date and same_position:
+                    if lecture.joined_cohorts and other_lecture.joined_cohorts:
+                        if lecture.classroom_id == other_lecture.classroom_id:
+                            continue
+                    conflicts.append((lecture, other_lecture))
+
+        return conflicts

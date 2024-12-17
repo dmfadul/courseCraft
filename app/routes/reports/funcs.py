@@ -3,6 +3,11 @@ import app.global_vars as global_vars
 
 
 def check_lectures_in_wrong_week():
+    from app.global_vars import ALTERNATING_WEEKS
+
+    if not ALTERNATING_WEEKS:
+        return [[["NESTE CURSO AS SEMANAS NÃO SÃO ALTERNADAS", "name"]]]
+    
     moduli = Modulus.query.all()
 
     misplaced_lectures = []
@@ -21,8 +26,8 @@ def check_lectures_in_wrong_week():
             
             misplaced_lectures.append(lecture)
 
-    print(misplaced_lectures)
     grid = [[[]]]
+
     for lec in misplaced_lectures:
         grid.append([[f"{lec.modulus.code} -- {lec.date}", "name"]])
 
@@ -148,3 +153,24 @@ def check_lectures_in_odd_classrooms():
             grid.append([[message, "name"]])
 
     return grid
+
+
+def check_teachers_conflicts():
+    teachers = Teacher.query.all()
+
+    grid = []    
+    for teacher in teachers:
+        flag = teacher.check_for_conflicts()
+        if flag == 0:
+            continue
+        
+        grid.append([[f"{teacher.name}:", "name"]])
+
+        for line in flag:
+            grid.append([[f"{line}", "name"]])
+
+    if not grid:
+        return [[["No conflicts found", "name"]]]
+
+    return grid
+    

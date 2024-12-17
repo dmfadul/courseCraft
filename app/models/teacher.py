@@ -87,3 +87,40 @@ class Teacher(db.Model):
         if discipline not in self.disciplines:
             self.disciplines.append(discipline)
             db.session.commit()
+
+    def check_for_conflicts(self):
+        conflicting_lectures = []
+        for i in range(len(self.all_lectures)-1):
+            for j in range(i+1, len(self.all_lectures)):
+                test_l = self.all_lectures[i]
+                target_l = self.all_lectures[j]
+
+                if test_l.date == target_l.date and test_l.grid_position == target_l.grid_position:
+                    if test_l.joined_cohorts and target_l.joined_cohorts and (test_l.classroom_id == target_l.classroom_id):
+                        continue
+                    if test_l == target_l:
+                        continue
+                    conflicting_lectures.append((test_l, target_l))
+
+        if not conflicting_lectures:
+            return 0
+
+        output, done = [], []
+        for test_l, target_l in conflicting_lectures:
+            if test_l in done:
+                continue
+
+            output.append(f"""{test_l.modulus.discipline.name} - {test_l.date}, {test_l.grid_position} - 
+            entre as turmas {test_l.modulus.cohort.code} e {target_l.modulus.cohort.code}.""")
+            
+            done.append(test_l)
+
+        return output
+      
+    def check_for_conflict(self, date, grid_position, joined=False):
+        for lecture in self.all_lectures:
+            if lecture.date == date and lecture.grid_position == grid_position:
+                if lecture.joined_cohorts and joined:
+                    return 0
+                return f"Teacher {self.name} is already teaching {lecture.discipline.name} at {date} - {grid_position}."
+        return 0
