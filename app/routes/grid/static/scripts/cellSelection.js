@@ -42,6 +42,7 @@ $(document).ready(function() {
         const selectedClassroom = $('#dropdown-select-classrooms').val();
         const repeatWeekly = $('#weekly-repeat').is(':checked');  // Get the checkbox state
         const joinCohorts = $('#joined-cohorts').is(':checked');  // Get the checkbox state
+        const forced = $('#force-creation').is(':checked');  // Get the checkbox state
 
         const dataToSend = selectedCells.map(cell => {
             return {
@@ -53,6 +54,7 @@ $(document).ready(function() {
                 classCode: classNumber,
                 repeatWeekly: repeatWeekly,
                 joinCohorts: joinCohorts,
+                forced: forced,
                 getAllDisciplines: getAllDisciplines,
             };
         });
