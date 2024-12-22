@@ -338,6 +338,7 @@ def resolve_lectures(data):
     action = "delete" if data[0].get("selectedOption").split(" - ")[0] == "0" else "add"
     repeat_weekly = data[0]['repeatWeekly']
     joined_cohorts = data[0]['joinCohorts']
+    forced = data[0]['forced']
     get_all_disciplines = data[0]['getAllDisciplines']
     
     while True:
@@ -396,9 +397,14 @@ def resolve_lectures(data):
             else:
                 lecture.set_classroom()
 
-            classroom_flag = check_conflicting_classrooms(lecture)
-            teacher_flag = check_teachers_availability(lecture)
-            intensive_flag = check_for_intensive_classes(lecture)
+            if forced:
+                classroom_flag = None
+                teacher_flag = None
+                intensive_flag = None
+            else:
+                classroom_flag = check_conflicting_classrooms(lecture)
+                teacher_flag = check_teachers_availability(lecture)
+                intensive_flag = check_for_intensive_classes(lecture)
 
             if classroom_flag:
                 lecture.delete_lecture()
@@ -412,7 +418,7 @@ def resolve_lectures(data):
                 lecture.delete_lecture()
                 return 0
 
-        week_increment = 1 if get_all_disciplines else 2
+        week_increment = 1 if (get_all_disciplines or not global_vars.ALTERNATING_WEEKS) else 2
         starting_date = starting_date + timedelta(weeks=week_increment) 
         if not repeat_weekly:
             break
