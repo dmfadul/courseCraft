@@ -140,7 +140,46 @@ def classroom_schedule(classroomName, week):
                            classroomList=[],)
 
 
-@grid_bp.route('/print/<classCode>/<week>', methods=['GET'])
+@grid_bp.route('/print/teachergrid/<teacherName>/<month>', methods=['GET'])
+@login_required
+def print_teachergrid(teacherName, month):
+    try:
+        month = int(month)  # Ensure 'month' can be converted to an integer
+    except ValueError:
+        abort(400, description="Formato Inválido.")
+
+    # change to print_grid
+    grid = funcs.gen_teacher_schedule(teacherName, month)
+
+    teacher = Teacher.query.filter_by(name=teacherName).first()
+    if not teacher:
+        abort(404, description="Professor não encontrado.")
+
+    parity = None
+    class_type = ""
+    class_location = ""
+   
+    # add check for mandatory classroom
+    rendered = render_template("print_grid.html",
+                                grid=grid,
+                                classCode=teacherName,
+                                classType=class_type,
+                                classLocation=class_location,
+                                weekNumber=month,)
+
+    css_path = os.path.join(current_app.static_folder, 'css/colors.css')
+    css = CSS(filename=css_path)
+
+    pdf = HTML(string=rendered).write_pdf(stylesheets=[css], presentational_hints=True)
+
+    response = make_response(pdf)
+    response.headers['Content-Type'] = 'application/pdf'
+    response.headers['Content-Disposition'] = 'attachment; filename="print.pdf"'
+
+    return response
+
+
+@grid_bp.route('/print/grid/<classCode>/<week>', methods=['GET'])
 @login_required
 def print_grid(classCode, week):
     try:
@@ -152,11 +191,9 @@ def print_grid(classCode, week):
         abort(400, description="Semana não existe.")
 
     # change to print_grid
-    # grid = funcs.gen_lectures_grid(classCode, week)
-    grid = funcs.gen_teacher_schedule(classCode, week)
+    grid = funcs.gen_lectures_grid(classCode, week)
 
-    # cohort = Cohort.query.filter_by(code=classCode).first()
-    cohort = Teacher.query.filter_by(name=classCode).first()
+    cohort = Cohort.query.filter_by(code=classCode).first()
     if not cohort:
         abort(404, description="Turma não encontrada.")
 

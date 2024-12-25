@@ -22,17 +22,18 @@ function changeWeekDirect(weekNumber) {
 // Function to extract classCode and week from the current URL
 function getClassCodeAndWeekFromUrl() {
     const pathParts = window.location.pathname.split('/');
+    const gridType = pathParts[1];
     const classCode = pathParts[2];
     const week = pathParts[3];
-    return { classCode, week };
+    return { gridType, classCode, week };
 }
 
 // Function to set the print button URL
 function setPrintButtonUrl() {
-    const { classCode, week } = getClassCodeAndWeekFromUrl();
+    const { gridType, classCode, week } = getClassCodeAndWeekFromUrl();
     const printButton = document.getElementById('printButton');
     printButton.onclick = function() {
-        window.location.href = `/print/${classCode}/${week}`;
+        window.location.href = `/print/${gridType}/${classCode}/${week}`;
     };
 }
 
