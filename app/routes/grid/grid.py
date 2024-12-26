@@ -154,18 +154,12 @@ def print_teachergrid(teacherName, month):
     teacher = Teacher.query.filter_by(name=teacherName).first()
     if not teacher:
         abort(404, description="Professor não encontrado.")
-
-    parity = None
-    class_type = ""
-    class_location = ""
    
     # add check for mandatory classroom
+    message = f"{teacherName} - {month}º MÊS"
     rendered = render_template("print_grid.html",
                                 grid=grid,
-                                classCode=teacherName,
-                                classType=class_type,
-                                classLocation=class_location,
-                                weekNumber=month,)
+                                message=message,)
 
     css_path = os.path.join(current_app.static_folder, 'css/colors.css')
     css = CSS(filename=css_path)
@@ -207,12 +201,10 @@ def print_grid(classCode, week):
         class_location = "ESPC"
    
     # add check for mandatory classroom
+    message = f"{classCode} - AULAS {class_type} NA {class_location} - {week}ª SEMANA"
     rendered = render_template("print_grid.html",
                                 grid=grid,
-                                classCode=classCode,
-                                classType=class_type,
-                                classLocation=class_location,
-                                weekNumber=week,)
+                                message=message,)
 
     css_path = os.path.join(current_app.static_folder, 'css/colors.css')
     css = CSS(filename=css_path)
