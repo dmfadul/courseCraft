@@ -1,149 +1,29 @@
 {% extends "base.html" %}
 
 {% block head_links %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/discipline.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
 {% endblock %}
 
 {% block mainContent %}
-<div class="container">
-    <div class="section">
-        <h2 >Search and Edit Discipline</h2>
+<div class="dashboard">
+    <div class="section" id="search-discipline-section">
+        <h2>Editar Disciplinas</h2>
+        <div>
+            <!-- Dropdown menus -->
+            <select id="discipline-category" style="width: 30%;">
+                {% for area in areas %}
+                    <option value="{{ area.id }}">{{ area.number }}</option>
+                {% endfor %}
+            </select>
 
-        <!-- Search Form -->
-        <form id="search-discipline-form" action="javascript:void(0);">
-            <div class="form-group">
-                <label for="search-code">Discipline Code:</label>
-                <input style="width: 8rem;" type="text" id="search-code" name="search_code" placeholder="Discipline code" required>
-            </div>
-            <div style="margin: 1rem 0 3rem 0;">
-            <button type="submit">Search</button>
-            </div>
-        </form>
-
-        <!-- Edit Form (Initially Hidden) -->
-        <div id="discipline-details" style="display: none;">
-            <h3>Edit Discipline</h3>
-            <form id="edit-discipline-details-form" action="javascript:void(0);">
-                <div class="form-group">
-                    <label for="edit-name">Name</label>
-                    <input style="width: 60rem;" type="text" id="edit-name" name="name" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="edit-name-abbr">Abbreviation</label>
-                    <input style="width: 60rem;" type="text" id="edit-name-abbr" name="name_abbr" required>
-                </div>
-
-                <div class="form-group1">
-                    <label style="padding: 0 1rem 0 0;" for="edit-code">Code</label>
-                    <input style="width: 8rem;" type="text" id="edit-code" name="code" readonly required>
-                </div>
-
-                <div class="form-group1">
-                    <label style="padding: 0 1rem 0 0;" for="edit-workload">Workload</label>
-                    <input style="width: 8rem;" type="number" id="edit-workload" name="workload" required>
-                </div>
-
-                <div class="form-group1">
-                    <label for="edit-is-theoretical">Theoretical?</label>
-                    <label class="switch">
-                        <input type="checkbox" id="edit-is-theoretical" name="edit-is-theoretical">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-                
-                <div class="form-group1">
-                    <label for="edit-is-intensive">Intensive?</label>
-                    <label class="switch">
-                        <input type="checkbox" id="edit-is-intensive" name="edit-is-intensive">
-                        <span class="slider"></span>
-                    </label>
-                </div>
-
-                <div style="padding: 0 1rem 0 0;">
-                <button style="margin: 0 1rem 0 0;" type="submit">Save Changes</button>
-                <button class="delete-button-red" type="button" id="delete-discipline-btn">Delete</button>
-                </div>    
-            </form>
+            <select id="discipline-list" style="width: 65%;">
+                {% for discipline in initial_disciplines %}
+                    <option value="{{ discipline.id }}">{{ discipline.name }}</option>
+                {% endfor %}
+            </select>
         </div>
     </div>
 </div>
 
-<script>
-document.getElementById('search-discipline-form').addEventListener('submit', async function(event) {
-    event.preventDefault(); // Prevent form submission
-
-    const code = document.getElementById('search-code').value;
-
-    try {
-        const response = await fetch(`/crud/get-discipline/${code}`);
-        if (response.ok) {
-            const data = await response.json();
-            document.getElementById('edit-name').value = data.name;
-            document.getElementById('edit-name-abbr').value = data.name_abbr;
-            document.getElementById('edit-code').value = data.code;
-            document.getElementById('edit-workload').value = data.workload;
-            document.getElementById('edit-is-theoretical').value = data.is_theoretical ? 'true' : 'false';
-            document.getElementById('edit-is-intensive').value = data.is_intensive ? 'true' : 'false';
-            document.getElementById('discipline-details').style.display = 'block';
-        } else {
-            alert('Discipline not found');
-            document.getElementById('discipline-details').style.display = 'none';
-        }
-    } catch (error) {
-        console.error('Error fetching discipline:', error);
-        alert('An error occurred while fetching the discipline.');
-    }
-});
-
-    // Handle update form submission
-    document.getElementById('edit-discipline-details-form').addEventListener('submit', async function(event) {
-        const data = {
-            name: document.getElementById('edit-name').value,
-            name_abbr: document.getElementById('edit-name-abbr').value,
-            code: document.getElementById('edit-code').value,
-            workload: document.getElementById('edit-workload').value,
-            is_theoretical: document.getElementById('edit-is-theoretical').value,
-            is_intensive: document.getElementById('edit-is-intensive').value,
-        };
-
-        const response = await fetch('/update_discipline', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-
-        if (response.ok) {
-            alert('Discipline updated successfully');
-        } else {
-            alert('Error updating discipline');
-        }
-    });
-
-    // Handle delete button click
-    document.getElementById('delete-discipline-btn').addEventListener('click', async function(event) {
-        const code = document.getElementById('edit-code').value;
-
-        if (confirm('Are you sure you want to delete this discipline?')) {
-            try {
-                const response = await fetch(`/crud/delete-discipline/${code}`, {
-                    method: 'POST',
-                });
-
-                if (response.ok) {
-                    alert('Discipline deleted successfully');
-                    // Clear form and hide details
-                    document.getElementById('discipline-details').style.display = 'none';
-                    document.getElementById('search-code').value = '';
-                } else {
-                    alert('Error deleting discipline');
-                }
-            } catch (error) {
-                console.error('Error deleting discipline:', error);
-                alert('An error occurred while deleting the discipline.');
-            }
-        }
-    });
-
-</script>
+<script src="{{ url_for('grid.static', filename='scripts/grid.js') }}"></script>
 {% endblock %}

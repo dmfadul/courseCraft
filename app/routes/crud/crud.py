@@ -20,6 +20,14 @@ def crud():
     return redirect(url_for('crud.add_teacher_to_modulus'))
 
 
+@crud_bp.route('/crud/discipline', methods=['GET', 'POST'])
+@login_required
+def edit_discipline():
+    areas = [{'id': 0, 'number': 'all'}] + [{'id':i, 'number':i} for i in range(1, 7)]
+    return render_template('edit-discipline.html',
+                            areas=areas)
+
+
 @crud_bp.route('/crud/add-discipline/', methods=['GET', 'POST'])
 @login_required
 def add_discipline(): 
@@ -51,35 +59,35 @@ def add_discipline():
                                 available_teachers=available_teachers)
 
 
-@crud_bp.route('/crud/edit-discipline/', methods=['GET', 'POST'])
-@login_required
-def edit_discipline(): 
-    if request.method == 'POST':
-        name = request.form['name']
-        name_abbr = request.form['name_abbr']
-        code = request.form['code']
-        workload = request.form['workload']
-        is_theoretical = bool(request.form['is_theoretical'])
-        is_intensive = bool(request.form['is_intensive'])
-        classroom = None if request.form['classroom'] == '0' else request.form['classroom']
+# @crud_bp.route('/crud/edit-discipline/', methods=['GET', 'POST'])
+# @login_required
+# def edit_discipline(): 
+#     if request.method == 'POST':
+#         name = request.form['name']
+#         name_abbr = request.form['name_abbr']
+#         code = request.form['code']
+#         workload = request.form['workload']
+#         is_theoretical = bool(request.form['is_theoretical'])
+#         is_intensive = bool(request.form['is_intensive'])
+#         classroom = None if request.form['classroom'] == '0' else request.form['classroom']
 
 
 
-        flag = Discipline.add_discipline(name,
-                                         name_abbr,
-                                         code,
-                                         workload,
-                                         is_theoretical,
-                                         is_intensive,
-                                         mandatory_room=classroom,
-                                        )
+#         flag = Discipline.add_discipline(name,
+#                                          name_abbr,
+#                                          code,
+#                                          workload,
+#                                          is_theoretical,
+#                                          is_intensive,
+#                                          mandatory_room=classroom,
+#                                         )
 
-        flash(f'Classroom {flag.name} added successfully.', 'success')
-        return redirect(url_for('dashboard.dashboard'))
-    else:
-        available_teachers = sorted(Teacher.query.all(), key=lambda x: x.name)
+#         flash(f'Classroom {flag.name} added successfully.', 'success')
+#         return redirect(url_for('dashboard.dashboard'))
+#     else:
+#         available_teachers = sorted(Teacher.query.all(), key=lambda x: x.name)
         
-        return render_template('edit-discipline.html')
+#         return render_template('edit-discipline.html')
 
 
 @crud_bp.route('/crud/get-discipline/<discipline_code>')
