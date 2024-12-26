@@ -10,15 +10,15 @@
         <h2>Editar Disciplinas</h2>
         <div>
             <!-- Dropdown menus -->
-            <select id="discipline-category" style="width: 30%;">
+            <select id="discipline-category" style="width: 10%;">
                 {% for area in areas %}
                     <option value="{{ area.id }}">{{ area.number }}</option>
                 {% endfor %}
             </select>
 
             <select id="discipline-list" style="width: 65%;">
-                {% for discipline in initial_disciplines %}
-                    <option value="{{ discipline.id }}">{{ discipline.name }}</option>
+                {% for disc in initial_disciplines %}
+                    <option value="{{ disc.id }}">{{ disc.code }} - {{ disc.name }}</option>
                 {% endfor %}
             </select>
         </div>

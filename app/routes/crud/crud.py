@@ -24,8 +24,18 @@ def crud():
 @login_required
 def edit_discipline():
     areas = [{'id': 0, 'number': 'all'}] + [{'id':i, 'number':i} for i in range(1, 7)]
+    all_disciplines = Discipline.query.all()
+
+    all_disciplines = sorted(
+        all_disciplines,
+        key=lambda x: (
+            float('.'.join(part.zfill(2) for part in x.code.replace('P', '').split('.'))),  # Pad fractions
+            'P' in x.code  # Place 'P' codes after non-'P' codes
+        )
+    )
     return render_template('edit-discipline.html',
-                            areas=areas)
+                            areas=areas,
+                            initial_disciplines=all_disciplines)
 
 
 @crud_bp.route('/crud/add-discipline/', methods=['GET', 'POST'])
