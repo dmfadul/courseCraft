@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 data.forEach(discipline => {
                     const option = document.createElement('option');
                     option.value = discipline.id;
-                    option.textContent = discipline.name;
+                    option.textContent = discipline.code + " - " + discipline.name;
                     disciplineDropdown.appendChild(option);
                 });
             })

@@ -23,31 +23,40 @@ def crud():
 @crud_bp.route('/crud/discipline', methods=['GET', 'POST'])
 @login_required
 def edit_discipline():
-    areas = [{'id': 0, 'number': 'all'}] + [{'id':i, 'number':i} for i in range(1, 7)]
+    areas = [{'id': 1000, 'number': 'all'}] + [{'id':i, 'number':i} for i in range(7)]
     all_disciplines = Discipline.query.all()
 
-    all_disciplines = sorted(
-        all_disciplines,
-        key=lambda x: (
-            float('.'.join(part.zfill(2) for part in x.code.replace('P', '').split('.'))),  # Pad fractions
-            'P' in x.code  # Place 'P' codes after non-'P' codes
-        )
-    )
+    all_disciplines = Discipline.sort_by_code(all_disciplines)
+
     return render_template('edit-discipline.html',
                             areas=areas,
                             initial_disciplines=all_disciplines)
 
 
-@crud_bp.route('/crud/get_disciplines/<int:category_id>', methods=['GET'])
+@crud_bp.route('/crud/get_disciplines/<int:class_code>', methods=['GET'])
 @login_required
-def get_disciplines(category_id):
-    return jsonify([])
+def get_disciplines(class_code):
+    if class_code == 1000:
+        disciplines = [d for d in Discipline.query.all()]
+    else:
+        disciplines = [d for d in Discipline.query.all() if d.code.startswith(str(class_code))]
+    
+    disciplines = Discipline.sort_by_code(disciplines)
+
+    return jsonify([d.to_dict() for d in disciplines])
 
 
-@crud_bp.route('/crud/get_discipline_info/<int:category_id>', methods=['GET'])
+@crud_bp.route('/crud/get_discipline_info/<int:discipline_code>', methods=['GET'])
 @login_required
-def get_discipline_info(category_id):
-    return jsonify({})
+def get_discipline_info(discipline_code):
+    discipline = Discipline.query.filter_by(code=discipline_code).first()
+    if not discipline:
+        return jsonify({'error': 'Discipline not found'}), 404
+    
+    modules = discipline.moduli
+    print(modules)
+
+    return jsonify(modules)
 
 
 @crud_bp.route('/crud/add-discipline/', methods=['GET', 'POST'])

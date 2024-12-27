@@ -231,3 +231,15 @@ class Discipline(db.Model):
             'teachers': [teacher.name for teacher in self.teachers],
             'prerequisites': [prerequisite.code for prerequisite in self.prerequisites],
         }
+    
+    @staticmethod
+    def sort_by_code(to_sort):
+        output = sorted(
+            to_sort,
+            key=lambda x: (
+                float('.'.join(part.zfill(2) for part in x.code.replace('P', '').split('.'))),  # Pad fractions
+                'P' in x.code  # Place 'P' codes after non-'P' codes
+            )
+        )
+
+        return output
