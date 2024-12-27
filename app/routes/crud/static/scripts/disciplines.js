@@ -34,10 +34,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
     const disciplineDropdown = document.getElementById('discipline-list');
+    const disciplineSummarySection = document.getElementById('discipline-summary-section');
     const disciplineInfoSection = document.getElementById('discipline-info-section');
     const modulesTableBody = document.querySelector('#modules-table tbody');
     const applyChangesButton = document.getElementById('apply-changes');
 
+    const discCodeSpan = document.getElementById('disc-code');
+    const discNameInput = document.getElementById('disc-name');
+    const discAbbreviationInput = document.getElementById('disc-abbreviation');
+   
     disciplineDropdown.addEventListener('change', function() {
         const selectedDiscipline = disciplineDropdown.value;
 
@@ -50,6 +55,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
+                // Populate discipline summary
+                discCodeSpan.textContent = data.code;
+                discNameInput.value = data.name;
+                discAbbreviationInput.value = data.abbreviation;
+                disciplineSummarySection.style.display = 'block';
 
                 // Clear existing table rows
                 modulesTableBody.innerHTML = '';
@@ -74,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     row.innerHTML = `
                         <td>${module.code}</td>
-                        <td><input type="text" value="${module.name}" data-index="${index}" class="module-name"></td>
+                        <td>${module.name}</td>
                         <td><input type="text" value="${teacher1}" data-index="${index}" class="teacher" data-teacher="1"></td>
                         <td><input type="text" value="${teacher2}" data-index="${index}" class="teacher" data-teacher="2"></td>
                         <td><input type="text" value="${teacher3}" data-index="${index}" class="teacher" data-teacher="3"></td>

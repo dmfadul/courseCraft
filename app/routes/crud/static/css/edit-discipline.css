@@ -96,3 +96,12 @@ button#apply-changes:hover {
     background-color: #0056b3;
     transform: scale(1.05);
 }
+
+#modules-table th,
+#modules-table td {
+    width: auto; /* Default width if unspecified */
+    min-width: 100px; /* Set a minimum width */
+    overflow: hidden; /* Hide content that overflows */
+    text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+    white-space: nowrap; /* Prevent text wrapping */
+}
