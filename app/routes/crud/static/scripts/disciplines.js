@@ -35,12 +35,13 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     const disciplineDropdown = document.getElementById('discipline-list');
     const disciplineInfoSection = document.getElementById('discipline-info-section');
-    const disciplineInfoDiv = document.getElementById('discipline-info');
+    const modulesTableBody = document.querySelector('#modules-table tbody');
+    const applyChangesButton = document.getElementById('apply-changes');
 
     disciplineDropdown.addEventListener('change', function() {
         const selectedDiscipline = disciplineDropdown.value;
 
-        // Make AJAX request to get discipline info
+        // Make AJAX request to get modules
         fetch(`/crud/get_discipline_info/${selectedDiscipline}`)
             .then(response => {
                 if (!response.ok) {
@@ -49,19 +50,92 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-                // Populate the discipline info section
-                disciplineInfoDiv.innerHTML = `
-                    <p><strong>Código:</strong> ${data.code}</p>
-                    <p><strong>Nome:</strong> ${data.name}</p>
-                    <p><strong>Descrição:</strong> ${data.description}</p>
-                    <p><strong>Créditos:</strong> ${data.credits}</p>
-                `;
+
+                // Clear existing table rows
+                modulesTableBody.innerHTML = '';
+
+                // Populate modules grid
+                data.forEach((module, index) => {
+                    teacher1 = module.teachers[0] || '';
+                    teacher2 = module.teachers[1] || '';
+                    teacher3 = module.teachers[2] || '';
+    
+                    if (teacher1) {
+                        teacher1 = teacher1.teacher_name;
+                    }
+                    if (teacher2) {
+                        teacher2 = teacher2.teacher_name;
+                    }
+                    if (teacher3) {
+                        teacher3 = teacher3.nteacher_nameame;
+                    }
+
+                    const row = document.createElement('tr');
+
+                    row.innerHTML = `
+                        <td>${module.code}</td>
+                        <td><input type="text" value="${module.name}" data-index="${index}" class="module-name"></td>
+                        <td><input type="text" value="${teacher1}" data-index="${index}" class="teacher" data-teacher="1"></td>
+                        <td><input type="text" value="${teacher2}" data-index="${index}" class="teacher" data-teacher="2"></td>
+                        <td><input type="text" value="${teacher3}" data-index="${index}" class="teacher" data-teacher="3"></td>
+                        <td><button class="remove-module" data-index="${index}">Remover</button></td>
+                    `;
+                    modulesTableBody.appendChild(row);
+                });
+
+                // Show apply changes button
+                applyChangesButton.style.display = 'block';
+
+                // Add remove button functionality
+                document.querySelectorAll('.remove-module').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = this.getAttribute('data-index');
+                        data.modules.splice(index, 1);
+                        this.parentElement.innerHTML = '';
+                    });
+                });
 
                 // Make the section visible
                 disciplineInfoSection.style.display = 'block';
             })
             .catch(error => {
                 console.error('Error fetching discipline info:', error);
+            });
+    });
+
+    // Handle apply changes button click
+    applyChangesButton.addEventListener('click', function() {
+        const updatedModules = [];
+        const rows = modulesGrid.querySelectorAll(':scope > input, :scope > button');
+
+        for (let i = 0; i < rows.length; i += 6) {
+            updatedModules.push({
+                code: rows[i].value,
+                name: rows[i + 1].value,
+                teachers: [
+                    rows[i + 2].value,
+                    rows[i + 3].value,
+                    rows[i + 4].value,
+                ]
+            });
+        }
+
+        // Send updated modules to the server
+        fetch('/update_modules', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ modules: updatedModules }),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to update modules');
+                }
+                alert('Alterações aplicadas com sucesso!');
+            })
+            .catch(error => {
+                console.error('Error applying changes:', error);
             });
     });
 });

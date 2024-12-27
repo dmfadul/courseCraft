@@ -54,7 +54,8 @@ def get_discipline_info(discipline_id):
         return jsonify({'error': 'Discipline not found'}), 404
     
     modules = discipline.moduli
-    print([m.to_dict() for m in modules])
+    # print([m.to_dict() for m in modules])
+    print("discipline_id", discipline_id)
 
     return jsonify([m.to_dict() for m in modules])
 

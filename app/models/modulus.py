@@ -30,12 +30,13 @@ class Modulus(db.Model):
         return {
             'id': self.id,
             'name': self.discipline.name,
+            'disc_code': self.discipline.code,
             'code': self.code,
             'workload': self.discipline.workload,
             'is_theoretical': self.discipline.is_theoretical,
             'is_intensive': self.discipline.is_intensive,
             'mandatory_room': (self.classroom.code, self.classroom.name) if self.classroom else (None, None),
-            'teachers': [(teacher.id, teacher.name) for teacher in self.teachers],
+            'teachers': [{'teacher_id': teacher.id, 'teacher_name': teacher.name} for teacher in self.teachers],
             'prerequisites': [prerequisite.code for prerequisite in self.discipline.prerequisites],
         }
     
