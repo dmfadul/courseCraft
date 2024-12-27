@@ -1,0 +1,98 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #1e1e1e;
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 90%;
+    max-width: 1200px;
+    background: #2a2a2a;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+.section {
+    background: #333;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: left;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.section h2 {
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    border-bottom: 3px solid #007BFF;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+#modules-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#modules-table th, #modules-table td {
+    border: 1px solid #444;
+    padding: 10px 15px;
+    text-align: left;
+    color: #ddd;
+}
+
+#modules-table th {
+    background-color: #444;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#modules-table td input[type="text"] {
+    width: 90%;
+    padding: 5px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #222;
+    color: #ddd;
+    font-size: 14px;
+}
+
+#modules-table td button {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#modules-table td button:hover {
+    background-color: #cc0000;
+}
+
+button#apply-changes {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button#apply-changes:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
