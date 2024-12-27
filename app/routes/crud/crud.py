@@ -49,13 +49,12 @@ def get_disciplines(class_code):
 @crud_bp.route('/crud/get_discipline_info/<int:discipline_id>', methods=['GET'])
 @login_required
 def get_discipline_info(discipline_id):
-    print("teas")
     discipline = Discipline.query.filter_by(id=discipline_id).first()
     if not discipline:
         return jsonify({'error': 'Discipline not found'}), 404
     
     modules = discipline.moduli
-    print(modules)
+    print([m.to_dict() for m in modules])
 
     return jsonify([m.to_dict() for m in modules])
 
@@ -64,7 +63,6 @@ def get_discipline_info(discipline_id):
 @login_required
 def add_discipline(): 
     if request.method == 'POST':
-        print("TEST")
         name = request.form['name']
         name_abbr = request.form['name_abbr']
         code = request.form['code']
