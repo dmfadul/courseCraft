@@ -44,6 +44,12 @@ def get_disciplines(category_id):
     return jsonify([])
 
 
+@crud_bp.route('/crud/get_discipline_info/<int:category_id>', methods=['GET'])
+@login_required
+def get_discipline_info(category_id):
+    return jsonify({})
+
+
 @crud_bp.route('/crud/add-discipline/', methods=['GET', 'POST'])
 @login_required
 def add_discipline(): 

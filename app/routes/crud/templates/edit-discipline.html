@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block mainContent %}
-<div class="dashboard">
+<div class="dashboard" style="display: flex; flex-direction: column; gap: 20px;">
     <div class="section" id="search-discipline-section">
         <h2>Editar Disciplinas</h2>
         <div>
@@ -21,6 +21,13 @@
                     <option value="{{ disc.id }}">{{ disc.code }} - {{ disc.name }}</option>
                 {% endfor %}
             </select>
+        </div>
+    </div>
+
+    <div class="section" id="discipline-info-section" style="display: block;">
+        <h2>Informações da Disciplina</h2>
+        <div id="discipline-info">
+            <!-- Discipline info will be populated here -->
         </div>
     </div>
 </div>

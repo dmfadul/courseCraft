@@ -30,3 +30,38 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const disciplineDropdown = document.getElementById('discipline-list');
+    const disciplineInfoSection = document.getElementById('discipline-info-section');
+    const disciplineInfoDiv = document.getElementById('discipline-info');
+
+    disciplineDropdown.addEventListener('change', function() {
+        const selectedDiscipline = disciplineDropdown.value;
+
+        // Make AJAX request to get discipline info
+        fetch(`/get_discipline_info/${selectedDiscipline}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Populate the discipline info section
+                disciplineInfoDiv.innerHTML = `
+                    <p><strong>Código:</strong> ${data.code}</p>
+                    <p><strong>Nome:</strong> ${data.name}</p>
+                    <p><strong>Descrição:</strong> ${data.description}</p>
+                    <p><strong>Créditos:</strong> ${data.credits}</p>
+                `;
+
+                // Make the section visible
+                disciplineInfoSection.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error fetching discipline info:', error);
+            });
+    });
+});
