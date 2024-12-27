@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedDiscipline = disciplineDropdown.value;
 
         // Make AJAX request to get discipline info
-        fetch(`/get_discipline_info/${selectedDiscipline}`)
+        fetch(`/crud/get_discipline_info/${selectedDiscipline}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
