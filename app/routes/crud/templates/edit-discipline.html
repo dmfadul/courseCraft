@@ -16,7 +16,7 @@
                 {% endfor %}
             </select>
 
-            <select id="discipline-list" style="width: 65%;">
+            <select id="discipline-list" style="width: 45%;">
                 {% for disc in initial_disciplines %}
                     <option value="{{ disc.id }}">{{ disc.code }} - {{ disc.name }}</option>
                 {% endfor %}
@@ -25,5 +25,5 @@
     </div>
 </div>
 
-<script src="{{ url_for('grid.static', filename='scripts/grid.js') }}"></script>
+<script src="{{ url_for('crud.static', filename='scripts/disciplines.js') }}"></script>
 {% endblock %}

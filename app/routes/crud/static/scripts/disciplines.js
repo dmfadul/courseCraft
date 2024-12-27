@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedCategory = categoryDropdown.value;
 
         // Make AJAX request to get disciplines
-        fetch(`/get_disciplines/${selectedCategory}`)
+        fetch(`/crud/get_disciplines/${selectedCategory}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

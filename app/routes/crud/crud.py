@@ -38,6 +38,12 @@ def edit_discipline():
                             initial_disciplines=all_disciplines)
 
 
+@crud_bp.route('/crud/get_disciplines/<int:category_id>', methods=['GET'])
+@login_required
+def get_disciplines(category_id):
+    return jsonify([])
+
+
 @crud_bp.route('/crud/add-discipline/', methods=['GET', 'POST'])
 @login_required
 def add_discipline(): 
