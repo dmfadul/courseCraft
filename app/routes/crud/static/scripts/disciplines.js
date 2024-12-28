@@ -99,7 +99,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     row.innerHTML = `
                         <td>${module.code}</td>
-                        <td>${module.name}</td>
                         <td><input type="text" value="${teacher1}" data-index="${index}" class="teacher" data-teacher="1"></td>
                         <td><input type="text" value="${teacher2}" data-index="${index}" class="teacher" data-teacher="2"></td>
                         <td><input type="text" value="${teacher3}" data-index="${index}" class="teacher" data-teacher="3"></td>
