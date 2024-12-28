@@ -64,9 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const summaryRow = document.createElement('tr');
 
 
-                const tCode = "codeTeste";
-                const name = "teste";
-                const AbbrName = "teste..";
+                const tCode = data[0].disc_code;
+                const name = data[0].name;
+                const AbbrName = data[0].abbrName;
 
                 summaryRow.innerHTML = `
                     <td>${tCode}</td>

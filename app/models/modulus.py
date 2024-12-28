@@ -30,6 +30,7 @@ class Modulus(db.Model):
         return {
             'id': self.id,
             'name': self.discipline.name,
+            'abbrName': self.discipline.name_abbr,
             'disc_code': self.discipline.code,
             'code': self.code,
             'workload': self.discipline.workload,
