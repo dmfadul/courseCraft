@@ -26,10 +26,20 @@
 
     <div class="section" id="discipline-summary-section" style="display: none;">
         <h2>Informações da Disciplina</h2>
-        <div>
-            <p><strong>Código:</strong> <span id="disc-code"></span></p>
-            <p><strong>Nome:</strong> <input type="text" id="disc-name" style="width: 80%;"></p>
-            <p><strong>Abreviação:</strong> <input type="text" id="disc-abbreviation" style="width: 50%;"></p>
+        <div id="discipline-summary">
+            <table id="discipline-summary-table" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nome</th>
+                        <th>Abreviação</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be populated here -->
+                </tbody>
+            </table>
         </div>
     </div>
 
@@ -51,9 +61,9 @@
                     <!-- Rows will be populated here -->
                 </tbody>
             </table>
-            <button id="apply-changes" style="margin-top: 20px;">Aplicar Alterações</button>
         </div>
     </div>
+    <button id="apply-changes" style="margin-top: 20px;">Aplicar Alterações</button>
 </div>
 
 <script src="{{ url_for('crud.static', filename='scripts/disciplines.js') }}"></script>

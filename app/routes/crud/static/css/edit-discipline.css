@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     display: flex;
     justify-content: center;
@@ -38,26 +39,27 @@ body {
     padding-bottom: 5px;
 }
 
-#modules-table {
+/* Table Styles (Unified) */
+table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-#modules-table th, #modules-table td {
+table th, table td {
     border: 1px solid #444;
     padding: 10px 15px;
     text-align: left;
     color: #ddd;
 }
 
-#modules-table th {
+table th {
     background-color: #444;
     text-transform: uppercase;
     font-weight: bold;
 }
 
-#modules-table td input[type="text"] {
+table td input[type="text"] {
     width: 90%;
     padding: 5px;
     border: 1px solid #555;
@@ -67,7 +69,7 @@ body {
     font-size: 14px;
 }
 
-#modules-table td button {
+table td button {
     background-color: #ff4d4d;
     color: #fff;
     border: none;
@@ -77,10 +79,18 @@ body {
     transition: background-color 0.3s ease;
 }
 
-#modules-table td button:hover {
+table td button:hover {
     background-color: #cc0000;
 }
 
+table th, table td {
+    min-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Apply Changes Button */
 button#apply-changes {
     padding: 10px 20px;
     font-size: 16px;
@@ -95,13 +105,4 @@ button#apply-changes {
 button#apply-changes:hover {
     background-color: #0056b3;
     transform: scale(1.05);
-}
-
-#modules-table th,
-#modules-table td {
-    width: auto; /* Default width if unspecified */
-    min-width: 100px; /* Set a minimum width */
-    overflow: hidden; /* Hide content that overflows */
-    text-overflow: ellipsis; /* Add ellipsis for overflowed text */
-    white-space: nowrap; /* Prevent text wrapping */
 }

@@ -34,11 +34,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
     const disciplineDropdown = document.getElementById('discipline-list');
-    const disciplineSummarySection = document.getElementById('discipline-summary-section');
     const disciplineInfoSection = document.getElementById('discipline-info-section');
+    const disciplineSummarySection = document.getElementById('discipline-summary-section');
     const modulesTableBody = document.querySelector('#modules-table tbody');
+    const disciplineTableBody = document.querySelector('#discipline-summary-table tbody');
     const applyChangesButton = document.getElementById('apply-changes');
-
+    
     const discCodeSpan = document.getElementById('disc-code');
     const discNameInput = document.getElementById('disc-name');
     const discAbbreviationInput = document.getElementById('disc-abbreviation');
@@ -55,14 +56,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json();
             })
             .then(data => {
-                // Populate discipline summary
-                discCodeSpan.textContent = data.code;
-                discNameInput.value = data.name;
-                discAbbreviationInput.value = data.abbreviation;
-                disciplineSummarySection.style.display = 'block';
-
                 // Clear existing table rows
+                disciplineTableBody.innerHTML = '';
                 modulesTableBody.innerHTML = '';
+
+                // Populate discipline summary
+                const summaryRow = document.createElement('tr');
+
+
+                const tCode = "codeTeste";
+                const name = "teste";
+                const AbbrName = "teste..";
+
+                summaryRow.innerHTML = `
+                    <td>${tCode}</td>
+                    <td><input type="text" value="${name}" class="teacher" data-teacher="1"></td>
+                    <td><input type="text" value="${AbbrName}" class="teacher" data-teacher="2"></td>
+                    <td><button class="remove-module">Remover</button></td>
+                `;
+
+                disciplineTableBody.appendChild(summaryRow);
+
+                disciplineSummarySection.style.display = 'block';
 
                 // Populate modules grid
                 data.forEach((module, index) => {
@@ -77,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         teacher2 = teacher2.teacher_name;
                     }
                     if (teacher3) {
-                        teacher3 = teacher3.nteacher_nameame;
+                        teacher3 = teacher3.teacher_name;
                     }
 
                     const row = document.createElement('tr');
