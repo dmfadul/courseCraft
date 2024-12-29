@@ -54,9 +54,14 @@ def get_discipline_info(discipline_id):
         return jsonify({'error': 'Discipline not found'}), 404
     
     modules = discipline.moduli
-    print([m.to_dict() for m in modules])
+    modules_dict = [m.to_dict() for m in modules]
+    teachers_names = [(0, '-')] 
+    teachers_names += [(t.id, t.name) for t in sorted(Teacher.query.all(), key=lambda x: x.name)]
 
-    return jsonify([m.to_dict() for m in modules])
+    data_dict = {"teachersNames": teachers_names,
+                 "modules": modules_dict,}
+
+    return jsonify(data_dict)
 
 
 @crud_bp.route('/crud/add-discipline/', methods=['GET', 'POST'])

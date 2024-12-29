@@ -64,9 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 const summaryRow = document.createElement('tr');
 
 
-                const tCode = data[0].disc_code;
-                const name = data[0].name;
-                const AbbrName = data[0].abbrName;
+                const tCode = data.modules[0].disc_code;
+                const name = data.modules[0].name;
+                const AbbrName = data.modules[0].abbrName;
 
                 summaryRow.innerHTML = `
                     <td>${tCode}</td>
@@ -80,28 +80,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 disciplineSummarySection.style.display = 'block';
 
                 // Populate modules grid
-                data.forEach((module, index) => {
-                    teacher1 = module.teachers[0] || '';
-                    teacher2 = module.teachers[1] || '';
-                    teacher3 = module.teachers[2] || '';
+                data.modules.forEach((module, index) => {
+                    teacher1 = module.teachers[0]?.teacher_name || '-';
+                    teacher2 = module.teachers[1]?.teacher_name || '-';
+                    teacher3 = module.teachers[2]?.teacher_name || '-';
     
-                    if (teacher1) {
-                        teacher1 = teacher1.teacher_name;
-                    }
-                    if (teacher2) {
-                        teacher2 = teacher2.teacher_name;
-                    }
-                    if (teacher3) {
-                        teacher3 = teacher3.teacher_name;
-                    }
-
                     const row = document.createElement('tr');
 
                     row.innerHTML = `
                         <td>${module.code}</td>
-                        <td><input type="text" value="${teacher1}" data-index="${index}" class="teacher" data-teacher="1"></td>
-                        <td><input type="text" value="${teacher2}" data-index="${index}" class="teacher" data-teacher="2"></td>
-                        <td><input type="text" value="${teacher3}" data-index="${index}" class="teacher" data-teacher="3"></td>
+                        <td>${createTeacherDropdown(teacher1, data.teachersNames, index, 1)}</td>
+                        <td>${createTeacherDropdown(teacher2, data.teachersNames, index, 2)}</td>
+                        <td>${createTeacherDropdown(teacher3, data.teachersNames, index, 3)}</td>
                         <td><button class="remove-module" data-index="${index}">Remover</button></td>
                     `;
                     modulesTableBody.appendChild(row);
@@ -162,4 +152,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error applying changes:', error);
             });
     });
+
+    function createTeacherDropdown(selectedTeacherName, teachersTuples, moduleIndex, teacherIndex) {
+        const dropdown = document.createElement('select');
+        dropdown.classList.add('teacher-dropdown');
+        dropdown.dataset.index = moduleIndex;
+        dropdown.dataset.teacher = teacherIndex;
+
+        teachersTuples.forEach(teacherTuple => {
+            const teacherId = teacherTuple[0];
+            const teacherName = teacherTuple[1];
+
+            const option = document.createElement('option');
+            option.value = teacherId;
+            option.textContent = teacherName;
+            if (teacherName === selectedTeacherName) {
+                option.setAttribute('selected', 'selected');
+            }
+            dropdown.appendChild(option);
+        });
+
+        return dropdown.outerHTML;
+    }
 });
