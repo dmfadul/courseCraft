@@ -72,7 +72,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     <td>${tCode}</td>
                     <td><input type="text" value="${name}" class="teacher" data-teacher="1"></td>
                     <td><input type="text" value="${AbbrName}" class="teacher" data-teacher="2"></td>
-                    <td><button class="remove-module">Remover</button></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><button onclick="forbidden()" class="remove-module">Remover</button></td>
                 `;
 
                 disciplineTableBody.appendChild(summaryRow);
@@ -92,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <td>${createTeacherDropdown(teacher1, data.teachersNames, index, 1)}</td>
                         <td>${createTeacherDropdown(teacher2, data.teachersNames, index, 2)}</td>
                         <td>${createTeacherDropdown(teacher3, data.teachersNames, index, 3)}</td>
-                        <td><button onclick="delModule(this, '${module.code}')" class="remove-module" data-index="${index}">Remover</button></td>
+                        <td><button onclick="forbidden()" class="remove-module" data-index="${index}">Remover</button></td>
                     `;
                     modulesTableBody.appendChild(row);
                 });
@@ -209,4 +212,9 @@ function delModule(button, code) {
         .catch(error => {
             console.error('Error deleting module:', error);
         });
+}
+
+
+function forbidden() {
+    alert('Você não tem permissão para executar esta operação!');
 }
