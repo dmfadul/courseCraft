@@ -67,12 +67,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 const tCode = data.modules[0].disc_code;
                 const name = data.modules[0].name;
                 const AbbrName = data.modules[0].abbrName;
+                const selectedRoom = data.discipline.mandatory_room;
 
                 summaryRow.innerHTML = `
                     <td>${tCode}</td>
                     <td><input type="text" value="${name}" class="teacher" data-teacher="1"></td>
                     <td><input type="text" value="${AbbrName}" class="teacher" data-teacher="2"></td>
-                    <td></td>
+                    <td>${createRoomDropdown(selectedRoom, data.classrooms)}</td>
                     <td></td>
                     <td></td>
                     <td><button onclick="forbidden()" class="remove-module">Remover</button></td>
@@ -164,6 +165,28 @@ applyChangesButton.addEventListener('click', function() {
             console.error('Error applying changes:', error);
         });
     });
+
+    function createRoomDropdown(selectedRoomName, roomTuples) {
+        const dropdown = document.createElement('select');
+        dropdown.classList.add('room-dropdown');
+        
+        dropdown.setAttribute('disabled', 'disabled');
+
+        roomTuples.forEach(roomTuple => {
+            const roomID = roomTuple[0];
+            const roomName = roomTuple[1];
+
+            const option = document.createElement('option');
+            option.value = roomID;
+            option.textContent = roomName;
+            if (roomName === selectedRoomName) {
+                option.setAttribute('selected', 'selected');
+            }
+            dropdown.appendChild(option);
+        });
+
+        return dropdown.outerHTML;
+    }
 
     function createTeacherDropdown(selectedTeacherName, teachersTuples, moduleIndex, teacherIndex) {
         const dropdown = document.createElement('select');

@@ -55,11 +55,17 @@ def get_discipline_info(discipline_id):
     
     modules = discipline.moduli
     modules_dict = [m.to_dict() for m in modules]
+
     teachers_names = [(0, '-')] 
     teachers_names += [(t.id, t.name) for t in sorted(Teacher.query.all(), key=lambda x: x.name)]
 
-    data_dict = {"teachersNames": teachers_names,
-                 "modules": modules_dict,}
+    classrooms = [(0, '-')]
+    classrooms += [(c.id, c.name) for c in sorted(Classroom.query.all(), key=lambda x: x.name)]
+
+    data_dict = {"discipline": discipline.to_dict(),
+                 "modules": modules_dict,
+                 "teachersNames": teachers_names,
+                 "classrooms": classrooms,}
 
     return jsonify(data_dict)
 
