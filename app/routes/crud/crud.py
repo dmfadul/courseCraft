@@ -68,12 +68,27 @@ def get_discipline_info(discipline_id):
 @login_required
 def update_discipline():
     data = request.get_json()
-    print("data", data.get("modules"))
+    print("data", data)
 
     return jsonify({'response': 'ok'})
 
 
+@crud_bp.route('/crud/delete-discipline/<discipline_code>', methods=['POST'])
+@login_required
+def delete_discipline(discipline_code):
+    print(discipline_code)
 
+    return jsonify({'response': 'ok'})
+
+
+@crud_bp.route('/crud/delete-module', methods=['POST'])
+@login_required
+def delete_modulus():
+    data = request.get_json()
+    code = data['code']
+    print(code)
+
+    return jsonify({'response': 'ok'})
 
 
 
@@ -114,37 +129,6 @@ def add_discipline():
                                 available_teachers=available_teachers)
 
 
-# @crud_bp.route('/crud/edit-discipline/', methods=['GET', 'POST'])
-# @login_required
-# def edit_discipline(): 
-#     if request.method == 'POST':
-#         name = request.form['name']
-#         name_abbr = request.form['name_abbr']
-#         code = request.form['code']
-#         workload = request.form['workload']
-#         is_theoretical = bool(request.form['is_theoretical'])
-#         is_intensive = bool(request.form['is_intensive'])
-#         classroom = None if request.form['classroom'] == '0' else request.form['classroom']
-
-
-
-#         flag = Discipline.add_discipline(name,
-#                                          name_abbr,
-#                                          code,
-#                                          workload,
-#                                          is_theoretical,
-#                                          is_intensive,
-#                                          mandatory_room=classroom,
-#                                         )
-
-#         flash(f'Classroom {flag.name} added successfully.', 'success')
-#         return redirect(url_for('dashboard.dashboard'))
-#     else:
-#         available_teachers = sorted(Teacher.query.all(), key=lambda x: x.name)
-        
-#         return render_template('edit-discipline.html')
-
-
 @crud_bp.route('/crud/get-discipline/<discipline_code>')
 @login_required
 def get_discipline(discipline_code):
@@ -162,12 +146,7 @@ def get_discipline(discipline_code):
     return jsonify(test_dict)
 
 
-@crud_bp.route('/crud/delete-discipline/<discipline_code>', methods=['POST'])
-@login_required
-def delete_discipline(discipline_code):
-    print(discipline_code)
 
-    return jsonify({})
 
 
 

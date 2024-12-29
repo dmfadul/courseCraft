@@ -92,22 +92,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         <td>${createTeacherDropdown(teacher1, data.teachersNames, index, 1)}</td>
                         <td>${createTeacherDropdown(teacher2, data.teachersNames, index, 2)}</td>
                         <td>${createTeacherDropdown(teacher3, data.teachersNames, index, 3)}</td>
-                        <td><button class="remove-module" data-index="${index}">Remover</button></td>
+                        <td><button onclick="delModule(this, '${module.code}')" class="remove-module" data-index="${index}">Remover</button></td>
                     `;
                     modulesTableBody.appendChild(row);
                 });
 
                 // Show apply changes button
                 applyChangesButton.style.display = 'block';
-
-                // Add remove button functionality
-                document.querySelectorAll('.remove-module').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const index = this.getAttribute('data-index');
-                        data.modules.splice(index, 1);
-                        this.parentElement.innerHTML = '';
-                    });
-                });
 
                 // Make the section visible
                 disciplineInfoSection.style.display = 'block';
@@ -193,3 +184,29 @@ applyChangesButton.addEventListener('click', function() {
         return dropdown.outerHTML;
     }
 });
+
+
+function delModule(button, code) {
+    fetch('/crud/delete-module', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ code }),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to delete module');
+            }
+            alert('Módulo apagado com sucesso!');
+            const row = button.closest('tr'); // Ensure correct DOM traversal
+            if (row) {
+                row.remove(); // Remove the entire row
+            } else {
+                console.error('Row not found for the button.');
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting module:', error);
+        });
+}
