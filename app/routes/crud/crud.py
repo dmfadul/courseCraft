@@ -97,63 +97,6 @@ def delete_modulus():
 
 
 
-
-
-@crud_bp.route('/crud/add-discipline/', methods=['GET', 'POST'])
-@login_required
-def add_discipline(): 
-    if request.method == 'POST':
-        name = request.form['name']
-        name_abbr = request.form['name_abbr']
-        code = request.form['code']
-        workload = request.form['workload']
-        # is_theoretical = request.form['is_theoretical'] == 'on'
-        # is_intensive = request.form['is_intensive'] == 'on'
-        # classroom = None if request.form['classroom'] == '0' else request.form['classroom']
-
-        flag = Discipline.add_discipline(name,
-                                         name_abbr,
-                                         code,
-                                         workload,
-                                         True,
-                                         False,
-                                         mandatory_room=3,
-                                        )
-
-        flash(f'Classroom {flag.name} added successfully.', 'success')
-        return redirect(url_for('dashboard.dashboard'))
-    else:
-        available_teachers = sorted(Teacher.query.all(), key=lambda x: x.name)
-        
-        return render_template('add-discipline.html',
-                                available_teachers=available_teachers)
-
-
-@crud_bp.route('/crud/get-discipline/<discipline_code>')
-@login_required
-def get_discipline(discipline_code):
-    discipline = Discipline.query.filter_by(code=discipline_code).first()
-    # if discipline:
-        # return jsonify(discipline.to_dict())
-    test_dict = {
-        'name': "nome",
-        'code': "code",
-        'workload': 10,
-        'is_theoretical': True,
-        'is_intensive': False
-    }
-    # return jsonify({'error': 'Discipline not found'}), 404
-    return jsonify(test_dict)
-
-
-
-
-
-
-
-
-
-
 @crud_bp.route('/crud/add-teacher', methods=['GET', 'POST'])
 @login_required
 def add_teacher():
@@ -174,81 +117,6 @@ def add_teacher():
     return render_template('add-teacher.html')
 
 
-@crud_bp.route('/crud/add-teacher-discipline', methods=['GET', 'POST'])
-@login_required
-def add_teacher_to_discipline():
-    discipline_teacher = [
-        [f"{d.code}-{d.name} -- {d.teachers_names}: ", ""] for d in Discipline.query.all()]
-    teachers = sorted([t.name for t in Teacher.query.all()])
-
-    return render_template('crud-moduli.html',
-                            pageName='Add Teacher to Discipline',
-                            moduli=discipline_teacher,
-                            options=teachers,
-                            select_name='teacher',
-                            request_path='add-teacher-discipline')
-
-
-@crud_bp.route('/crud/rm-teacher-discipline', methods=['GET', 'POST'])
-@login_required
-def remove_teacher_from_discipline():
-    discipline_teacher = [
-        [f"{d.code}-{d.name} -- {d.teachers_names}: ", ""] for d in Discipline.query.all()]
-    teachers = sorted([t.name for t in Teacher.query.all()])
-
-    return render_template('crud-moduli.html',
-                            pageName='Remove Teacher from Discipline',
-                            moduli=discipline_teacher,
-                            options=teachers,
-                            select_name='teacher',
-                            request_path='rm-teacher-discipline')
-
-
-@crud_bp.route('/crud/add-teacher-moduli', methods=['GET', 'POST'])
-@login_required
-def add_teacher_to_modulus():
-    moduli_teacher = [[f"{m.discipline.code}-{m.discipline.name} -- {m.code} -- {m.teachers_names}: ", ""] for m in Modulus.query.all()]
-    teachers = sorted([t.name for t in Teacher.query.all()])
-
-    return render_template('crud-moduli.html',
-                            pageName='Add Teacher to Moduli',
-                            moduli=moduli_teacher,
-                            options=teachers,
-                            select_name='teacher',
-                            request_path='add-teacher-moduli')
-
-
-@crud_bp.route('/crud/rm-teacher-moduli', methods=['GET', 'POST'])
-@login_required
-def remove_teacher_from_modulus():
-    moduli_teacher = [[f"{m.discipline.code}-{m.discipline.name} -- {m.code} -- {m.teachers_names}: ", ""] for m in Modulus.query.all()]
-    teachers = sorted([t.name for t in Teacher.query.all()])
-
-    return render_template('crud-moduli.html',
-                            pageName='Remove Teacher from Moduli',
-                            moduli=moduli_teacher,
-                            options=teachers,
-                            select_name='teacher',
-                            request_path='rm-teacher-moduli')
-
-
-# Adding a classroom to modulus
-@crud_bp.route('/crud/classroom', methods=['GET', 'POST'])
-@login_required
-def add_classroom_to_modulus():
-    discipline_classroom = [[f"""{d.code} ~ {d.name} -- {"Externa" if d.is_theoretical else "Interna"}: """,
-                             d.mandatory_room.name] for d in Discipline.query.all()]
-    
-    discipline_classroom = sorted(discipline_classroom, key=lambda x: x[1])
-    classrooms = [c.name for c in Classroom.query.all()]
-
-    return render_template('crud-moduli.html',
-                            pageName='Add Classroom to Moduli',
-                            moduli=discipline_classroom,
-                            options=classrooms,
-                            select_name='classroom',
-                            request_path='classroom')
-
 @crud_bp.route('/crud/add-classroom/', methods=['GET', 'POST'])
 @login_required
 def add_classroom():
@@ -268,23 +136,3 @@ def add_classroom():
         return render_template('add-classroom.html')
 
     return render_template('add-classroom.html')
-
-
-@crud_bp.route('/crud/update', methods=['POST'])
-@login_required
-def crud_update():
-    request_path = request.form.get('request_path')
-    data = request.form
-    if request_path in ['add-teacher-discipline', 'rm-teacher-discipline']:
-        flag = funcs.resolve_teacher_to_discipline(data)
-    elif request_path in ['add-teacher-moduli', 'rm-teacher-moduli']:
-        flag = funcs.resolve_teacher_to_modulus(data)
-    elif request_path == 'classroom':
-        flag = funcs.resolve_classroom_to_modulus(data)
-    else:
-        return 'Invalid request path.'
-    
-    if flag:
-        flash(flag, 'danger')
-
-    return redirect(request_path)
