@@ -40,9 +40,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const disciplineTableBody = document.querySelector('#discipline-summary-table tbody');
     const applyChangesButton = document.getElementById('apply-changes');
     
-    const discCodeSpan = document.getElementById('disc-code');
-    const discNameInput = document.getElementById('disc-name');
-    const discAbbreviationInput = document.getElementById('disc-abbreviation');
+    // const discCodeSpan = document.getElementById('disc-code');
+    // const discNameInput = document.getElementById('disc-name');
+    // const discAbbreviationInput = document.getElementById('disc-abbreviation');
    
     disciplineDropdown.addEventListener('change', function() {
         const selectedDiscipline = disciplineDropdown.value;
@@ -118,39 +118,57 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Handle apply changes button click
-    applyChangesButton.addEventListener('click', function() {
-        const updatedModules = [];
-        const rows = modulesGrid.querySelectorAll(':scope > input, :scope > button');
+applyChangesButton.addEventListener('click', function() {
+    const updatedInfo = {
+        disciplineSummary: {},
+        modules: []
+    };
 
-        for (let i = 0; i < rows.length; i += 6) {
-            updatedModules.push({
-                code: rows[i].value,
-                name: rows[i + 1].value,
-                teachers: [
-                    rows[i + 2].value,
-                    rows[i + 3].value,
-                    rows[i + 4].value,
-                ]
-            });
-        }
+    // Collect discipline summary information
+    const summaryRow = disciplineTableBody.querySelector('tr');
+    if (summaryRow) {
+        const summaryInputs = summaryRow.querySelectorAll('input');
+        updatedInfo.disciplineSummary = {
+            code: summaryRow.children[0].textContent.trim(),
+            name: summaryInputs[0]?.value.trim() || '',
+            abbreviation: summaryInputs[1]?.value.trim() || ''
+        };
+    }
 
-        // Send updated modules to the server
-        fetch('/update_modules', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ modules: updatedModules }),
+    // Collect modules information
+    const moduleRows = modulesTableBody.querySelectorAll('tr');
+    moduleRows.forEach(row => {
+        const moduleData = {
+            code: row.children[0].textContent.trim(),
+            teachers: []
+        };
+
+        // Collect teacher selections
+        const teacherDropdowns = row.querySelectorAll('.teacher-dropdown');
+        teacherDropdowns.forEach(dropdown => {
+            moduleData.teachers.push(dropdown.value.trim());
+        });
+
+        updatedInfo.modules.push(moduleData);
+    });
+
+    // Send updated info to the server
+    fetch('/crud/update_discipline', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedInfo),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to update information');
+            }
+            alert('Alterações aplicadas com sucesso!');
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Failed to update modules');
-                }
-                alert('Alterações aplicadas com sucesso!');
-            })
-            .catch(error => {
-                console.error('Error applying changes:', error);
-            });
+        .catch(error => {
+            console.error('Error applying changes:', error);
+        });
     });
 
     function createTeacherDropdown(selectedTeacherName, teachersTuples, moduleIndex, teacherIndex) {

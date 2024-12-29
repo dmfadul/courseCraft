@@ -64,6 +64,26 @@ def get_discipline_info(discipline_id):
     return jsonify(data_dict)
 
 
+@crud_bp.route('/crud/update_discipline', methods=['POST'])
+@login_required
+def update_discipline():
+    data = request.get_json()
+    print("data", data.get("modules"))
+
+    return jsonify({'response': 'ok'})
+
+
+
+
+
+
+
+
+
+
+
+
+
 @crud_bp.route('/crud/add-discipline/', methods=['GET', 'POST'])
 @login_required
 def add_discipline(): 
