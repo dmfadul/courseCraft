@@ -67,12 +67,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 const tCode = data.modules[0].disc_code;
                 const name = data.modules[0].name;
                 const AbbrName = data.modules[0].abbrName;
+                const workLoad = data.discipline.workload;
                 const selectedRoom = data.discipline.mandatory_room;
 
                 summaryRow.innerHTML = `
                     <td>${tCode}</td>
-                    <td><input type="text" value="${name}" class="teacher" data-teacher="1"></td>
-                    <td><input type="text" value="${AbbrName}" class="teacher" data-teacher="2"></td>
+                    <td><input type="text" value="${name}" class="name"></td>
+                    <td><input type="text" value="${AbbrName}" class="abbrName"></td>
+                    <td><input type="number" value="${workLoad}" class="workload" style="width: 50px;"></td>
                     <td>${createRoomDropdown(selectedRoom, data.classrooms)}</td>
                     <td></td>
                     <td></td>
@@ -126,7 +128,8 @@ applyChangesButton.addEventListener('click', function() {
         updatedInfo.disciplineSummary = {
             code: summaryRow.children[0].textContent.trim(),
             name: summaryInputs[0]?.value.trim() || '',
-            abbreviation: summaryInputs[1]?.value.trim() || ''
+            abbreviation: summaryInputs[1]?.value.trim() || '',
+            workLoad: summaryInputs[2]?.value.trim() || '',
         };
     }
 

@@ -83,8 +83,13 @@ def update_discipline():
     
     new_abbr = data['disciplineSummary']['abbreviation']
     new_name = data['disciplineSummary']['name']
+    new_workload = data['disciplineSummary']['workLoad']
+    
     if not discipline.name == new_name or not discipline.name_abbr == new_abbr:
         discipline.change_name(new_name, new_abbr)
+
+    if not discipline.workload == new_workload:
+        discipline.change_workload(new_workload)
 
     mod_data = data['modules']
     for datum in mod_data:
