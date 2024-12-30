@@ -166,8 +166,6 @@ class Modulus(db.Model):
         db.session.commit()
         return f"{teacher.name} added to {self.code}."
 
-            
-        
     def remove_teacher(self, teacher_name):
         from .teacher import Teacher
         teacher = Teacher.query.filter_by(name=teacher_name).first()
@@ -183,6 +181,16 @@ class Modulus(db.Model):
         db.session.commit()
         return f"Teachers removed from {self.code}."
     
+    def replace_teachers(self, new_teachers):
+        for teacher in new_teachers:
+            if teacher not in self.discipline.teachers:
+                self.discipline.add_teacher(teacher.name)
+                print(f"Teacher {teacher.name} added to {self.discipline.code}.")
+
+        self.teachers = new_teachers
+        db.session.commit()
+        return f"Teachers replaced in {self.code}."
+
     def set_main_classroom(self, classroom_name=None):
         import random
         from .classroom import Classroom

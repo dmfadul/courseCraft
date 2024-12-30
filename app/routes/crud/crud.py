@@ -74,7 +74,40 @@ def get_discipline_info(discipline_id):
 @login_required
 def update_discipline():
     data = request.get_json()
-    print("data", data)
+    
+    disc_code = data['disciplineSummary']['code']
+    discipline = Discipline.query.filter_by(code=disc_code).first()
+
+    if not discipline:
+        return jsonify({'error': 'Discipline not found'}), 404
+    
+    new_abbr = data['disciplineSummary']['abbreviation']
+    new_name = data['disciplineSummary']['name']
+    if not discipline.name == new_name or not discipline.name_abbr == new_abbr:
+        discipline.change_name(new_name, new_abbr)
+
+    mod_data = data['modules']
+    for datum in mod_data:
+        mod_code = datum['code']
+        moduli = [m for m in discipline.moduli if m.code == mod_code]
+
+        if not len(moduli) == 1:
+            return jsonify({'error': 'Module not found'}), 404
+        
+        modulus = moduli[0]
+
+        old_teacher_ids = sorted([t.id for t in modulus.teachers])
+        new_teachers_ids = sorted([int(t) for t in datum['teachers'] if t != '0'])
+
+        if not old_teacher_ids == new_teachers_ids:
+            new_teachers = []
+            for teacher_id in new_teachers_ids:
+                teacher = Teacher.query.filter_by(id=teacher_id).first()
+                if not teacher:
+                    return jsonify({'error': 'Teacher not found'}), 404
+                new_teachers.append(teacher)
+
+            modulus.replace_teachers(new_teachers)
 
     return jsonify({'response': 'ok'})
 
