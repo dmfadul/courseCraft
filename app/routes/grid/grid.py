@@ -166,9 +166,10 @@ def print_teachergrid(teacherName, month):
 
     pdf = HTML(string=rendered).write_pdf(stylesheets=[css], presentational_hints=True)
 
+    file_name = f"{teacherName}_Mês_{month}.pdf"
     response = make_response(pdf)
     response.headers['Content-Type'] = 'application/pdf'
-    response.headers['Content-Disposition'] = 'attachment; filename="print.pdf"'
+    response.headers['Content-Disposition'] = 'attachment; filename={}'.format(file_name)
 
     return response
 
@@ -211,9 +212,10 @@ def print_grid(classCode, week):
 
     pdf = HTML(string=rendered).write_pdf(stylesheets=[css], presentational_hints=True)
 
+    file_name = f"{classCode}_Semana_{week}.pdf"
     response = make_response(pdf)
     response.headers['Content-Type'] = 'application/pdf'
-    response.headers['Content-Disposition'] = 'attachment; filename="print.pdf"'
+    response.headers['Content-Disposition'] = 'attachment; filename={}'.format(file_name)
 
     return response
 
