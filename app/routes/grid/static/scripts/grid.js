@@ -37,8 +37,19 @@ function setPrintButtonUrl() {
     };
 }
 
+function setPrintAllButtonUrl() {
+    const { gridType, classCode, week } = getClassCodeAndWeekFromUrl();
+    const printButton = document.getElementById('printAllButton');
+    printButton.onclick = function() {
+        console.log(gridType, classCode)
+        window.location.href = `/print_all/${gridType}/${classCode}`;
+    };
+}
+
+
 // Set the print button URL when the page loads
 window.onload = setPrintButtonUrl;
+window.onload = setPrintAllButtonUrl;
 
 document.addEventListener("keydown", function(event) {
     if (event.key === "ArrowLeft") {

@@ -5,6 +5,8 @@ from app.models import Cohort, Classroom, Teacher
 import app.global_vars as global_vars
 from flask_weasyprint import HTML, CSS
 from flask_login import login_required
+import zipfile
+import io
 import os
 
 grid_bp = Blueprint(
@@ -216,6 +218,98 @@ def print_grid(classCode, week):
     response = make_response(pdf)
     response.headers['Content-Type'] = 'application/pdf'
     response.headers['Content-Disposition'] = 'attachment; filename={}'.format(file_name)
+
+    return response
+
+
+@grid_bp.route('/print_all/grid/<classCode>', methods=['GET'])
+@login_required
+def print_grid_zip(classCode):
+    startWeek = 1
+    endWeek = global_vars.NUM_WEEKS
+
+    cohort = Cohort.query.filter_by(code=classCode).first()
+    if not cohort:
+        abort(404, description="Turma não encontrada.")
+
+    zip_buffer = io.BytesIO()  # In-memory ZIP file
+
+    with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+        for week in range(startWeek, endWeek + 1):
+            if week < 1 or week > global_vars.NUM_WEEKS:
+                continue
+
+            # Generate the grid for each week
+            grid = funcs.gen_lectures_grid(classCode, week)
+
+            if global_vars.ALTERNATING_WEEKS:
+                parity = (week % 2 == 0) == cohort.theoretical_week_parity
+                class_type = global_vars.TYPES_OF_CLASSES[parity]
+                class_location = global_vars.LOCAL_OF_CLASSES[parity]
+            else:
+                parity = None
+                class_type = "TEÓRICAS E PRÁTICAS"
+                class_location = "ESPC"
+
+            message = f"{classCode} - AULAS {class_type} NA {class_location} - {week}ª SEMANA"
+            rendered = render_template("print_grid.html",
+                                        grid=grid,
+                                        message=message,)
+
+            css_path = os.path.join(current_app.static_folder, 'css/colors.css')
+            css = CSS(filename=css_path)
+
+            pdf = HTML(string=rendered).write_pdf(stylesheets=[css], presentational_hints=True)
+
+            file_name = f"{classCode}_Semana_{week}.pdf"
+            zip_file.writestr(file_name, pdf)
+
+    zip_buffer.seek(0)
+
+    zip_file_name = f"{classCode}_Semanas_{startWeek}_a_{endWeek}.zip"
+    response = make_response(zip_buffer.read())
+    response.headers['Content-Type'] = 'application/zip'
+    response.headers['Content-Disposition'] = f'attachment; filename={zip_file_name}'
+
+    return response
+
+
+@grid_bp.route('/print_all/teachergrid/<teacherName>', methods=['GET'])
+@login_required
+def print_all(teacherName):
+    startMonth = global_vars.MONTHS[0]
+    endMonth = global_vars.MONTHS[-1]
+
+    teacher = Teacher.query.filter_by(name=teacherName).first()
+    if not teacher:
+        abort(404, description="Professor não encontrado.")
+
+    zip_buffer = io.BytesIO()  # In-memory ZIP file
+
+    with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+        for month in range(startMonth, endMonth + 1):
+            # Generate the grid for each month
+            grid = funcs.gen_teacher_schedule(teacherName, month)
+            
+            message = f"{teacherName} - {month}º MÊS"
+            rendered = render_template("print_grid.html",
+                                        grid=grid,
+                                        message=message,)
+
+            css_path = os.path.join(current_app.static_folder, 'css/colors.css')
+            css = CSS(filename=css_path)
+
+            pdf = HTML(string=rendered).write_pdf(stylesheets=[css], presentational_hints=True)
+
+            file_name = f"{teacherName}_Mês_{month}.pdf"
+            zip_file.writestr(file_name, pdf)
+
+    zip_buffer.seek(0)
+
+    zip_file_name = f"{teacherName}_Meses_{startMonth}_a_{endMonth}.zip"
+    response = make_response(zip_buffer.read())
+    response.headers['Content-Type'] = 'application/zip'
+    response.headers['Content-Disposition'] = f'attachment; filename={zip_file_name}'
 
     return response
 
