@@ -73,6 +73,10 @@ def get_discipline_info(discipline_id):
 @crud_bp.route('/crud/update_discipline', methods=['POST'])
 @login_required
 def update_discipline():
+    from app.routes.grid.validation import check_conflicting_classrooms
+    from app.routes.grid.validation import check_teachers_availability
+    from app.routes.grid.validation import check_for_intensive_classes
+
     data = request.get_json()
     
     disc_code = data['disciplineSummary']['code']
@@ -101,10 +105,11 @@ def update_discipline():
         
         modulus = moduli[0]
 
-        old_teacher_ids = sorted([t.id for t in modulus.teachers])
+        old_teachers = modulus.teachers.copy()
+        old_teachers_ids = sorted([t.id for t in old_teachers])
         new_teachers_ids = sorted([int(t) for t in datum['teachers'] if t != '0'])
 
-        if not old_teacher_ids == new_teachers_ids:
+        if not old_teachers_ids == new_teachers_ids:
             new_teachers = []
             for teacher_id in new_teachers_ids:
                 teacher = Teacher.query.filter_by(id=teacher_id).first()
@@ -114,6 +119,15 @@ def update_discipline():
 
             modulus.replace_teachers(new_teachers)
 
+        for lec in modulus.lectures:
+            teacher_flag = check_teachers_availability(lec)
+            if teacher_flag:
+                modulus.replace_teachers(old_teachers)
+                return jsonify({
+                    'error': "Um dos professores incluídos tem aulas em conflito com as desta disciplina",
+                    'message': "Um dos professores incluídos tem aulas em conflito com as desta disciplina"  # Include the detailed flag message
+                }), 400
+            
     return jsonify({'response': 'ok'})
 
 

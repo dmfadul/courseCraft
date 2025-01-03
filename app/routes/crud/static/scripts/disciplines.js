@@ -149,8 +149,6 @@ applyChangesButton.addEventListener('click', function() {
 
         updatedInfo.modules.push(moduleData);
     });
-
-    // Send updated info to the server
     fetch('/crud/update_discipline', {
         method: 'POST',
         headers: {
@@ -160,12 +158,32 @@ applyChangesButton.addEventListener('click', function() {
     })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Failed to update information');
+                return response.json().then(errorData => {
+                    throw errorData; // Pass the error response as an object
+                });
             }
             alert('Alterações aplicadas com sucesso!');
         })
         .catch(error => {
-            console.error('Error applying changes:', error);
+            console.error('Error updating discipline info:', error);
+            
+            // Find the flash messages container
+            const flashMessagesContainer = document.getElementById('flash-messages');
+            
+            if (flashMessagesContainer) {
+                // Create a new alert div
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-danger'; // Bootstrap's danger class for error styling
+                alertDiv.textContent = error.message || 'Unknown error occurred';
+    
+                // Append the alert to the container
+                flashMessagesContainer.appendChild(alertDiv);
+    
+                // Optional: Auto-remove the flash message after a few seconds
+                setTimeout(() => {
+                    alertDiv.remove();
+                }, 5000);
+            }
         });
     });
 

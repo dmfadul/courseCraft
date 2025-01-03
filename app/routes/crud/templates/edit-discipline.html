@@ -5,7 +5,19 @@
 {% endblock %}
 
 {% block mainContent %}
+<!-- Display Flash Messages -->
 <div class="dashboard" style="display: flex; flex-direction: column; gap: 20px;">
+    <div id="flash-messages" class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message | safe}}
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
     <div class="section" id="search-discipline-section">
         <h2>Editar Disciplinas</h2>
         <div>
