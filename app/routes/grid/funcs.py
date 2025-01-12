@@ -1,6 +1,6 @@
 from flask import flash
 from datetime import datetime, timedelta
-from app.models import Cohort, Lecture, Classroom, Teacher
+from app.models import Cohort, Lecture, Classroom, Teacher, Modulus
 import app.global_vars as global_vars
 
 
@@ -169,36 +169,50 @@ def gen_matrix(parity, week_number):
 def gen_lectures_grid(class_code, week_number):
     grid = gen_empty_grid(week_number)
 
-    for i in range(len(grid)):
-        for j in range(len(grid[i])):
-            if j == 0 or i in [0, 1]:
-                continue
-            date = datetime.strptime(f"{grid[0][j][0]}/{global_vars.SCHOOL_YEAR}", "%d/%m/%Y").date()
+    # Avoid loading unnecessary data
+    week_dates = [
+        datetime.strptime(f"{day}/{global_vars.SCHOOL_YEAR}", "%d/%m/%Y").date()
+        for day, _ in grid[0][1:]
+    ]
 
+    lectures = Lecture.query.filter(
+        Lecture.date.in_(week_dates)
+    ).join(Lecture.modulus).filter(
+        Modulus.cohort.has(code=class_code)
+    ).all()
+
+    lectures_by_date_position = {
+        (lecture.date, lecture.grid_position): lecture for lecture in lectures
+    }
+
+    for i in range(len(grid)):
+        for j in range(1, len(grid[i])):
+            if i in [0, 1]:
+                continue
+
+            date = datetime.strptime(f"{grid[0][j][0]}/{global_vars.SCHOOL_YEAR}", "%d/%m/%Y").date()
             grid_position = global_vars.HOURS_DICT.get(grid[i][0][0])
-            lectures = Lecture.query.filter_by(date=date, grid_position=grid_position).all()
-            lectures = [lecture for lecture in lectures if lecture.modulus.cohort.code == class_code]
-            
-            if lectures:
-                lecture = lectures[0]
+
+            lecture = lectures_by_date_position.get((date, grid_position))
+            if lecture:
                 disc_abbr = lecture.modulus.discipline.name_abbr
                 disc_code = lecture.modulus.discipline.code
                 teacher_name = lecture.modulus.teachers_names
                 class_number = Lecture.count(lecture.modulus_id, lecture.date, lecture.grid_position)
                 workload = lecture.modulus.discipline.workload
-                classroom = global_vars.LOCAL_OF_CLASSES[0] if lecture.classroom.name == "Externa" else lecture.classroom.name
+                classroom = (
+                    global_vars.LOCAL_OF_CLASSES[0]
+                    if lecture.classroom.name == "Externa"
+                    else lecture.classroom.name
+                )
 
-                cell_text = f"""{str(disc_code)}-{disc_abbr}
+                cell_text = f"""{disc_code}-{disc_abbr}
                                 {teacher_name}
                                 {class_number}/{workload}
                                 {classroom}
                             """
 
-                if lecture.joined_cohorts:
-                    cell_formatting = [disc_code.replace(".", "-"), "joined"]
-                else:
-                    cell_formatting = disc_code.replace(".", "-")
-
+                cell_formatting = [disc_code.replace(".", "-"), "joined"] if lecture.joined_cohorts else disc_code.replace(".", "-")
                 grid[i][j] = [cell_text, cell_formatting]
 
     return grid

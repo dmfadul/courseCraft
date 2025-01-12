@@ -232,45 +232,40 @@ def print_grid_zip(classCode):
     if not cohort:
         abort(404, description="Turma não encontrada.")
 
-    zip_buffer = io.BytesIO()  # In-memory ZIP file
+    def generate_pdf_zip():
+        zip_buffer = io.BytesIO()  # In-memory ZIP file
+        with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+            for week in range(startWeek, endWeek + 1):
+                if week < 1 or week > global_vars.NUM_WEEKS:
+                    continue
+                
+                grid = funcs.gen_lectures_grid(classCode, week)
+    
+                if global_vars.ALTERNATING_WEEKS:
+                    parity = (week % 2 == 0) == cohort.theoretical_week_parity
+                    class_type = global_vars.TYPES_OF_CLASSES[parity]
+                    class_location = global_vars.LOCAL_OF_CLASSES[parity]
+                else:
+                    class_type = "TEÓRICAS E PRÁTICAS"
+                    class_location = "ESPC"
+    
+                message = f"{classCode} - AULAS {class_type} NA {class_location} - {week}ª SEMANA"
+                rendered = render_template("print_grid.html", grid=grid, message=message)
+    
+                css_path = os.path.join(current_app.static_folder, 'css/colors.css')
+                css = CSS(filename=css_path)
+    
+                pdf = HTML(string=rendered).write_pdf(stylesheets=[css], presentational_hints=True)
+    
+                file_name = f"{classCode}_Semana_{week}.pdf"
+                zip_file.writestr(file_name, pdf)
+    
+        zip_buffer.seek(0)  # Move to the beginning of the buffer
+        return zip_buffer.read()
 
-    with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
-        for week in range(startWeek, endWeek + 1):
-            if week < 1 or week > global_vars.NUM_WEEKS:
-                continue
-
-            # Generate the grid for each week
-            grid = funcs.gen_lectures_grid(classCode, week)
-
-            if global_vars.ALTERNATING_WEEKS:
-                parity = (week % 2 == 0) == cohort.theoretical_week_parity
-                class_type = global_vars.TYPES_OF_CLASSES[parity]
-                class_location = global_vars.LOCAL_OF_CLASSES[parity]
-            else:
-                parity = None
-                class_type = "TEÓRICAS E PRÁTICAS"
-                class_location = "ESPC"
-
-            message = f"{classCode} - AULAS {class_type} NA {class_location} - {week}ª SEMANA"
-            rendered = render_template("print_grid.html",
-                                        grid=grid,
-                                        message=message,)
-
-            css_path = os.path.join(current_app.static_folder, 'css/colors.css')
-            css = CSS(filename=css_path)
-
-            pdf = HTML(string=rendered).write_pdf(stylesheets=[css], presentational_hints=True)
-
-            file_name = f"{classCode}_Semana_{week}.pdf"
-            zip_file.writestr(file_name, pdf)
-
-    zip_buffer.seek(0)
-
-    zip_file_name = f"{classCode}_Semanas_{startWeek}_a_{endWeek}.zip"
-    response = make_response(zip_buffer.read())
+    response = make_response(generate_pdf_zip())
     response.headers['Content-Type'] = 'application/zip'
-    response.headers['Content-Disposition'] = f'attachment; filename={zip_file_name}'
-
+    response.headers['Content-Disposition'] = f'attachment; filename={classCode}_Semanas_{startWeek}_a_{endWeek}.zip'
     return response
 
 
