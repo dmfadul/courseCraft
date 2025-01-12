@@ -30,6 +30,7 @@ function getClassCodeAndWeekFromUrl() {
 
 // Function to set the print button URL
 function setPrintButtonUrl() {
+    console.log("ok2");
     const { gridType, classCode, week } = getClassCodeAndWeekFromUrl();
     const printButton = document.getElementById('printButton');
     printButton.onclick = function() {
@@ -39,17 +40,19 @@ function setPrintButtonUrl() {
 
 function setPrintAllButtonUrl() {
     const { gridType, classCode, week } = getClassCodeAndWeekFromUrl();
-    const printButton = document.getElementById('printAllButton');
-    printButton.onclick = function() {
-        console.log(gridType, classCode)
+    const printAllButton = document.getElementById('printAllButton');
+    printAllButton.onclick = function() {
         window.location.href = `/print_all/${gridType}/${classCode}`;
     };
 }
 
 
 // Set the print button URL when the page loads
-window.onload = setPrintButtonUrl;
-window.onload = setPrintAllButtonUrl;
+window.onload = function() {
+    setPrintButtonUrl();
+    setPrintAllButtonUrl();
+};
+
 
 document.addEventListener("keydown", function(event) {
     if (event.key === "ArrowLeft") {
