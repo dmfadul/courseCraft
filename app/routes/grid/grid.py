@@ -58,7 +58,8 @@ def grid(classCode, week):
     weeks = [i for i in range(1, global_vars.NUM_WEEKS+1)]
     cohorts = [c.code for c in Cohort.query.all()]
     message = f"{classCode} - AULAS {class_type} NA {class_location} - {week}ª SEMANA"
-    classroom_list = ["-"] + [c.name for c in Classroom.query.all() if c.code not in ['0', '-1']]
+    classrooms = sorted(Classroom.query.all(), key=lambda x: x.name)
+    classroom_list = ["-"] + [c.name for c in classrooms if c.code not in ['0', '-1']]
 
     return render_template("grid.html",
                            grid=grid,
