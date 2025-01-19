@@ -58,7 +58,8 @@ def grid(classCode, week):
     weeks = [i for i in range(1, global_vars.NUM_WEEKS+1)]
     cohorts = [c.code for c in Cohort.query.all()]
     message = f"{classCode} - AULAS {class_type} NA {class_location} - {week}ª SEMANA"
-    classroom_list = ["-"] + [c.name for c in Classroom.query.all() if c.code not in ['0', '-1']]
+    classrooms = sorted(Classroom.query.all(), key=lambda x: x.name)
+    classroom_list = ["-"] + [c.name for c in classrooms if c.code not in ['0', '-1']]
 
     return render_template("grid.html",
                            grid=grid,
@@ -108,7 +109,10 @@ def teacher_schedule(teacherName, month):
 @login_required
 def classroomgrid_redirect():
     
-    first_croom_name = [c.name for c in Classroom.query.all() if not (c.code == "-1" or c.code == "0")][0]
+    classrooms = sorted(Classroom.query.all(), key=lambda x: x.name)
+    first_croom_name = [c.name for c in classrooms if not (c.code == "-1" or c.code == "0")]
+    print(first_croom_name)
+    first_croom_name=first_croom_name[0]
     return redirect(url_for('grid.classroom_schedule', classroomName=first_croom_name, week=1))
 
 
@@ -126,7 +130,8 @@ def classroom_schedule(classroomName, week):
     grid = funcs.gen_classroom_schedule(classroomName, week)
     
     message = f"{classroomName} -- {week}ª SEMANA"
-    classrooms = [c.name for c in Classroom.query.all() if c.code not in ['0', '-1']]
+    classrooms = sorted(Classroom.query.all(), key=lambda x: x.name)
+    classrooms = [c.name for c in classrooms if c.code not in ['0', '-1']]
     weeks = [i for i in range(1, global_vars.NUM_WEEKS+1)]
 
     return render_template("grid.html",
