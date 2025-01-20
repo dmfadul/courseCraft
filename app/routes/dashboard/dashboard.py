@@ -1,5 +1,5 @@
-from flask import Blueprint, redirect, url_for, render_template
-from flask_login import login_required
+from flask import Blueprint, redirect, url_for, render_template, flash
+from flask_login import login_required, current_user
 
 dashboard_bp = Blueprint(
                         'dashboard',
@@ -147,6 +147,21 @@ def remove_teacher_discipline(discipline_code, teacher_name):
     return f"{flag}"
 
 
+@dashboard_bp.route('/add-user/<username>/<password>')
+@login_required
+def add_user(username, password):
+    from app.models import User
+    
+    if not current_user.is_admin:
+        flash("You don't have permission to create new users.")
+        return redirect(url_for('dashboard.dashboard'))
+    
+    User.add_entry(username, password)
+    
+    flash(f"User {username} created.")
+    return redirect(url_for('dashboard.dashboard'))
+
+
 @dashboard_bp.route('/rm-teacher-mod/<discipline_code>/<cohort_code>/<teacher_name>')
 @login_required
 def remove_teacher_modulus(discipline_code, cohort_code, teacher_name):
@@ -171,3 +186,5 @@ def remove_teacher_modulus(discipline_code, cohort_code, teacher_name):
     flag = modulus.remove_teacher(teacher.name)
 
     return f"{flag}"
+
+
