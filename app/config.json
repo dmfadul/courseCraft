@@ -15,7 +15,7 @@
         },
         "count": 3,
         "threshold": 3,
-        "user_breach_alert": false,
+        "block": false,
         "settings": {
             "theme": "dark",
             "language": "en",

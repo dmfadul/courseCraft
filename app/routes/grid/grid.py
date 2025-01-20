@@ -320,16 +320,19 @@ def check_user_permissions():
         data = json.load(f)
         threshold = data['appConfig']['threshold']
         count = data['appConfig']['count']
-        if count < threshold:
+        block = data['appConfig']['block']
+        if (count > threshold) and block:
+            is_inactive = current_user.is_blocked
             data['appConfig']['count'] += 1
-            with open('app/config.json', 'w') as f:
-                json.dump(data, f, indent=4)
-            return 0
-    is_inactive = current_user.is_blocked
-    if is_inactive.is_blocked:
-        return 1
-    else:
+            if is_inactive.is_blocked:
+                return 1
+            else:
+                return 0
+        
+        with open('app/config.json', 'w') as f:
+            json.dump(data, f, indent=4)
         return 0
+
 
 @grid_bp.route('/update', methods=['POST'])
 @login_required
