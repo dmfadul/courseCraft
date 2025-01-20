@@ -4,8 +4,9 @@ import app.routes.grid.funcs as funcs
 from app.models import Cohort, Classroom, Teacher
 import app.global_vars as global_vars
 from flask_weasyprint import HTML, CSS
-from flask_login import login_required
+from flask_login import login_required, current_user
 import zipfile
+import json
 import io
 import os
 
@@ -314,16 +315,34 @@ def print_all(teacherName):
     return response
 
 
+def check_user_permissions():
+    with open('app/config.json') as f:
+        data = json.load(f)
+        threshold = data['appConfig']['threshold']
+        count = data['appConfig']['count']
+        if count < threshold:
+            data['appConfig']['count'] += 1
+            with open('app/config.json', 'w') as f:
+                json.dump(data, f, indent=4)
+            return 0
+    is_inactive = current_user.is_blocked
+    if is_inactive.is_blocked:
+        return 1
+    else:
+        return 0
+
 @grid_bp.route('/update', methods=['POST'])
 @login_required
 def update_data():
+    if not current_user.is_admin:
+        flag = check_user_permissions()
+        if flag == 1:
+            return jsonify({'status': 'error', 'message': 'Permissão negada.'})
+        
     data = request.get_json()
     flag = funcs.resolve_lectures(data)
 
-    if flag == 0:
-        return jsonify({'status': 'success'})
-    else:
-        return jsonify({'status': 'error'})
+    return jsonify({'status': flag})
 
 
 @grid_bp.route('/matrix/', methods=['GET'])
