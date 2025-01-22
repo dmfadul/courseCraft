@@ -175,6 +175,12 @@ def add_teacher():
     return render_template('add-teacher.html')
 
 
+@crud_bp.route('/crud/add-discipline/', methods=['GET', 'POST'])
+@login_required
+def add_discipline():
+    print('add_discipline')
+    return render_template('add-discipline.html')
+
 @crud_bp.route('/crud/add-classroom/', methods=['GET', 'POST'])
 @login_required
 def add_classroom():
