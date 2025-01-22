@@ -178,8 +178,51 @@ def add_teacher():
 @crud_bp.route('/crud/add-discipline/', methods=['GET', 'POST'])
 @login_required
 def add_discipline():
-    print('add_discipline')
+    if request.method == 'POST':
+        name = request.form['name']
+        abbr = request.form['abbr']
+        code = request.form['code']
+        workload = request.form['workload']
+        cohorts_str = request.form['cohorts']
+
+        code_check = Discipline.query.filter_by(code=code).first()
+        if code_check is not None:
+            flash(f"Code {code} already part of the shabang", 'danger')
+            return redirect(url_for('crud.add_discipline'))
+
+        name_check = Discipline.query.filter_by(name=name).first()
+        if name_check is not None:
+            flash(f"Name {name} already part of the shabang", 'danger')
+            return redirect(url_for('crud.add_discipline'))
+
+        new_disc = Discipline.add_discipline(name=name,
+                                         name_abbr=abbr,
+                                         code=code,
+                                         workload=int(workload),
+                                         is_theoretical=True,
+                                         is_intensive=False)
+        
+        if not isinstance(new_disc, Discipline):
+            flash("an Error has ocurred", 'danger')
+            return redirect(url_for('crud.add_discipline'))
+
+        cohorts_list = cohorts_str.split('+')
+        cohorts = Cohort.query.all()
+        for cohort in cohorts:
+            code = cohort.code
+            code_base = ''.join([l for l in code if not l.isdigit()])
+            if code_base not in cohorts_list:
+                continue
+
+            flag = Modulus.add_modulus(cohort.code, new_disc.code)
+            if isinstance(flag, Modulus):
+                flag.set_main_classroom()
+        
+        flash(f'Discipline {name} added successfully.', 'success')
+        return redirect(url_for('crud.add_discipline'))
+    
     return render_template('add-discipline.html')
+
 
 @crud_bp.route('/crud/add-classroom/', methods=['GET', 'POST'])
 @login_required

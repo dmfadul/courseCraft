@@ -1,17 +1,34 @@
 {% extends "base.html" %}
 {% block mainContent %}
+<!-- Display Flash Messages -->
+<div class="dashboard" style="display: flex; flex-direction: column; gap: 20px;">
+    <div id="flash-messages" class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message | safe}}
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        
 <div class="container mt-5">
     <h2>Add New Teacher</h2>
-    <form action="/crud/add-teacher" method="post">
+    <form action="/crud/add-discipline" method="post">
         <div class="mb-3">
             <label for="name" class="form-label">Nome da Disciplina</label>
             <input type="text" class="form-control" id="name" name="name" required>
             <label for="abbr" class="form-label">Abreviação do Nome</label>
             <input type="text" class="form-control" id="abbr" name="abbr" required>
-            <label for="rg" class="form-label">Código da Disciplina</label>
+            <label for="code" class="form-label">Código da Disciplina</label>
             <input type="text" class="form-control" id="code" name="code" required>
+            <label for="workload" class="form-label">Carga Horária</label>
+            <input type="text" class="form-control" id="workload" name="workload" required>
+            <label for="cohorts" class="form-label">Turmas</label>
+            <input type="text" class="form-control" id="cohorts" name="cohorts" required>
         </div>
-        <button type="submit" class="btn btn-primary">Add Teacher</button>
+        <button type="submit" class="btn btn-primary">Add Discipline</button>
     </form>
 </div>
 {% endblock %}
