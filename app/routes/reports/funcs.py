@@ -1,4 +1,4 @@
-from app.models import Teacher, Modulus, Lecture, Classroom
+from app.models import Teacher, Modulus, Lecture, Classroom, Discipline, Cohort
 import app.global_vars as global_vars
 
 
@@ -41,6 +41,9 @@ def calculate_teachers_workload():
 
     teacher_grid = [[["Professor", "normal"]] + [[m, "normal"] for m in meses_in_course]]
     for teacher in teachers:
+        if len(teacher.lectures) == 0:
+            continue
+
         new_row = [[teacher.name, "name"]]
         for month in global_vars.MONTHS:
             workload = teacher.workload(int(month))
@@ -88,7 +91,7 @@ def check_classes_for_classrooms():
         if modulus.classroom.code == "0":
             grid.append([[f"{modulus.discipline.name} -- {modulus.cohort.code}", "name"]])
 
-    grid.append([["empty", "name"]])
+    grid.append([["Nenhuma Aula sem Sala", "name"]])
 
     return grid
 
@@ -151,6 +154,25 @@ def check_lectures_in_odd_classrooms():
                           Marcada para {lecture.classroom.code} --
                           Deveria ser {supposed_room.name}"""
             grid.append([[message, "name"]])
+
+    return grid
+
+
+
+def list_teachers_by_cohorts():
+    disciplines = Discipline.query.all()
+    disciplines = Discipline.sort_by_code(disciplines)
+
+    grid = []
+    for disc in disciplines:
+        if '0' in disc.code:
+            continue
+        
+        grid.append([[f"{disc.code} - {disc.name.upper()}:", "name"]])
+        for mod in disc.moduli:
+            teachers_names = sorted([t.name for t in mod.teachers])
+            teachers_names = '' if not teachers_names else ', '.join(teachers_names)
+            grid.append([[f"{mod.cohort.code} - {teachers_names}", "name"]])
 
     return grid
 
