@@ -191,8 +191,8 @@ def check_for_classroom_conflicts():
         for line in flag:
             grid.append([[f"{line}", "name"]])
 
-        if not grid:
-            return [[["no conflicts found", "name"]]]
+    if not grid:
+        return [[["no conflicts found", "name"]]]
 
     return grid
 
