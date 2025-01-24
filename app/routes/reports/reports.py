@@ -14,6 +14,7 @@ REPORTS_DICT = {
     'Carga Horária dos Professores': funcs.calculate_teachers_workload,
     'Checar Matérias sem Professores': funcs.check_classes_for_teachers,
     'Checar Aulas sem Sala': funcs.check_classes_for_classrooms,
+    'Checar Conflitos de Sala': funcs.check_for_classroom_conflicts,
     'Checar Disciplinas Físicas': funcs.check_proximity_of_intensive_moduli,
     'Checar Prerequisitos': funcs.check_prerequisites,
     'Checar Aulas Fora de Salas Obrigatórias': funcs.check_lectures_in_odd_classrooms,

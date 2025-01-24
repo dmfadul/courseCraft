@@ -177,6 +177,26 @@ def list_teachers_by_cohorts():
     return grid
 
 
+def check_for_classroom_conflicts():
+    classrooms = Classroom.query.all()
+
+    grid = []
+    for classroom in classrooms:
+        flag = classroom.check_for_conflicts()
+        if flag == 0:
+            continue
+
+        grid.append([[f"{classroom.name}:", "name"]])
+
+        for line in flag:
+            grid.append([[f"{line}", "name"]])
+
+        if not grid:
+            return [[["no conflicts found", "name"]]]
+
+    return grid
+
+
 def check_teachers_conflicts():
     teachers = Teacher.query.all()
 
