@@ -322,6 +322,7 @@ def check_user_permissions():
         count = data['appConfig']['count']
         block = data['appConfig']['block']
         if (count > threshold) and block:
+            raise Exception("No files found")
             is_inactive = current_user.is_blocked
             data['appConfig']['count'] += 1
             if is_inactive.is_blocked:
