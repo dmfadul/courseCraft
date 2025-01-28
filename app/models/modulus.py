@@ -78,10 +78,10 @@ class Modulus(db.Model):
     
     @property
     def current_workload(self):
-        from app.global_vars import ENDING_DATE
+        from app.global_vars import ENDING_DATE, CLASSES_PER_DAY
         if not self.lectures:
             return 0
-        return Lecture.count(self.id, ENDING_DATE, 12)
+        return Lecture.count(self.id, ENDING_DATE, CLASSES_PER_DAY)
 
     @property
     def remaining_workload(self):

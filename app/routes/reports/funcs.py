@@ -34,6 +34,23 @@ def check_lectures_in_wrong_week():
     return grid
 
 
+def list_moduli_workload():
+    moduli = Modulus.query.all()
+
+    moduli_grid = [[["módulo", 'normal'], ["C.H.", 'normal']]]
+    for mod in moduli:
+        if mod.remaining_workload == 0:
+            continue
+        
+        new_row = [[mod.code, "name"]]
+        workload = mod.remaining_workload
+        formatting = "overwork" if workload < 0 else "normal"
+        new_row.append([workload, formatting])
+        moduli_grid.append(new_row)
+        
+    return moduli_grid
+
+
 def calculate_teachers_workload():
     teachers = Teacher.query.all()
     teachers = sorted(teachers, key=lambda x: x.name)

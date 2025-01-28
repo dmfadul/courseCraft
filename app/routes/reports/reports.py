@@ -21,6 +21,7 @@ REPORTS_DICT = {
     'Checar Aulas na Semana Errada': funcs.check_lectures_in_wrong_week,
     'Checar Conflitos de Professores': funcs.check_teachers_conflicts,
     'Listar Professores Por Turma': funcs.list_teachers_by_cohorts,
+    'Listar Carga Horária Faltante': funcs.list_moduli_workload,
     }
 
 
