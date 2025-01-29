@@ -42,12 +42,15 @@ def list_moduli_workload():
         if mod.remaining_workload == 0:
             continue
         
-        new_row = [[mod.code, "name"]]
+        name = mod.discipline.name
+        code = mod.discipline.code
+        cohort_code = mod.cohort.code
+        new_row = [[f"{code} - {name} - {cohort_code}", "name"]]
         workload = mod.remaining_workload
         formatting = "overwork" if workload < 0 else "normal"
         new_row.append([workload, formatting])
         moduli_grid.append(new_row)
-        
+
     return moduli_grid
 
 
