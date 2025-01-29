@@ -20,6 +20,107 @@ def crud():
     return redirect(url_for('crud.add_teacher_to_modulus'))
 
 
+@crud_bp.route('/crud/add-teacher', methods=['GET', 'POST'])
+@login_required
+def add_teacher():
+    if request.method == 'POST':
+        name = request.form['name']
+        abbr = request.form['abbr']
+        rg = request.form['rg']
+        flag = Teacher.add_teacher(name=name, abbr_name=abbr, rg=rg)
+        if flag == 1:
+            flash(f"The name {name} already part of the shabang", 'danger')
+        elif flag == 2:
+            flash(f"RG {rg} already part of the shabang", 'danger')
+        else:
+            flash(f'Teacher {name} added successfully.', 'success')
+
+        return render_template('add-teacher.html')
+
+    return render_template('add-teacher.html')
+
+
+@crud_bp.route('/crud/add-discipline/', methods=['GET', 'POST'])
+@login_required
+def add_discipline():
+    if request.method == 'POST':
+        name = request.form['name']
+        abbr = request.form['abbr']
+        code = request.form['code']
+        workload = request.form['workload']
+        cohorts_str = request.form['cohorts']
+
+        code_check = Discipline.query.filter_by(code=code).first()
+        if code_check is not None:
+            flash(f"Code {code} already part of the shabang", 'danger')
+            return redirect(url_for('crud.add_discipline'))
+
+        name_check = Discipline.query.filter_by(name=name).first()
+        if name_check is not None:
+            flash(f"Name {name} already part of the shabang", 'danger')
+            return redirect(url_for('crud.add_discipline'))
+
+        new_disc = Discipline.add_discipline(name=name,
+                                         name_abbr=abbr,
+                                         code=code,
+                                         workload=int(workload),
+                                         is_theoretical=True,
+                                         is_intensive=False)
+        
+        if not isinstance(new_disc, Discipline):
+            flash("an Error has ocurred", 'danger')
+            return redirect(url_for('crud.add_discipline'))
+
+        cohorts_list = cohorts_str.split('+')
+        cohorts = Cohort.query.all()
+        for cohort in cohorts:
+            code = cohort.code
+            code_base = ''.join([l for l in code if not l.isdigit()])
+            if code_base not in cohorts_list:
+                continue
+
+            flag = Modulus.add_modulus(cohort.code, new_disc.code)
+            if isinstance(flag, Modulus):
+                flag.set_main_classroom()
+        
+        flash(f'Discipline {name} added successfully.', 'success')
+        return redirect(url_for('crud.add_discipline'))
+    
+    return render_template('add-discipline.html')
+
+
+@crud_bp.route('/crud/add-classroom/', methods=['GET', 'POST'])
+@login_required
+def add_classroom():
+    if request.method == 'POST':
+        code = request.form['code']
+        name = request.form['name']
+        capacity = request.form['capacity']
+        fungible = request.form['fungible']
+        flag = Classroom.add_classroom(code, name, capacity, bool(fungible))
+        if flag == 1:
+            flash(f"Code {code} already part of the shabang", 'danger')
+        elif flag == 2:
+            flash(f"Name {name} already part of the shabang", 'danger')
+        else:
+            flash(f'Classroom {name} added successfully.', 'success')
+
+        return render_template('add-classroom.html')
+
+    return render_template('add-classroom.html')
+
+
+@crud_bp.route('/crud/add-users', methods=['GET', 'POST'])
+@login_required
+def add_users():
+    if request.method == 'POST':
+        # funcs.add_users()
+        return redirect(url_for('crud.add_users'))
+
+    return render_template('add-users.html')
+
+
+
 @crud_bp.route('/crud/discipline', methods=['GET', 'POST'])
 @login_required
 def edit_discipline():
@@ -147,99 +248,3 @@ def delete_modulus():
     print(code)
 
     return jsonify({'response': 'ok'})
-
-
-
-
-
-
-
-
-@crud_bp.route('/crud/add-teacher', methods=['GET', 'POST'])
-@login_required
-def add_teacher():
-    if request.method == 'POST':
-        name = request.form['name']
-        abbr = request.form['abbr']
-        rg = request.form['rg']
-        flag = Teacher.add_teacher(name=name, abbr_name=abbr, rg=rg)
-        if flag == 1:
-            flash(f"The name {name} already part of the shabang", 'danger')
-        elif flag == 2:
-            flash(f"RG {rg} already part of the shabang", 'danger')
-        else:
-            flash(f'Teacher {name} added successfully.', 'success')
-
-        return render_template('add-teacher.html')
-
-    return render_template('add-teacher.html')
-
-
-@crud_bp.route('/crud/add-discipline/', methods=['GET', 'POST'])
-@login_required
-def add_discipline():
-    if request.method == 'POST':
-        name = request.form['name']
-        abbr = request.form['abbr']
-        code = request.form['code']
-        workload = request.form['workload']
-        cohorts_str = request.form['cohorts']
-
-        code_check = Discipline.query.filter_by(code=code).first()
-        if code_check is not None:
-            flash(f"Code {code} already part of the shabang", 'danger')
-            return redirect(url_for('crud.add_discipline'))
-
-        name_check = Discipline.query.filter_by(name=name).first()
-        if name_check is not None:
-            flash(f"Name {name} already part of the shabang", 'danger')
-            return redirect(url_for('crud.add_discipline'))
-
-        new_disc = Discipline.add_discipline(name=name,
-                                         name_abbr=abbr,
-                                         code=code,
-                                         workload=int(workload),
-                                         is_theoretical=True,
-                                         is_intensive=False)
-        
-        if not isinstance(new_disc, Discipline):
-            flash("an Error has ocurred", 'danger')
-            return redirect(url_for('crud.add_discipline'))
-
-        cohorts_list = cohorts_str.split('+')
-        cohorts = Cohort.query.all()
-        for cohort in cohorts:
-            code = cohort.code
-            code_base = ''.join([l for l in code if not l.isdigit()])
-            if code_base not in cohorts_list:
-                continue
-
-            flag = Modulus.add_modulus(cohort.code, new_disc.code)
-            if isinstance(flag, Modulus):
-                flag.set_main_classroom()
-        
-        flash(f'Discipline {name} added successfully.', 'success')
-        return redirect(url_for('crud.add_discipline'))
-    
-    return render_template('add-discipline.html')
-
-
-@crud_bp.route('/crud/add-classroom/', methods=['GET', 'POST'])
-@login_required
-def add_classroom():
-    if request.method == 'POST':
-        code = request.form['code']
-        name = request.form['name']
-        capacity = request.form['capacity']
-        fungible = request.form['fungible']
-        flag = Classroom.add_classroom(code, name, capacity, bool(fungible))
-        if flag == 1:
-            flash(f"Code {code} already part of the shabang", 'danger')
-        elif flag == 2:
-            flash(f"Name {name} already part of the shabang", 'danger')
-        else:
-            flash(f'Classroom {name} added successfully.', 'success')
-
-        return render_template('add-classroom.html')
-
-    return render_template('add-classroom.html')
