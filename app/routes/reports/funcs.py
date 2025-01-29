@@ -45,10 +45,12 @@ def list_moduli_workload():
         name = mod.discipline.name
         code = mod.discipline.code
         cohort_code = mod.cohort.code
+
         new_row = [[f"{code} - {name} - {cohort_code}", "name"]]
         workload = mod.remaining_workload
         formatting = "overwork" if workload < 0 else "normal"
         new_row.append([workload, formatting])
+        
         moduli_grid.append(new_row)
 
     return moduli_grid
@@ -67,9 +69,23 @@ def list_total_hours():
         if lec_tuple not in unique_lecs:
             unique_lecs.append(lec_tuple)
 
-    print(len(lectures))
-    print(len(unique_lecs))
-    return 0
+    moduli = Modulus.query.all()
+    total_unnallocated = 0
+    for mod in moduli:
+        if mod.remaining_workload == 0:
+            continue
+
+        if '0.' in mod.discipline.code:
+            continue
+     
+        total_unnallocated += mod.remaining_workload
+       
+    hour_grid = [[["Horas Alocadas", 'normal'], ["Horas a Alocar", 'normal']]]
+    new_row = [[f"{len(unique_lecs)} horas", "normal"], [f"{total_unnallocated} horas", "normal"]]
+    hour_grid.append(new_row)
+
+    return hour_grid
+
 
 def calculate_teachers_workload():
     from app.global_config import TEACHERS_MAX_HOURS_PER_MONTH as max_hours
