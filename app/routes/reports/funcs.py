@@ -54,6 +54,23 @@ def list_moduli_workload():
     return moduli_grid
 
 
+def list_total_hours():
+    lectures = Lecture.query.all()
+    unique_lecs = []
+    for lec in lectures:
+        if '0.' in lec.modulus.discipline.code:
+            continue
+        lec_tuple = (lec.date,
+                     lec.grid_position,
+                     lec.modulus.discipline.name,
+                     lec.classroom_id)
+        if lec_tuple not in unique_lecs:
+            unique_lecs.append(lec_tuple)
+
+    print(len(lectures))
+    print(len(unique_lecs))
+    return 0
+
 def calculate_teachers_workload():
     teachers = Teacher.query.all()
     teachers = sorted(teachers, key=lambda x: x.name)

@@ -22,6 +22,7 @@ REPORTS_DICT = {
     'Checar Conflitos de Professores': funcs.check_teachers_conflicts,
     'Listar Professores Por Turma': funcs.list_teachers_by_cohorts,
     'Listar Carga Horária Faltante': funcs.list_moduli_workload,
+    'Listar Horas do Curso': funcs.list_total_hours
     }
 
 
