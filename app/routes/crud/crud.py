@@ -110,12 +110,22 @@ def add_classroom():
     return render_template('add-classroom.html')
 
 
-@crud_bp.route('/crud/add-users', methods=['GET', 'POST'])
+@crud_bp.route('/crud/add-user', methods=['GET', 'POST'])
 @login_required
-def add_users():
+def add_user():
+    from app.models import User
     if request.method == 'POST':
-        # funcs.add_users()
-        return redirect(url_for('crud.add_users'))
+        user_name = request.form['userName']
+        password =  request.form['password']
+        confirmation =  request.form['confirmation']
+
+        if password != confirmation:
+            flash('Passwords do not match', 'danger')
+            return redirect(url_for('crud.add_user'))
+
+        User.add_entry(user_name, password)
+        flash('User created', 'success')
+        return redirect(url_for('crud.add_user'))
 
     return render_template('add-users.html')
 

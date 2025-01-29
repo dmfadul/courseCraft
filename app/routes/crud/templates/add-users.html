@@ -1,17 +1,31 @@
 {% extends "base.html" %}
 {% block mainContent %}
+
+<!-- Display Flash Messages -->
+<div id="flash-messages" class="flash-messages">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message | safe}}
+        </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+
 <div class="container mt-5">
     <h2>Add New User</h2>
-    <form action="/crud/add-teacher" method="post">
+    <form action="/crud/add-user" method="post">
         <div class="mb-3">
             <label for="userName" class="form-label">Nome do Usuário</label>
             <input type="text" class="form-control" id="userName" name="userName" required>
 
             <label for="password" class="form-label">Senha</label>
-            <input type="text" class="form-control" id="password" name="password" required>
+            <input type="password" class="form-control" id="password" name="password" required>
 
             <label for="confirmation" class="form-label">Confirmação da Senha</label>
-            <input type="text" class="form-control" id="confirmation" name="confirmation" required>
+            <input type="password" class="form-control" id="confirmation" name="confirmation" required>
         </div>
         <button type="submit" class="btn btn-primary">Add User</button>
     </form>
