@@ -72,6 +72,7 @@ def list_total_hours():
     return 0
 
 def calculate_teachers_workload():
+    from app.global_config import TEACHERS_MAX_HOURS_PER_MONTH as max_hours
     teachers = Teacher.query.all()
     teachers = sorted(teachers, key=lambda x: x.name)
     meses_in_course = [global_vars.MESES_ABR[int(m)-1] for m in global_vars.MONTHS]
@@ -84,7 +85,7 @@ def calculate_teachers_workload():
         new_row = [[teacher.name, "name"]]
         for month in global_vars.MONTHS:
             workload = teacher.workload(int(month))
-            formatting = "overwork" if workload >= 40 else "normal"
+            formatting = "overwork" if workload >= max_hours else "normal"
             new_row.append([workload, formatting])
         teacher_grid.append(new_row)
 
