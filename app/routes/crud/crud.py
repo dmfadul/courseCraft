@@ -123,7 +123,11 @@ def add_user():
             flash('Passwords do not match', 'danger')
             return redirect(url_for('crud.add_user'))
 
-        User.add_entry(user_name, password)
+        flag = User.add_entry(user_name, password)
+        if isinstance(flag, str):
+            flash(flag, 'danger')
+            return redirect(url_for('crud.add_user'))
+
         flash('User created', 'success')
         return redirect(url_for('crud.add_user'))
 

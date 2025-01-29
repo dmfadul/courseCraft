@@ -18,6 +18,10 @@ class User(db.Model, UserMixin):
 
     @classmethod
     def add_entry(cls, name, password, is_admin=False):
+        test_user = cls.query.filter_by(name=name).first()
+        if test_user:
+            return "user name already exists"
+        
         new_user = cls(
             name = name,
             password = password,
