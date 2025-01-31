@@ -93,17 +93,37 @@ def calculate_teachers_workload():
     teachers = sorted(teachers, key=lambda x: x.name)
     meses_in_course = [global_vars.MESES_ABR[int(m)-1] for m in global_vars.MONTHS]
 
-    teacher_grid = [[["Professor", "normal"]] + [[m, "normal"] for m in meses_in_course]]
+    total_hours = 0
+    month_totals = {}
+    teacher_grid = [[["Professor", "normal"]] + [[m, "normal"] for m in meses_in_course] + [["Total", "normal"]]]
+    
     for teacher in teachers:
         if len(teacher.lectures) == 0:
             continue
 
+        teacher_total = 0
         new_row = [[teacher.name, "name"]]
         for month in global_vars.MONTHS:
             workload = teacher.workload(int(month))
             formatting = "overwork" if workload >= max_hours else "normal"
             new_row.append([workload, formatting])
+
+            teacher_total += workload
+            if month not in month_totals.keys():
+                month_totals[month] = 0
+            month_totals[month] += workload
+        
+        new_row.append([teacher_total, "normal"])
         teacher_grid.append(new_row)
+
+        total_hours += teacher_total
+
+    final_row =  [["TOTAL", "normal"]]
+    for month in global_vars.MONTHS:
+        final_row.append([month_totals[month], "normal"])
+
+    final_row.append([total_hours, "normal"])
+    teacher_grid.append(final_row)
 
     return teacher_grid
         
