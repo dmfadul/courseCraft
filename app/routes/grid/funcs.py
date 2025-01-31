@@ -264,9 +264,19 @@ def gen_teacher_schedule(teacher_name, month):
             lectures = [l for l in teacher.all_lectures if (l.date==date and l.grid_position==grid_position)]
 
             if not len(lectures) == 1 and not all([l.joined_cohorts for l in lectures]):
-                raise Exception("Erro. Há mais de uma aula na mesma sala, data e horário.")
+                cohort_code = resolve_multiple_lectures_code(lectures)
+
+                cell_text = "CONFLITO\n"
+                for lecture in lectures:
+                    disc_abbr = lecture.modulus.discipline.name_abbr
+                    disc_code = lecture.modulus.discipline.code
+
+                    cell_text += f"{str(disc_code)}-{disc_abbr}\n"
+
+                cell_text += f"{cohort_code}"
+                grid[i][j] = [cell_text, disc_code.replace(".", "-")]
                 
-            if lectures:
+            elif lectures:
                 lecture = lectures[0]
                 disc_abbr = lecture.modulus.discipline.name_abbr
                 disc_code = lecture.modulus.discipline.code
