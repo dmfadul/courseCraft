@@ -75,6 +75,42 @@ def grid(classCode, week):
                            classroomList=classroom_list,)
 
 
+@grid_bp.route('/cohortsgrid/', methods=['GET'])
+@login_required
+def cohortsgrid_redirect():
+    return redirect(url_for('grid.cohortsgrid', week=1))
+
+
+@grid_bp.route('/cohortsgrid/all/<week>', methods=['GET'])
+@login_required
+def cohortsgrid(week):
+    try:
+        week = int(week)  # Ensure 'week' can be converted to an integer
+    except ValueError:
+        abort(400, description="Formato Inválido.")  # Bad request if not an integer
+
+    if week < 1 or week > global_vars.NUM_WEEKS:
+        abort(400, description="Semana não existe.")  # Bad request if out of range
+
+    grid = funcs.gen_cohorts_grid(week)
+
+    class_type = "TEÓRICAS E PRÁTICAS"
+    message = f"TODAS AS TURMAS - AULAS {class_type} - {week}ª SEMANA"
+    weeks = [i for i in range(1, global_vars.NUM_WEEKS+1)]
+
+    return render_template("grid.html",
+                           grid=grid,
+                           headerMessage=message,
+                           toBeSelected=[],
+                           select=["all"],
+                           timeUnit="Semana",
+                           timeSelect=weeks,
+                           currentTime=week,
+                           disciplineList=[],
+                           disciplineListAll=[],
+                           classroomList=[],)
+
+
 @grid_bp.route('/teachergrid/', methods=['GET'])
 @login_required
 def teachergrid_redirect():

@@ -166,6 +166,55 @@ def gen_matrix(parity, week_number):
     return grid
 
 
+def gen_cohorts_grid(week_number):
+    grid = gen_empty_grid(week_number=week_number)
+
+    # Avoid loading unnecessary data
+    week_dates = [
+        datetime.strptime(f"{day}/{global_vars.SCHOOL_YEAR}", "%d/%m/%Y").date()
+        for day, _ in grid[0][1:]
+    ]
+
+    lectures = Lecture.query.filter(
+        Lecture.date.in_(week_dates)
+    ).join(Lecture.modulus).all()
+
+    lectures_by_date_position = {
+        (lec.modulus.cohort.code, lec.date, lec.grid_position): lec for lec in lectures
+    }
+
+    for i in range(len(grid)):
+        for j in range(1, len(grid[i])):
+            if i in [0, 1]:
+                continue
+
+            date = datetime.strptime(f"{grid[0][j][0]}/{global_vars.SCHOOL_YEAR}", "%d/%m/%Y").date()
+            grid_position = global_vars.HOURS_DICT.get(grid[i][0][0])
+            all_cohorts = Cohort.query.all()
+
+            all_lectures_in_position = []
+            for cohort in all_cohorts:
+                lecture = lectures_by_date_position.get((cohort.code, date, grid_position))
+                
+                if lecture and not lecture.modulus.discipline.code == "0.6":
+                    all_lectures_in_position.append(lecture)
+
+
+            if len(all_lectures_in_position) == 0:
+                continue
+
+            else:
+                cell_text = ""
+                for lec in all_lectures_in_position:
+                    cell_text += f"{lec.modulus.cohort.code}\n"
+
+                cell_formatting = []
+
+            grid[i][j] = [cell_text, cell_formatting]
+
+    return grid
+
+
 def gen_lectures_grid(class_code, week_number):
     grid = gen_empty_grid(week_number)
 
