@@ -351,33 +351,11 @@ def print_all(teacherName):
     return response
 
 
-def check_user_permissions():
-    with open('app/config.json') as f:
-        data = json.load(f)
-        threshold = data['appConfig']['threshold']
-        count = data['appConfig']['count']
-        block = data['appConfig']['block']
-        if (count > threshold) and block:
-            raise Exception("No files found")
-            is_inactive = current_user.is_blocked
-            data['appConfig']['count'] += 1
-            if is_inactive.is_blocked:
-                return 1
-            else:
-                return 0
-        
-        with open('app/config.json', 'w') as f:
-            json.dump(data, f, indent=4)
-        return 0
-
-
 @grid_bp.route('/update', methods=['POST'])
 @login_required
 def update_data():
     if not current_user.is_admin:
-        flag = check_user_permissions()
-        if flag == 1:
-            return jsonify({'status': 'error', 'message': 'Permissão negada.'})
+        abort(403, description="Acesso negado.")
         
     data = request.get_json()
     flag = funcs.resolve_lectures(data)
